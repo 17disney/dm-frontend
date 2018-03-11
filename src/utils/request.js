@@ -5,7 +5,8 @@ import { getToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  // baseURL: 'http://park-cn.17disney.com/api/v3', // process.env.BASE_API, // api的base_url
+  baseURL: 'http://127.0.0.1:7001',
   timeout: 15000 // 请求超时时间
 })
 

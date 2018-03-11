@@ -38,6 +38,34 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/explorer',
+    component: Layout,
+    redirect: '/explorer/destinations',
+    name: '资源管理',
+    meta: { title: 'explorer', icon: 'example' },
+    children: [
+      {
+        path: 'destinations',
+        name: 'destinations',
+        component: () => import('@/views/explorer/destinations'),
+        meta: { title: '项目管理', icon: 'table' }
+      },
+      {
+        path: 'schedules',
+        name: 'schedules',
+        component: () => import('@/views/explorer/schedules'),
+        meta: { title: '项目时间表', icon: 'table' }
+      }
+      // {
+      //   path: 'tree',
+      //   name: 'Tree',
+      //   component: () => import('@/views/tree/index'),
+      //   meta: { title: 'Tree', icon: 'tree' }
+      // }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
