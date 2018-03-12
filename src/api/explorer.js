@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 const base = 'explorer-service'
 
-export function destinations(local, type) {
+export function destinations(local) {
   return request({
-    url: `${base}/destinations/${local}/${type}`,
+    url: `${base}/destinations/${local}`,
     method: 'get'
   })
 }

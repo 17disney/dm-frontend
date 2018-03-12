@@ -6,6 +6,13 @@ const attType = [
     showTab: false
   },
   {
+    name: '周围景点',
+    id: 'entertainment-venue',
+    icon: '',
+    showTab: false
+  },
+
+  {
     name: '主题园区',
     id: 'land',
     icon: '',
@@ -23,12 +30,7 @@ const attType = [
     icon: 'entertainment',
     showTab: true
   },
-  {
-    name: '周围景点',
-    id: 'entertainment-venue',
-    icon: '',
-    showTab: false
-  },
+
   {
     name: '餐饮',
     id: 'restaurant',
@@ -42,16 +44,40 @@ const attType = [
     showTab: true
   },
   {
+    name: '洗手间',
+    id: 'fadsgfad',
+    icon: 'restrooms',
+    showTab: true
+  },
+  {
+    name: '迪士尼乐拍通',
+    id: 'fadsgfad3sadf2',
+    icon: 'photo-pass-plus',
+    showTab: true
+  },
+  {
     name: '主题活动',
     id: 'event',
     icon: 'tours-events',
     showTab: true
   },
   {
+    name: '游客服务',
+    id: 'evenadsfsfdt',
+    icon: 'information',
+    showTab: true
+  },
+  {
     name: '酒店',
     id: 'resort',
-    icon: '',
-    showTab: false
+    icon: 'resorts',
+    showTab: true
+  },
+  {
+    name: '休闲活动',
+    id: 'playsfd',
+    icon: 'disneyland-recreation',
+    showTab: true
   },
   {
     name: '主题乐园',
@@ -108,10 +134,12 @@ const attHotList = [
 exports.attHotList = attHotList
 
 exports.attType = attType
-exports.attTypeTab = {
-  list: attType.filter(_ => _.showTab),
-  selectedId: 'attraction'
-}
+// exports.attTypeTab = {
+//   list: attType.filter(_ => _.showTab),
+//   selectedId: 'attraction',
+//   selectedIndex: 0
+// }
+exports.attsType = attType.filter(_ => _.showTab)
 
 exports.attTypeIcon = (function() {
   const list = []
