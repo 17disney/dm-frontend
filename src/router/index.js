@@ -56,12 +56,50 @@ export const constantRouterMap = [
         component: () => import('@/views/explorer/schedules'),
         meta: { title: '项目时间表', icon: 'table' }
       }
-      // {
-      //   path: 'tree',
-      //   name: 'Tree',
-      //   component: () => import('@/views/tree/index'),
-      //   meta: { title: 'Tree', icon: 'tree' }
-      // }
+    ]
+  },
+
+  {
+    path: '/wait-count',
+    component: Layout,
+    redirect: '/wait-count/attractions',
+    name: '等待时间',
+    meta: { title: 'explorer', icon: 'example' },
+    children: [
+      {
+        path: 'attractions',
+        name: 'attractions',
+        component: () => import('@/views/wait-count/attractions'),
+        meta: { title: '游乐项目', icon: 'table' }
+      },
+      {
+        path: 'park',
+        name: 'park',
+        component: () => import('@/views/wait-count/park'),
+        meta: { title: '乐园', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/flow',
+    component: Layout,
+    redirect: '/flow/ticket',
+    name: '客流预测',
+    meta: { title: 'explorer', icon: 'example' },
+    children: [
+      {
+        path: 'ticket',
+        name: 'ticket',
+        component: () => import('@/views/flow/ticket'),
+        meta: { title: '售票量', icon: 'table' }
+      },
+      {
+        path: 'park',
+        name: 'park',
+        component: () => import('@/views/flow/park'),
+        meta: { title: '乐园', icon: 'table' }
+      }
     ]
   },
 
