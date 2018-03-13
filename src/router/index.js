@@ -64,7 +64,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/wait-count/attractions',
     name: '等待时间',
-    meta: { title: 'explorer', icon: 'example' },
+    meta: { title: '等待时间', icon: 'example' },
     children: [
       {
         path: 'attractions',
@@ -86,7 +86,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/flow/ticket',
     name: '客流预测',
-    meta: { title: 'explorer', icon: 'example' },
+    meta: { title: '客流预测', icon: 'example' },
     children: [
       {
         path: 'ticket',

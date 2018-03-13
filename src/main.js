@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import 'normalize.css/normalize.css'// A modern alternative to CSS resets
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -11,6 +11,7 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import router from './router'
 import store from './store'
+import moment from 'moment'
 
 import '@/styles/disney/index.styl'
 import '@/icons' // icon
@@ -26,4 +27,9 @@ new Vue({
   store,
   template: '<App/>',
   components: { App }
+})
+
+Vue.filter('time', function(value) {
+  const val = moment(value, 'x').format('H:mm:ss')
+  return val
 })

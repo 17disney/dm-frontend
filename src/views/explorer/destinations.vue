@@ -51,7 +51,7 @@
 
 <script>
 // import { getList } from '@/api/table'
-import { destinations } from '@/api/explorer'
+import Explorer from '@/api/explorer'
 import { attsType } from '@/common/park-arr'
 export default {
   data() {
@@ -87,7 +87,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      destinations('shanghai', 'attraction').then(res => {
+      Explorer.destinations('shanghai', 'attraction').then(res => {
         const { added, facetGroups } = res
         added.forEach((item) => {
           const { type } = item
