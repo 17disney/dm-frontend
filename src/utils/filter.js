@@ -1,10 +1,21 @@
 import moment from 'moment'
 import { lineToObject } from './tool'
-import { landArr } from '@/common/park-arr'
+import { landArr, attLevelList } from '@/common/park-arr'
 
 export function landName(id) {
   const aid = lineToObject(id)['__id__']
   return landArr[aid]
+}
+
+export function attLevel(id) {
+  const item = attLevelList.filter(_ => _.id === id)
+
+  let level = 1
+  if (item && item[0] && item[0]['level']) {
+    level = item[0]['level']
+  }
+
+  return level
 }
 
 // 时间去0

@@ -6,16 +6,81 @@
   // padding: 30px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center
 }
 
 .panel {
   background: #FFF;
-  width: 300px;
-  height: 300px;
-  border: 1px solid $color-light-grey-sss;
-  margin: 20px;
-  padding: 15px;
+  width: 100%;
+  border: 1px solid $color-light-grey-ss;
 
-  &--att {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+
+  &__heading {
+    // padding: 15px;
+    padding-top 15px
+    padding-bottom 15px
+    margin: 0px 15px
+    display: flex;
+    // justify-content center
+    align-items: center;
+    border-bottom 1px solid $color-light-grey-ss;
+  }
+
+  &__body {
+    padding: 15px;
+  }
+
+  &__title {
+    color: $color-primary-dark;
+    margin: 0px;
+    font-size: 20px;
+    margin-bottom: 2px;
+
+    &__desc {
+      font-size: 14px;
+      margin: 0px;
+    }
+  }
+}
+
+.panel--att {
+ margin: 15px;
+  width: 450px;
+  height: 300px;
+  .att {
+    &__avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      margin-right: 15px;
+    }
+
+    &__index {
+      display: flex;
+      background:  $color-light-grey-sss
+      padding 10px
+      // border-radius: 5px
+      &__item {
+        flex: 1;
+        text-align: center;
+      }
+
+      &__text {
+        &--num {
+          margin: 0px;
+          font-weight: 600
+          font-size: 16px;
+        }
+
+        &--desc {
+          margin: 0px;
+          font-size: 12px;
+        }
+      }
+    }
   }
 }

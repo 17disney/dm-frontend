@@ -1,27 +1,39 @@
 <template>
-  <div class="app-container">
+  <div class="app-container bg--gray">
     <div class="filter-container">
-      <!-- <el-select clearable style="width: 120px" class="filter-item" v-model="filters.type" :placeholder="'项目类型'">
-        <el-option v-for="item in attsType" :key="item.id" :label="item.name" :value="item.id"></el-option>
-      </el-select> -->
-
-      <el-date-picker v-model="date" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+      <el-date-picker value-format="yyyy-MM-dd" v-model="filters.date" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
       </el-date-picker>
       <el-button-group>
-        <el-button type="primary" icon="el-icon-arrow-left">上一天</el-button>
-        <el-button type="primary">下一天
+        <el-button @click="prevDate" type="primary" icon="el-icon-arrow-left">上一天</el-button>
+        <el-button @click="nextDate" type="primary">下一天
           <i class="el-icon-arrow-right el-icon--right"></i>
         </el-button>
       </el-button-group>
-
     </div>
     <div class="attlist-wrap">
-      <div class="panel panel-att" v-for="item in list" :key="item.id">
-        {{item.name}} {{item.landName}}
-
-        <div v-if="waits[item.aid]">
-          <chart height='100%' width='100%'></chart>
-          {{waits[item.aid]['utime'] | time}}
+      <div v-show="item.level >= filters.level" class="panel panel--att" v-for="item in list" :key="item.id">
+        <div class="panel__heading">
+          <img class="att__avatar" :src="item.finderListMobileSquare.url">
+          <div class="panel__heading__text">
+            <h3 class="panel__title">{{item.name}}</h3>
+            <p class="panel__title__desc">{{item.landName}}</p>
+          </div>
+        </div>
+        <div class="panel__body">
+          <div class="att__index" v-if="waits[item.aid]">
+            <div class="att__index__item">
+              <p class="att__index__text--num">{{waits[item.aid]['waitAvg']}}</p>
+              <p class="att__index__text--desc">平均等候</p>
+            </div>
+            <div class="att__index__item">
+              <p class="att__index__text--num">{{waits[item.aid]['waitMax']}}</p>
+              <p class="att__index__text--desc">最高等候</p>
+            </div>
+          </div>
+          <div v-if="waits[item.aid]">
+            <chart :data="waits[item.aid]['waitHour']" :id="item.aid" height='100%' width='100%'></chart>
+            <!-- {{waits[item.aid]['utime'] | time}} -->
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +72,7 @@
 
 <script>
 import { mapState } from 'vuex'
+
 import Waits from '@/api/waits'
 import moment from 'moment'
 import Chart from '@/components/Charts/lineMarker'
@@ -101,10 +114,19 @@ export default {
       listLoading: false,
       local: 'shanghai',
       date: moment().format('YYYY-MM-DD'),
-      waits: {}
+      waits: {},
+      filters: {
+        level: 2,
+        date: moment().format('YYYY-MM-DD')
+      }
     }
   },
 
+  watch: {
+    'filters.date': function(val) {
+      this.getWaits()
+    }
+  },
   computed: {
     ...mapState({
       list: state => state.park.list,
@@ -120,10 +142,10 @@ export default {
 
   methods: {
     async getWaits() {
-      const arg = {
-        raw: true
-      }
-      const data = await Waits.attractions(this.local, this.date, arg)
+      // const arg = {
+      //   raw: true
+      // }
+      const data = await Waits.attractions(this.local, this.filters.date)
 
       const waits = {}
       data.forEach((item) => {
@@ -131,6 +153,12 @@ export default {
       })
       this.waits = waits
       // console.log(data)
+    },
+    prevDate() {
+
+    },
+    nextDate() {
+
     }
   }
 }

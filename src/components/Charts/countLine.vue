@@ -1,5 +1,5 @@
 <style lang="stylus">
-.chart-wait-base {
+.chart-count-base {
   height: 200px;
 
   .inner {
@@ -10,7 +10,7 @@
 </style>
 
 <template>
-  <div class="chart-wait-base">
+  <div class="chart-count-base">
     <div class="inner" :id="id"></div>
   </div>
 </template>
@@ -52,6 +52,8 @@ export default {
   },
   methods: {
     initChart() {
+      let { data } = this
+      data = data.reverse()
       // let data = this
 
       // data.forEach(_ => {
@@ -108,7 +110,7 @@ export default {
               color: '#57617B'
             }
           },
-          data: this.data.map(_ => _[0])
+          data: data.map(_ => _['date'])
         }],
         yAxis: [{
           type: 'value',
@@ -166,7 +168,7 @@ export default {
 
             }
           },
-          data: this.data.map(_ => _[1])
+          data: data.map(_ => _['waitAvg'])
         }]
       })
     }

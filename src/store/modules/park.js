@@ -2,7 +2,7 @@ import Explorer from '@/api/explorer'
 
 import moment from 'moment'
 import { lineToObject } from '@/utils/tool'
-import { landName } from '@/utils/filter'
+import { landName, attLevel } from '@/utils/filter'
 // import { landArr } from '@/common/park-arr'
 
 const park = {
@@ -24,6 +24,8 @@ const park = {
             item.landName = landName(ancestorsItem.id)
           }
         }
+
+        item.level = attLevel(item.id)
 
         item.type = item.type.toLowerCase()
         // 提取坐标

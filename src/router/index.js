@@ -42,7 +42,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/explorer/destinations',
     name: '资源管理',
-    meta: { title: 'explorer', icon: 'example' },
+    meta: { title: '资源管理', icon: 'example' },
     children: [
       {
         path: 'destinations',
@@ -63,7 +63,7 @@ export const constantRouterMap = [
     path: '/wait-count',
     component: Layout,
     redirect: '/wait-count/attractions',
-    name: '等待时间',
+    name: '等待统计',
     meta: { title: '等待时间', icon: 'example' },
     children: [
       {
@@ -73,12 +73,25 @@ export const constantRouterMap = [
         meta: { title: '游乐项目', icon: 'table' }
       },
       {
+        path: 'attractions/:id',
+        name: 'attractions-id',
+        component: () => import('@/views/wait-count/attractions-id'),
+        meta: { title: '项目详情', icon: 'table' }
+      },
+      {
         path: 'park',
         name: 'park',
         component: () => import('@/views/wait-count/park'),
         meta: { title: '乐园', icon: 'table' }
       }
     ]
+  },
+
+  {
+    path: '/wait-countattractions/:id',
+    name: 'attractions-id',
+    component: () => import('@/views/wait-count/attractions-id'),
+    meta: { title: '项目详情', icon: 'table' }
   },
 
   {
@@ -103,40 +116,79 @@ export const constantRouterMap = [
     ]
   },
 
+  // {
+  //   path: '/ticket',
+  //   component: Layout,
+  //   redirect: '/flow/ticket',
+  //   name: '售票量',
+  //   meta: { title: '售票量', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'ticket',
+  //       name: 'ticket',
+  //       component: () => import('@/views/flow/ticket'),
+  //       meta: { title: '售票量', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'park',
+  //       name: 'park',
+  //       component: () => import('@/views/flow/park'),
+  //       meta: { title: '乐园', icon: 'table' }
+  //     }
+  //   ]
+  // },
+
   {
-    path: '/example',
+    path: '/map',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/flow/ticket',
+    name: '地图',
+    meta: { title: '地图', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'ticket',
+        name: 'ticket',
+        component: () => import('@/views/flow/ticket'),
+        meta: { title: '模拟入园', icon: 'table' }
       }
+
     ]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

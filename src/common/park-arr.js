@@ -93,45 +93,112 @@ const attType = [
   // }
 ]
 
-const attHotList = [
+const attLevelList = [
   {
     id: 'attSoaringOverHorizon;entityType=Attraction;destination=shdr',
     aid: 'attSoaringOverHorizon',
-    name: '翱翔•飞越地平线'
+    name: '翱翔•飞越地平线',
+    level: 3
   },
   {
     id: 'attRoaringRapids;entityType=Attraction;destination=shdr',
     aid: 'attRoaringRapids',
-    name: '雷鸣山漂流'
+    name: '雷鸣山漂流',
+    level: 3
   },
   {
     id: 'attTronLightcyclePowerRun;entityType=Attraction;destination=shdr',
     aid: 'attTronLightcyclePowerRun',
-    name: '创极速光轮'
+    name: '创极速光轮',
+    level: 3
   },
   {
     id: 'attBuzzLightyearPlanetRescue;entityType=Attraction;destination=shdr',
     aid: 'attBuzzLightyearPlanetRescue',
-    name: '巴斯光年星际营救'
+    name: '巴斯光年星际营救',
+    level: 3
   },
   {
     id: 'attSevenDwarfsMineTrain;entityType=Attraction;destination=shdr',
     aid: 'attSevenDwarfsMineTrain',
-    name: '七个小矮人矿山车'
+    name: '七个小矮人矿山车',
+    level: 3
   },
   {
     id: 'attAdventuresWinniePooh;entityType=Attraction;destination=shdr',
     aid: 'attAdventuresWinniePooh',
-    name: '小熊维尼历险记'
+    name: '小熊维尼历险记',
+    level: 3
   },
   {
     id: 'attPeterPansFlight;entityType=Attraction;destination=shdr',
     aid: 'attPeterPansFlight',
-    name: '小飞侠天空奇遇'
+    name: '小飞侠天空奇遇',
+    level: 3
+  },
+  {
+    id: 'attExplorerCanoes;entityType=Attraction;destination=shdr',
+    aid: 'attExplorerCanoes',
+    name: '探险家独木舟',
+    level: 2
+  },
+  {
+    id: 'attJetPacks;entityType=Attraction;destination=shdr',
+    aid: 'attJetPacks',
+    name: '喷气背包飞行器',
+    level: 2
+  },
+  {
+    id: 'attFantasiaCarousel;entityType=Attraction;destination=shdr',
+    aid: 'attFantasiaCarousel',
+    name: '幻想曲旋转木马',
+    level: 2
+  },
+  {
+    id: 'attDumboFlyingElephant;entityType=Attraction;destination=shdr',
+    aid: 'attDumboFlyingElephant',
+    name: '小飞象',
+    level: 2
+  },
+  {
+    id: 'attHunnyPotSpin;entityType=Attraction;destination=shdr',
+    aid: 'attHunnyPotSpin',
+    name: '旋转疯蜜罐',
+    level: 2
+  },
+  {
+    id: 'attOnceUponTimeAdventure;entityType=Attraction;destination=shdr',
+    aid: 'attOnceUponTimeAdventure',
+    name: '漫游童话时光',
+    level: 2
+  },
+  {
+    id: 'attVoyageToCrystalGrotto;entityType=Attraction;destination=shdr',
+    aid: 'attVoyageToCrystalGrotto',
+    name: '晶彩奇航',
+    level: 2
+  },
+  {
+    id: 'attPiratesOfCaribbean;entityType=Attraction;destination=shdr',
+    aid: 'attPiratesOfCaribbean',
+    name: '加勒比海盗——沉落宝藏之战',
+    level: 2
+  },
+  {
+    id: 'attCampDiscovery;entityType=Attraction;destination=shdr',
+    aid: 'attCampDiscovery',
+    name: '古迹探索营',
+    level: 2
+  },
+  {
+    id: 'attAdventuresWinniePooh;entityType=Attraction;destination=shdr',
+    aid: 'attAdventuresWinniePooh',
+    name: '小熊维尼历险记',
+    level: 2
   }
 ]
 
-exports.attHotList = attHotList
+exports.attLevelList = attLevelList
 
 exports.attType = attType
 // exports.attTypeTab = {
