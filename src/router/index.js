@@ -88,13 +88,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/wait-countattractions/:id',
-    name: 'attractions-id',
-    component: () => import('@/views/wait-count/attractions-id'),
-    meta: { title: '项目详情', icon: 'table' }
-  },
-
-  {
     path: '/flow',
     component: Layout,
     redirect: '/flow/ticket',
@@ -106,13 +99,13 @@ export const constantRouterMap = [
         name: 'ticket',
         component: () => import('@/views/flow/ticket'),
         meta: { title: '售票量', icon: 'table' }
-      },
-      {
-        path: 'park',
-        name: 'park',
-        component: () => import('@/views/flow/park'),
-        meta: { title: '乐园', icon: 'table' }
       }
+      // {
+      //   path: 'park',
+      //   name: 'park',
+      //   component: () => import('@/views/flow/park'),
+      //   meta: { title: '乐园', icon: 'table' }
+      // }
     ]
   },
 
@@ -138,22 +131,28 @@ export const constantRouterMap = [
   //   ]
   // },
 
-  {
-    path: '/map',
-    component: Layout,
-    redirect: '/flow/ticket',
-    name: '地图',
-    meta: { title: '地图', icon: 'example' },
-    children: [
-      {
-        path: 'ticket',
-        name: 'ticket',
-        component: () => import('@/views/flow/ticket'),
-        meta: { title: '模拟入园', icon: 'table' }
-      }
+  // {
+  //   path: '/map',
+  //   component: Layout,
+  //   redirect: '/angLog/index',
+  //   name: '模拟入园',
+  //   meta: { title: '模拟入园', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'angLog',
+  //       name: 'angLog',
+  //       component: () => import('@/views/angLog/index'),
+  //       meta: { title: '模拟入园', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'map',
+  //       name: 'map',
+  //       component: () => import('@/views/angLog/map'),
+  //       meta: { title: '地图', icon: 'table' }
+  //     }
 
-    ]
-  },
+  //   ]
+  // },
 
   // {
   //   path: '/example',
