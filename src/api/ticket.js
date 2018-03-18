@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
+const base = 'explorer-service'
 export default {
   available: function available(local, params) {
     return request({
-      url: `/ticket/available/${local}`,
+      url: `${base}/ticket/available/${local}`,
       method: 'get',
       params
     })
@@ -11,7 +12,7 @@ export default {
 
   availableDate: function available(local, date) {
     return request({
-      url: `/ticket/available/${local}/${date}`,
+      url: `${base}/ticket/available/${local}/${date}`,
       method: 'get'
     })
   }

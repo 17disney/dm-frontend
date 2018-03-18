@@ -1,18 +1,18 @@
 import request from '@/utils/request'
 
-// const base = 'wait-times'
+const base = 'explorer-service'
 
 export default {
   park: function park(local, date) {
     return request({
-      url: `wait-times/park/${local}/${date}`,
+      url: `${base}/wait-times/park/${local}/${date}`,
       method: 'get'
     })
   },
 
   attractions: function attractions(local, date, params = {}) {
     return request({
-      url: `wait-times/attractions/${local}/${date}`,
+      url: `${base}/wait-times/attractions/${local}/${date}`,
       method: 'get',
       params
     })
@@ -20,14 +20,14 @@ export default {
 
   attractionsId: function attractionsId(local, date, id) {
     return request({
-      url: `wait-times/attractions/${local}/${date}/${id}`,
+      url: `${base}/wait-times/attractions/${local}/${date}/${id}`,
       method: 'get'
     })
   },
 
   waitCountPark: function waitCountPark(local, params) {
     return request({
-      url: `wait-count/park/${local}`,
+      url: `${base}/wait-count/park/${local}`,
       method: 'get',
       params
     })
@@ -35,7 +35,7 @@ export default {
 
   waitCountAttractionsId: function waitCountAttractionsId(local, id, params) {
     return request({
-      url: `wait-count/attractions/${local}/${id}`,
+      url: `${base}/wait-count/attractions/${local}/${id}`,
       method: 'get',
       params
     })

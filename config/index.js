@@ -6,11 +6,25 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/explorer-service': {
+        target: 'http://192.168.31.46:7001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/explorer-service': '/'
+        }
+      },
+      '/forecast-service': {
+        target: 'http://192.168.31.46:7100',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/forecast-service': '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: '192.168.31.46', // can be overwritten by process.env.HOST
@@ -45,7 +59,7 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false,
+    cssSourceMap: false
   },
 
   build: {

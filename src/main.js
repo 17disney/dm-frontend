@@ -12,6 +12,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import moment from 'moment'
+import { Message } from 'element-ui'
 
 import '@/styles/disney/index.styl'
 import '@/icons' // icon
@@ -42,3 +43,5 @@ Vue.filter('moment', function(value, src, format) {
   }
   return val
 })
+
+Vue.prototype.Message = Message()

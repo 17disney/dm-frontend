@@ -8,37 +8,37 @@
     </div>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-table @row-click="clickRow" v-if="ticketCount" size="small" stripe :data="ticketCount" v-loading.body="isLoad.ticketCount" element-loading-text="Loading" border fit highlight-current-row>
-          <el-table-column label="日期" width="200">
+        <el-table @row-click="clickRow" v-if="parkData.length > 0" size="small" stripe :data="parkData" v-loading.body="parkData.length === 0" element-loading-text="Loading" border fit highlight-current-row>
+          <el-table-column label="日期" width="100">
             <template slot-scope="scope">
               {{scope.row.date}} {{scope.row.date | moment('YYYY-MM-DD', 'd')}}
             </template>
           </el-table-column>
-          <el-table-column filter-multiple label="售票量" width="100" align="type">
+          <el-table-column filter-multiple label="售票量" width="70" align="type">
             <template slot-scope="scope">
               <span>{{20000 - scope.row.availableCount}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column filter-multiple label="平均客流量" width="100" align="type">
+          <el-table-column filter-multiple label="平均客流" width="70" align="type">
             <template slot-scope="scope">
               <span>{{scope.row['flowAvg']}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column filter-multiple label="最高客流量" width="100" align="type">
+          <el-table-column filter-multiple label="最高客流" width="70" align="type">
             <template slot-scope="scope">
               <span>{{scope.row['flowMax']}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column filter-multiple label="乐园指数" width="100" align="type">
+          <el-table-column filter-multiple label="乐园指数" width="70" align="type">
             <template slot-scope="scope">
               <span>{{scope.row['markAvg']}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column filter-multiple label="最高指数" width="100" align="type">
+          <el-table-column filter-multiple label="最高指数" width="70" align="type">
             <template slot-scope="scope">
               <span>{{scope.row['markMax']}}</span>
             </template>
@@ -47,13 +47,31 @@
         </el-table>
       </el-col>
       <el-col :span="12">
-        <div class="panel">
+        <!-- <div class="panel">
           <div class="panel__heading">
             <h3 class="panel__title">售票趋势</h3>
           </div>
           <div class="panel__body">
             <line-area legend="售票量" v-if="isLoad.ticketDate" :data="ticketDate" :id="'ticket-' + date" height='100%' width='100%'></line-area>
-            <div>{{coefficients}}</div>
+            <line-area legend="售票量" v-if="isLoad.ticketRegression" :data="ticketRegression" id="ticketRegression" height='100%' width='100%'></line-area>
+            <div>
+              <p>{{ticketMath}}</p>
+              <el-button type="primary" @click="clickUpdateRegression">主要按钮</el-button>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="panel">
+          <div class="panel__heading">
+            <h3 class="panel__title">售票量/客流量</h3>
+          </div>
+          <div class="panel__body">
+            <el-checkbox-group @change="selectIndex" v-model="indexList">
+              <el-checkbox label="flowAvg">客流量</el-checkbox>
+              <el-checkbox label="flowMax">最高客流量</el-checkbox>
+              <el-checkbox label="availableCount">售票量</el-checkbox>
+            </el-checkbox-group>
+            <line-area legend="售票量/客流量" v-if="isLoad.ticketFlowCount" :data="ticketFlowCount" id="ticket-flow" height='100%' width='100%'></line-area>
           </div>
         </div>
       </el-col>
@@ -65,12 +83,14 @@
 <script>
 import Ticket from '@/api/ticket'
 import Waits from '@/api/waits'
+import Forecast from '@/api/forecast'
 import moment from 'moment'
 import lineArea from '@/components/Charts/lineArea'
 // import { PolynomialRegression, SLR } from 'ml-regression'
 // import ExponentialRegression from 'ml-regression-exponential'
 // const PolynomialRegression = require('ml-regression').PolynomialRegression;
 import PolynomialRegression from 'ml-regression-polynomial'
+import { Message } from 'element-ui'
 
 export default {
   components: { lineArea },
@@ -86,12 +106,21 @@ export default {
       isLoad: {
         ticketDate: false,
         ticketCount: false,
-        parkCount: false
+        parkCount: false,
+        ticketRegression: false,
+        ticketFlowCount: false
       },
       ticketCount: [],
       ticketDate: [],
       parkCount: {},
-      coefficients: ''
+      coefficients: '',
+      ticketRegression: [],
+      ticketMath: '',
+      ticketFlowCount: [],
+      parkData: [],
+      indexList: [],
+      parkChartData: []
+
     }
   },
   watch: {
@@ -112,6 +141,19 @@ export default {
   },
 
   methods: {
+    async clickUpdateRegression() {
+      const { local, date } = this
+      const update = {
+        ticketMath: this.ticketMath
+      }
+      const data = await Forecast.updatePark(local, date, update)
+      if (data) {
+        Message({
+          message: '更新成功',
+          type: 'success'
+        })
+      }
+    },
     async clickRow(e) {
       const { date } = e
       const { local } = this
@@ -121,77 +163,117 @@ export default {
       console.log(data)
     },
     regression(data) {
-      const { date } = this
-      let x = data.map(_ => {
-        const _date = _[0]
-        return Math.abs(moment(_date, 'MM/DD').diff(moment(date), 'days') - 1)
-      })
+      if (data.length < 15) {
+        return
+      }
 
-      x = x.reverse()
-
+      const x = []
+      for (let i = 0; i < data.length; i++) {
+        x.push(i)
+      }
       const y = data.map(_ => _[1])
+      // console.log(x)
+      // console.log(y)
 
-      console.log(x)
-      console.log(y)
+      const regression = new PolynomialRegression(x, y, 8)
 
-      const degree = 3 // setup the maximum degree of the polynomial
-
-      const regression = new PolynomialRegression(x, y, degree)
-
-      console.log(regression.coefficients) // Prints the coefficients in increasing order of power (from 0 to degree).
-
+      // 汇图
       const coefficients = regression.coefficients
-      // console.log(coefficients.reverse())
-
-      for (let x = 1; x <= 15; x++) {
+      this.ticketMath = coefficients
+      const ticketRegression = []
+      for (let x = 0; x <= 14; x++) {
         let y = 0
         let k = 0
         for (let s = 0; s < coefficients.length; s++) {
           const _val = (coefficients[k] * Math.pow(x, s))
-          // console.log(_val)
           y += _val
           k++
         }
-        console.log(y)
+        ticketRegression.push([x, y])
       }
 
-      // console.log(regression)
-
-      // const degree = 10 // setup the maximum degree of the polynomial
-      // const regression = new PolynomialRegression(x, y, degree)
-      // // console.log(regression.predict(80)) // Apply the model to some x value. Prints 2.6.
-      // console.log(regression.coefficients) // Prints the coefficients in increasing order of power (from 0 to degree).
-      console.log(regression.toString()) // Prints a human-readable version of the function.
-      // console.log(regression.toLaTeY())
-
-      // this.coefficients = regression.toString()
+      this.isLoad.ticketRegression = true
+      this.ticketRegression = ticketRegression
     },
 
-    async initList() {
+    async getParkTicket() {
       const { local } = this
       const arg = {
-        st: '2018-02-21',
+        st: '2018-03-02',
         et: '2018-04-15'
       }
 
+      const parkData = await Waits.waitCountPark(local, arg)
       const ticketData = await Ticket.available(local, arg)
 
-      const parkData = await Waits.waitCountPark(local, arg)
-      const parkCount = {}
-      parkData.forEach(item => {
-        const { date } = item
-        parkCount[date] = item
-      })
-
+      const ticketDates = {}
       ticketData.forEach(item => {
         const { date } = item
-        if (parkCount[date]) {
-          Object.assign(item, parkCount[date])
+        ticketDates[date] = item
+      })
+
+      parkData.forEach(item => {
+        const { date } = item
+        if (ticketDates[date]) {
+          Object.assign(item, ticketDates[date])
         }
       })
 
-      this.ticketCount = ticketData
-      this.isLoad.parkCount = true
+      this.parkData = parkData
+    },
+    selectIndex() {
+      console.log(11)
+      // let index = this.indexList
+      const { indexList, parkData } = this
+      const series = []
+      parkData.forEach(item => {
+        const _arr = []
+        _arr[0] = item.date
+        indexList.forEach(index => {
+          if (index === 'availableCount') {
+            item[index] = 20000 - item[index]
+          }
+          _arr.push(item[index])
+        })
+        series.push(_arr)
+      })
+
+      this.parkChartData = series
+    },
+
+    async initList() {
+      await this.getParkTicket()
+
+      // this.ticketCount = ticketData
+      // this.isLoad.parkCount = true
+
+      // // 处理售票量/客流量
+      // const ticketFlowCount = {}
+      // let _data = []
+      // parkData.forEach(item => {
+      //   _data.push([
+      //     item.date,
+      //     item.flowAvg
+      //   ])
+      // })
+      // _data.reverse()
+
+      // ticketFlowCount['park'] = _data
+
+      // _data = []
+      // parkData.forEach(item => {
+      //   _data.push([
+      //     item.date,
+      //     item.availableCount
+      //   ])
+      // })
+      // _data.reverse()
+
+      // console.log(_data)
+
+      // ticketFlowCount['ticket'] = _data
+      // this.ticketFlowCount = ticketFlowCount
+      // this.isLoad.ticketFlowCount = true
     },
 
     async init() {
