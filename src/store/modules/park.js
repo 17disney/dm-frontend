@@ -101,7 +101,8 @@ const park = {
         }
       })
       state.schedules = data
-    }
+    },
+    SET_TICKETS: (state, data) => {}
   },
   actions: {
     // 获取项目列表

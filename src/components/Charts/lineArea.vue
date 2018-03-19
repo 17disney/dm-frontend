@@ -14,14 +14,19 @@ export default {
       default: 'chart'
     },
     data: {
-      type: [Array, Object],
+      type: Array,
       default: []
     },
-    type: {
-      type: String
+    indexList: {
+      type: Array,
+      default: function() {
+        return ['num']
+      }
     },
-    legend: {
-      type: String
+
+    xAxisKey: {
+      type: String,
+      default: 'key'
     }
   },
   data() {
@@ -30,7 +35,7 @@ export default {
     }
   },
   mounted() {
-    this.initChart()
+    this.init()
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -40,14 +45,21 @@ export default {
     this.chart = null
   },
   watch: {
-    'data': function() {
-      this.initChart()
+    // 'data': function(val) {
+    //   if (val.length > 0) {
+    //     this.initChart()
+    //   }
+    // },
+    'indexList': function(val) {
+      this.init()
     }
   },
   methods: {
-    initSeries(data) {
-      const series = [{
-        name: '等候时间',
+    initSeries(data, key) {
+      const name = this.Filters.fieldName(key)
+      const series = {
+        name,
+        data,
         type: 'line',
         smooth: true,
         symbol: 'circle',
@@ -76,44 +88,33 @@ export default {
           normal: {
             color: '#2492D7',
             borderColor: '#243247',
-            borderWidth: 12
+            borderWidth: 3
           }
-        },
-        data
-      }]
-
+        }
+      }
       return series
     },
 
-    initChart() {
+    init() {
       this.chart = echarts.init(document.getElementById(this.id))
-      const { data, legend } = this
+      const { data, legend, xAxisKey, indexList } = this
 
-      let series, xAxisData
+      // 设置x轴数据
+      const xAxisData = data.map(_ => _[xAxisKey])
 
-      if (Array.isArray(data)) {
-        series = this.initSeries(data.map(_ => _[1]))
-        xAxisData = data.map(_ => _[0])
-      } else {
-        // const _data = data[0]
-        // xAxisData = _data.map(_ => _[0])
-
-        // for (const k in data) {
-        //   const _data = data[k]
-        //   console.log(_data)
-        //   series.push(this.initSeries(_data.map(_ => _[1])))
-        // }
-
-        // data.forEach(item => {
-        //   console.log(item)
-        // })
-      }
+      const series = []
+      indexList.forEach(item => {
+        const _data = data.map(_ => _[item])
+        const _series = this.initSeries(_data, item)
+        series.push(_series)
+      })
+      console.log(series)
 
       const option = {
         grid: {
           top: 50,
-          left: '3%',
-          right: '4%',
+          left: '2%',
+          right: '2%',
           bottom: '2%',
           containLabel: true
         },
@@ -163,7 +164,6 @@ export default {
           },
           data: xAxisData
         }],
-
         series
       }
 

@@ -11,7 +11,7 @@
         <el-table @row-click="clickRow" v-if="parkData.length > 0" size="small" stripe :data="parkData" v-loading.body="parkData.length === 0" element-loading-text="Loading" border fit highlight-current-row>
           <el-table-column label="日期" width="100">
             <template slot-scope="scope">
-              {{scope.row.date}} {{scope.row.date | moment('YYYY-MM-DD', 'd')}}
+              {{scope.row.date}} {{scope.row.date | timeFormat('YYYY-MM-DD', 'd')}}
             </template>
           </el-table-column>
           <el-table-column filter-multiple label="售票量" width="70" align="type">
@@ -69,9 +69,9 @@
             <el-checkbox-group @change="selectIndex" v-model="indexList">
               <el-checkbox label="flowAvg">客流量</el-checkbox>
               <el-checkbox label="flowMax">最高客流量</el-checkbox>
-              <el-checkbox label="availableCount">售票量</el-checkbox>
+              <el-checkbox label="ticketNum">售票量</el-checkbox>
             </el-checkbox-group>
-            <line-area legend="售票量/客流量" v-if="isLoad.ticketFlowCount" :data="ticketFlowCount" id="ticket-flow" height='100%' width='100%'></line-area>
+            <line-area legend="售票量/客流量"  :data="parkChartData" id="ticket-flow" height='100%' width='100%'></line-area>
           </div>
         </div>
       </el-col>
@@ -222,11 +222,12 @@ export default {
       this.parkData = parkData
     },
     selectIndex() {
-      console.log(11)
-      // let index = this.indexList
+      const { deepClone } = this.Utils
       const { indexList, parkData } = this
+
+      const _parkData = deepClone(parkData)
       const series = []
-      parkData.forEach(item => {
+      _parkData.forEach(item => {
         const _arr = []
         _arr[0] = item.date
         indexList.forEach(index => {
