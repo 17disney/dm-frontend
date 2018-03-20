@@ -41,20 +41,20 @@ export const constantRouterMap = [
     path: '/explorer',
     component: Layout,
     redirect: '/explorer/destinations',
-    name: '资源管理',
-    meta: { title: '资源管理', icon: 'example' },
+    name: 'explorer',
+    meta: { title: '运营管理', icon: 'mdx' },
     children: [
       {
         path: 'destinations',
         name: 'destinations',
         component: () => import('@/views/explorer/destinations'),
-        meta: { title: '项目管理', icon: 'table' }
+        meta: { title: '项目管理', icon: '' }
       },
       {
         path: 'schedules',
         name: 'schedules',
         component: () => import('@/views/explorer/schedules'),
-        meta: { title: '项目时间表', icon: 'table' }
+        meta: { title: '开放时间表', icon: '' }
       }
     ]
   },
@@ -63,109 +63,109 @@ export const constantRouterMap = [
     path: '/wait-count',
     component: Layout,
     redirect: '/wait-count/attractions',
-    name: '等待统计',
-    meta: { title: '等待时间', icon: 'example' },
+    name: 'wait',
+    meta: { title: '等候时间', icon: 'time' },
     children: [
       {
         path: 'attractions',
         name: 'attractions',
         component: () => import('@/views/wait-count/attractions'),
-        meta: { title: '游乐项目', icon: 'table' }
+        meta: { title: '游乐项目', icon: '' }
       },
       {
         path: 'attractions/:id',
         name: 'attractions-id',
         component: () => import('@/views/wait-count/attractions-id'),
-        meta: { title: '项目详情', icon: 'table' }
+        meta: { title: '项目详情', icon: '' }
       },
       {
         path: 'park',
         name: 'park',
         component: () => import('@/views/wait-count/park'),
-        meta: { title: '乐园', icon: 'table' }
+        meta: { title: '乐园', icon: '' }
       }
     ]
   },
 
   {
-    path: '/flow',
+    path: '/simulation',
     component: Layout,
-    redirect: '/flow/ticket',
-    name: '客流预测',
-    meta: { title: '客流预测', icon: 'example' },
+    redirect: '/simulation/oneday',
+    name: 'simulation',
+    meta: { title: '乐园模拟', icon: 'magic-kingdom' },
     children: [
       {
-        path: 'ticket',
-        name: 'ticket',
-        component: () => import('@/views/flow/ticket'),
-        meta: { title: '售票量', icon: 'table' }
+        path: 'oneday',
+        name: 'oneday',
+        component: () => import('@/views/simulation/oneday'),
+        meta: { title: '乐园的一天', icon: '' }
+      },
+      {
+        path: 'plan',
+        name: 'plan',
+        component: () => import('@/views/simulation/plan'),
+        meta: { title: '路径规划', icon: '' }
       }
-      // {
-      //   path: 'park',
-      //   name: 'park',
-      //   component: () => import('@/views/flow/park'),
-      //   meta: { title: '乐园', icon: 'table' }
-      // }
+
+    ]
+  },
+
+  {
+    path: '/forecast',
+    component: Layout,
+    redirect: '/views/forecast',
+    name: 'forecast',
+    meta: { title: '模型管理', icon: 'business-excellence' },
+    children: [
+      {
+        path: 'park',
+        name: 'park',
+        component: () => import('@/views/forecast/park'),
+        meta: { title: '乐园', icon: '' }
+      },
+      {
+        path: 'atts',
+        name: 'atts',
+        component: () => import('@/views/forecast/atts'),
+        meta: { title: '项目', icon: '' }
+      }
+    ]
+  },
+
+  {
+    path: '/fastpass',
+    component: Layout,
+    redirect: '/fastpass/task',
+    name: 'fastpass',
+    meta: { title: '快速通行证', icon: 'shdr-fastpass' },
+    children: [
+      {
+        path: 'task',
+        name: 'task',
+        component: () => import('@/views/fastpass/task'),
+        meta: { title: '任务列表', icon: '' }
+      },
+      {
+        path: 'record',
+        name: 'record',
+        component: () => import('@/views/fastpass/record'),
+        meta: { title: '领取记录', icon: '' }
+      }
     ]
   },
 
   // {
-  //   path: '/ticket',
-  //   component: Layout,
-  //   redirect: '/flow/ticket',
-  //   name: '售票量',
-  //   meta: { title: '售票量', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'ticket',
-  //       name: 'ticket',
-  //       component: () => import('@/views/flow/ticket'),
-  //       meta: { title: '售票量', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'park',
-  //       name: 'park',
-  //       component: () => import('@/views/flow/park'),
-  //       meta: { title: '乐园', icon: 'table' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/map',
-  //   component: Layout,
-  //   redirect: '/angLog/index',
-  //   name: '模拟入园',
-  //   meta: { title: '模拟入园', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'angLog',
-  //       name: 'angLog',
-  //       component: () => import('@/views/angLog/index'),
-  //       meta: { title: '模拟入园', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'map',
-  //       name: 'map',
-  //       component: () => import('@/views/angLog/map'),
-  //       meta: { title: '地图', icon: 'table' }
-  //     }
-
-  //   ]
-  // },
-
-  // {
   //   path: '/example',
   //   component: Layout,
-  //   redirect: '/example/table',
+  //   redirect: '/example/',
   //   name: 'Example',
   //   meta: { title: 'Example', icon: 'example' },
   //   children: [
   //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
+  //       path: '',
+  //       name: '',
+  //       component: () => import('@/views//index'),
+  //       meta: { title: '', icon: '' }
   //     },
   //     {
   //       path: 'tree',

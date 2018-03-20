@@ -9,6 +9,15 @@ export function mathRegression(coefficients, x) {
   return y
 }
 
+export function mathArrAvg(arr) {
+  let sum = 0
+  arr.forEach(_ => {
+    sum += _
+  })
+  const avg = sum / arr.length
+  return avg
+}
+
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
@@ -32,7 +41,9 @@ export function parseTime(time, cFormat) {
   }
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
-    if (key === 'a') { return ['一', '二', '三', '四', '五', '六', '日'][value - 1] }
+    if (key === 'a') {
+      return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+    }
     if (result.length > 0 && value < 10) {
       value = '0' + value
     }
@@ -91,4 +102,22 @@ export function deepClone(source) {
     }
   }
   return targetObj
+}
+
+export function sortBy(attr, rev = true) {
+  // 第二个参数没有传递 默认升序排列
+
+  rev = (rev) ? 1 : -1
+
+  return function(a, b) {
+    a = a[attr]
+    b = b[attr]
+    if (a < b) {
+      return rev * -1
+    }
+    if (a > b) {
+      return rev * 1
+    }
+    return 0
+  }
 }

@@ -13,6 +13,7 @@ const park = {
     waits: {},
     schedules: {}
   },
+
   mutations: {
     SET_LIST: (state, data) => {
       data.forEach(item => {

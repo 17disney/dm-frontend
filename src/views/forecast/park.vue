@@ -5,20 +5,40 @@
 
     <div class="filter-container">
 
-    <el-date-picker
-      v-model="value6"
-      type="daterange"
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期">
-    </el-date-picker>
-      {{value6}}
+      <el-date-picker v-model="dateRang" type="daterange" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+      </el-date-picker>
       <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="date" align="right" type="date" placeholder="选择日期"></el-date-picker> -->
+    </div>
+
+    <div class="panel-container">
+      <div class="panel">
+        <div class="panel__heading">
+          <h3 class="panel__title">售票量/客流量</h3>
+        </div>
+        <div class="panel__body">
+
+          <el-checkbox-group v-model="indexList">
+            <el-checkbox label="flowAvg">客流量</el-checkbox>
+            <el-checkbox label="flowMax">最高客流量</el-checkbox>
+            <el-checkbox label="ticketNum">售票量</el-checkbox>
+          </el-checkbox-group>
+
+          <line-area xAxisKey="date" :indexList="indexList" legend="售票量/客流量" v-if="countLoad.parkList" :data="parkList" id="ticket-flow" height='100%' width='100%'></line-area>
+          <el-button @click="clickMath" type="success">计算</el-button>
+          {{ticketMath}}
+
+          <line-area legend="售票量/客流量" v-if="isLoad.mathData" :data="ticketRegression" id="ticket-math" height='100%' width='100%'></line-area>
+          {{ftRate}}
+
+          <line-area xAxisKey="ticketNum" :indexList="['flowAvg']" legend="售票量/客流量" v-if="countLoad.parkList" :data="parkCountList" id="ticket-flow2" height='100%' width='100%'></line-area>
+
+        </div>
+      </div>
+
     </div>
     <el-row :gutter="20">
       <el-col :span="12">
-
-        <el-table size="small" stripe :data="parkList" v-loading.body="parkList.length === 0" element-loading-text="Loading" border fit highlight-current-row>
+        <el-table size="small" stripe :data="parkCountList" v-loading.body="parkCountList.length === 0" element-loading-text="Loading" border fit highlight-current-row>
           <el-table-column label="日期" width="100">
             <template slot-scope="scope">
               {{scope.row.date}} {{scope.row.date | timeFormat('YYYY-MM-DD', 'd')}}
@@ -74,26 +94,7 @@
         </el-table>
       </el-col>
       <el-col :span="12">
-        <div class="panel">
-          <div class="panel__heading">
-            <h3 class="panel__title">售票量/客流量</h3>
-          </div>
-          <div class="panel__body">
 
-            <el-checkbox-group v-model="indexList">
-              <el-checkbox label="flowAvg">客流量</el-checkbox>
-              <el-checkbox label="flowMax">最高客流量</el-checkbox>
-              <el-checkbox label="ticketNum">售票量</el-checkbox>
-            </el-checkbox-group>
-
-            <line-area xAxisKey="date"  :indexList="indexList" legend="售票量/客流量" v-if="countLoad.parkList" :data="parkList" id="ticket-flow" height='100%' width='100%'></line-area>
-            <el-button @click="clickMath" type="success">计算</el-button>
-            {{ticketMath}}
-
-            <line-area legend="售票量/客流量" v-if="isLoad.mathData" :data="ticketRegression" id="ticket-math" height='100%' width='100%'></line-area>
-            {{ftRate}}
-          </div>
-        </div>
       </el-col>
     </el-row>
   </div>
@@ -101,7 +102,7 @@
 
 <script>
 import lineArea from '@/components/Charts/lineArea'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import PolynomialRegression from 'ml-regression-polynomial'
 
 export default {
@@ -119,11 +120,11 @@ export default {
       isLoad: {
         mathData: false
       },
-      search: {
-        st: '2018-02-20',
-        et: '2018-03-17'
-      },
-      value6: ''
+      // search: {
+      //   // st: '2018-02-20',
+      //   // et: '2018-03-17'
+      // },
+      dateRang: ['2018-03-01', '2018-03-19']
     }
   },
 
@@ -132,7 +133,16 @@ export default {
       parkList: state => state.count.parkList,
       countLoad: state => state.count.isLoad,
       ftRate: state => state.count.ftRate
-    })
+    }),
+    ...mapGetters([
+      'parkCountList'
+    ]),
+    st: function() {
+      return this.dateRang[0]
+    },
+    et: function() {
+      return this.dateRang[1]
+    }
   },
 
   mounted() {
@@ -153,10 +163,10 @@ export default {
     },
 
     clickMath() {
-      const { parkList } = this
+      const { parkCountList } = this
 
       const nData = []
-      parkList.forEach(item => {
+      parkCountList.forEach(item => {
         if (item.date !== '2018-03-08') {
           nData.push(item)
         }

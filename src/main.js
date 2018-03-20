@@ -12,6 +12,7 @@ import store from './store'
 import { Message } from 'element-ui'
 import * as Utils from './utils'
 import * as Filters from './filters'
+import Icon from '@/components/Icon'
 
 import '@/styles/disney/index.styl'
 import '@/icons' // icon
@@ -21,6 +22,7 @@ Vue.use(ElementUI, { locale })
 Vue.prototype.Utils = Utils
 Vue.prototype.Message = Message()
 Vue.prototype.Filters = Filters
+Vue.component('icon', Icon)
 
 Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])

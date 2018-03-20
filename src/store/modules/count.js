@@ -1,31 +1,46 @@
 import Wait from '@/api/waits'
 import Ticket from '@/api/ticket'
-import { mathRegression } from '@/utils'
+import { mathRegression, mathArrAvg } from '@/utils'
 
 const count = {
   state: {
     local: 'shanghai',
     st: '2018-02-20',
-    et: '2018-03-17',
+    et: '2018-03-07',
     parkList: [],
     ticketList: [],
     tickets: {},
     isLoad: {
       parkList: false
+    },
+    fts: {},
+    ftRate: {
+      flowIn: 0
     }
   },
+  getters: {
+    parkCountList: (state, getters) => {
+      const list = []
+      const { parkList, tickets, fts } = state
+
+      parkList.forEach(item => {
+        const { date } = item
+        list.push(Object.assign({}, item, tickets[date], fts[date]))
+      })
+
+      return list
+    }
+    // tickets: (state, getters) => {
+
+    // }
+  },
+
   mutations: {
     SET_PARK_LIST: (state, data) => {
       state.parkList = data
       state.isLoad.parkList = true
     },
     SET_TICKET_LIST: (state, data) => {
-      const { parkList, tickets } = state
-      parkList.forEach(item => {
-        const { date } = item
-        Object.assign(item, tickets[date])
-      })
-
       state.ticketList = data
       state.isLoad.parkList = true
     },
@@ -33,24 +48,44 @@ const count = {
       if (date) {
         state.tickets[date] = data
       } else {
-        state.tickets = data
+        const tickets = {}
+        data.forEach(item => {
+          item.ticketNum = 20000 - item.availableCount
+          const { date } = item
+          tickets[date] = item
+        })
+        state.tickets = tickets
       }
     },
-    MARGE_PARK_TICKET_LIST: state => {
-      const { parkList, ticketList } = state
-      if (parkList.length > 0 && ticketList.length > 0) {
-        parkList.forEach(item => {})
-      }
-    },
+    // 计算
     SET_MATH: (state, data) => {
-      const { parkList } = state
+      // data = [21071.309595351056, 2.0166155002669033]
+      const { parkList, tickets } = state
+      // const flowRateList = []
+      const fts = {}
       parkList.forEach(item => {
-        item.flowFt = Math.round(mathRegression(data, item.ticketNum))
+        const { flowMax, date } = item
+        const ticketNum = tickets[date]['ticketNum']
+        const flowFt = Math.round(mathRegression(data, ticketNum))
+        const flowRate = Math.round(
+          100 - Math.abs((flowFt - flowMax) / flowMax) * 100
+        )
+
+        fts[date] = {
+          flowFt,
+          flowRate
+        }
+        // flowRateList.push(flowRate)
+        // item.flowRate = flowRate
       })
+
+      state.fts = fts
+
+      // state.ftRate.flowIn = mathArrAvg(flowRateList)
     }
   },
   actions: {
-    // 乐园统计信息
+    // 获取乐园统计列表
     async getParkCountList({ commit, state }) {
       const { local, st, et } = state
       const arg = {
@@ -58,10 +93,14 @@ const count = {
         et
       }
       const data = await Wait.waitCountPark(local, arg)
+      data.forEach(item => {
+        const { flowAvg, flowMax } = item
+        item.flowIn = Math.round((flowMax) * 0.9)
+      })
       data.reverse()
       commit('SET_PARK_LIST', data)
     },
-    // 售票量统计
+    // 获取售票量统计列表
     async getTicketList({ commit, state }) {
       const { local, st, et } = state
       const arg = {
@@ -69,14 +108,7 @@ const count = {
         et
       }
       const data = await Ticket.available(local, arg)
-
-      const tickets = {}
-      data.forEach(item => {
-        item.ticketNum = 20000 - item.availableCount
-        const { date } = item
-        tickets[date] = item
-      })
-      commit('SET_TICKETS', tickets)
+      commit('SET_TICKETS', data)
       commit('SET_TICKET_LIST', data)
     },
     async getTicketDate({ commit, state }, date) {

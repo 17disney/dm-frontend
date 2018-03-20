@@ -6,6 +6,7 @@
 
 <script>
 import echarts from 'echarts'
+import { sortBy } from '@/utils'
 
 export default {
   props: {
@@ -14,6 +15,10 @@ export default {
       default: 'chart'
     },
     data: {
+      type: Array,
+      default: []
+    },
+    sort: {
       type: Array,
       default: []
     },
@@ -70,24 +75,24 @@ export default {
             width: 1
           }
         },
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-              offset: 0,
-              color: '#2492D7'
-            }, {
-              offset: 0.8,
-              color: '#A1D4EE'
-            }], false),
-            shadowColor: 'rgba(0, 0, 0, 0.1)',
-            shadowBlur: 10
-          }
-        },
+        // areaStyle: {
+        //   normal: {
+        //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        //       offset: 0,
+        //       color: '#2492D7'
+        //     }, {
+        //       offset: 0.8,
+        //       color: '#A1D4EE'
+        //     }], false),
+        //     shadowColor: 'rgba(0, 0, 0, 0.1)',
+        //     shadowBlur: 10
+        //   }
+        // },
 
         itemStyle: {
           normal: {
-            color: '#2492D7',
-            borderColor: '#243247',
+            // color: '#2492D7',
+            // borderColor: '#243247',
             borderWidth: 3
           }
         }
@@ -97,11 +102,16 @@ export default {
 
     init() {
       this.chart = echarts.init(document.getElementById(this.id))
-      const { data, legend, xAxisKey, indexList } = this
+      const { data, legend, xAxisKey, indexList, sort } = this
+
+      if (sort) {
+        // const [key, type] = sort
+        // data.sort(sortBy(key, type))
+      }
 
       // 设置x轴数据
       const xAxisData = data.map(_ => _[xAxisKey])
-
+      console.log(xAxisData)
       const series = []
       indexList.forEach(item => {
         const _data = data.map(_ => _[item])
