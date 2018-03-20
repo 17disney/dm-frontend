@@ -2,16 +2,15 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/zh-CN'
 
+import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-// import '@/styles/index.scss' // global css
 
 import App from './App'
-import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
 import * as Utils from './utils'
-import * as Filters from './filters'
+import router from './common/router'
+import * as Filters from './common/filters'
 import Icon from '@/components/Icon'
 
 import '@/styles/disney/index.styl'

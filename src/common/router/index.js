@@ -7,7 +7,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 /* Layout */
-import Layout from '../views/layout/Layout'
+import Layout from '@/views/layout/Layout'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -22,19 +22,31 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
 
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/dashboard/index',
     name: 'Dashboard',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    meta: { title: '仪表盘', icon: 'home' },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '乐园实况' }
+      },
+      {
+        path: 'map',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '地图' }
+      }
+    ]
   },
 
   {
@@ -106,7 +118,6 @@ export const constantRouterMap = [
         component: () => import('@/views/simulation/plan'),
         meta: { title: '路径规划', icon: '' }
       }
-
     ]
   },
 
@@ -197,4 +208,3 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
-

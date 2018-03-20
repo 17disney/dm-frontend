@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <div class="page-header">
       <el-select clearable style="width: 120px" class="filter-item" v-model="filters.type" :placeholder="'项目类型'">
         <el-option v-for="item in attsType" :key="item.id" :label="item.name" :value="item.id"></el-option>
       </el-select>
@@ -50,20 +50,19 @@
 </template>
 
 <script>
-// import { getList } from '@/api/table'
-import Explorer from '@/api/explorer'
 import { attsType } from '@/common/park-arr'
+import { mapActions, mapState } from 'vuex'
 export default {
   data() {
     return {
-      listRaw: [],
-      listLoading: true,
-      facetGroups: null,
-      attsType,
-      filters: {
-        type: 'attraction',
-        keyword: null
-      }
+      // listRaw: [],
+      // listLoading: true,
+      // facetGroups: null,
+      // attsType,
+      // filters: {
+      //   type: 'attraction',
+      //   keyword: null
+      // }
     }
   },
   filters: {
@@ -77,26 +76,39 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.getDestinationsList('attraction')
   },
   computed: {
+
+    ...mapState({
+      attList: state => state.explorer.attList,
+      parkList: state => state.count.parkList,
+      countLoad: state => state.count.isLoad,
+      ftRate: state => state.count.ftRate
+    }),
+
     list: function() {
-      return this.listRaw.filter(_ => _.type === this.filters.type)
+      // return this.listRaw.filter(_ => _.type === this.filters.type)
     }
   },
   methods: {
+
+    ...mapActions([
+      'getDestinationsList'
+    ]),
+
     fetchData() {
-      this.listLoading = true
-      Explorer.destinations('shanghai', 'attraction').then(res => {
-        const { added, facetGroups } = res
-        added.forEach((item) => {
-          const { type } = item
-          item.type = type.toLowerCase()
-        })
-        this.listRaw = added
-        this.facetGroups = facetGroups
-        this.listLoading = false
-      })
+      // this.listLoading = true
+      // Explorer.destinations('shanghai', 'attraction').then(res => {
+      //   const { added, facetGroups } = res
+      //   added.forEach((item) => {
+      //     const { type } = item
+      //     item.type = type.toLowerCase()
+      //   })
+      //   this.listRaw = added
+      //   this.facetGroups = facetGroups
+      //   this.listLoading = false
+      // })
     },
 
     updateData() {

@@ -1,5 +1,5 @@
 import Wait from '@/api/waits'
-import Ticket from '@/api/ticket'
+import Ticket from '@/common/api/ticket'
 import { mathRegression, mathArrAvg } from '@/utils'
 
 const count = {

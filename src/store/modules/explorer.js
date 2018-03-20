@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { destinations, schedules } from '@/api/explorer'
+import { destinations, schedules } from '@/common/api/explorer'
 import { lineToObject } from '@/utils/tool'
 import { landName } from '@/utils/filter'
 
@@ -7,12 +7,11 @@ const explorer = {
   state: {
     local: 'shanghai',
     date: moment().format('YYYY-MM-DD'),
-    list: [],
-    waits: {},
+    attList: [],
     schedules: {}
   },
   mutations: {
-    SET_LIST: (state, data) => {
+    SET_ATT_LIST: (state, data) => {
       data.forEach(item => {
         const { id, ancestors } = item
         item.aid = lineToObject(id)['__id__']
@@ -122,9 +121,7 @@ const explorer = {
   actions: {
     // 获取项目列表
     async getDestinationsList({ commit, state }, type) {
-      // let key = `destinationsList-${type}`
       const data = await destinations(state.local, type)
-      // this.updateCache(key, data)
       commit('SET_LIST', data)
     },
 
