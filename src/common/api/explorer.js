@@ -21,7 +21,7 @@ export default {
 
   schedules: function schedules(local, date) {
     return request({
-      url: `${base}/schedules/${local}/${date}`,
+      url: `${base}/explorer/schedules/${local}/${date}`,
       method: 'get'
     })
   }

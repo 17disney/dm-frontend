@@ -43,5 +43,4 @@ export default {
 
   // const waitCountPark = (local, st, et) => request(`${base}/wait-count/park/${local}`, {st, et})
   // const waitCountAttractions = (local, id, data) => request(`${base}/wait-count/attractions/${local}/${id}`, data)
-
 }

@@ -8,7 +8,6 @@ const explorer = {
     local: 'shanghai',
     date: moment().format('YYYY-MM-DD'),
     attList: [],
-    atts: {},
     facetGroups: {},
     schedules: {}
   },
@@ -16,7 +15,6 @@ const explorer = {
     attractionList: (state, getters) => {
       return state.attList.filter(item => item.type === 'attraction')
     }
-
   },
   mutations: {
     SET_FACET_GROUPS: (state, data) => {
@@ -59,63 +57,7 @@ const explorer = {
       })
       state.attList = data
     },
-    SET_WAITS: (state, data) => {
-      const waits = {}
-      data.forEach(item => {
-        const { fpList, waitList, endTime } = item
 
-        if (fpList && fpList.length > 0) {
-          item.fpAvailable = true
-          const [utime, fpStartTime] = fpList[0]
-          item.fpStatus = true
-          item.fpUtime = utime
-          if (fpStartTime === 'FASTPASS is Not Available') {
-            item.fpStatus = false
-          } else {
-            item.fpStartTime = moment(fpStartTime, 'HH:mm:ss').format('H:mm')
-
-            let fpEndTime = moment(fpStartTime, 'HH:mm:ss')
-              .add(1, 'h')
-              .format('H:mm')
-            if (fpEndTime > moment(endTime, 'HH:mm:ss')) {
-              fpEndTime = moment(endTime, 'HH:mm:ss').format('H:mm')
-            }
-            item.fpEndTime = fpEndTime
-          }
-        }
-
-        if (waitList && waitList.length > 0) {
-          const [utime, postedWaitMinutes, status] = item.waitList[0]
-          item.status = status
-          item.utime = utime
-          item.postedWaitMinutes = postedWaitMinutes
-        }
-        waits[item.id] = item
-      })
-
-      const { list } = state
-      list.forEach(item => {
-        const wait = waits[item.aid]
-        if (wait && wait['waitList'] && wait.status === 'Operating') {
-          // item.icon = L.divIcon({
-          //   className: 'att-marker att-marker--wait',
-          //   popupAnchor: [17, 57],
-          //   html: `
-          //     <div class="att-marker__content">
-          //       <div class="att-marker__desc">等候</div>
-          //       <div class="att-marker__num">${wait.waitList[0][1]}</div>
-          //       <div class="att-marker__desc">分钟</div>
-          //     </div>
-          //     <div class="att-marker__tip__container">
-          //       <div class="att-marker__tip">
-          //     </div>
-          //   `
-          // })
-        }
-      })
-
-      state.waits = waits
-    },
     SET_SCHEDULES: (state, data) => {
       let activities = []
       for (const item of data) {
@@ -140,21 +82,9 @@ const explorer = {
       commit('SET_FACET_GROUPS', facetGroups)
     },
 
-    // // 获取等待时间
-    // async getAttractionsWait({ commit, state }) {
-    //   const data = await Attractions(state.local, state.date)
-
-    //   commit('SET_WAITS', data)
-    // },
-
     // 获取时间表
-    async getSchedules({ commit, state }) {
-      const data = await Explorer.schedules(state.local, state.date)
-
-      // this.updateCache(key, data)
-      // wepy.setStorageSync('destinationsSchedules', data)
-      // wepy.setStorageSync('destinationsSchedulesCache', date)
-      // return data
+    async getSchedules({ commit, state }, date) {
+      const data = await Explorer.schedules(state.local, date)
       commit('SET_SCHEDULES', data)
     }
   }

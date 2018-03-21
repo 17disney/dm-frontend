@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Waits from '@/api/waits'
+// import Waits from '@/api/waits'
 import Ticket from '@/api/ticket'
 import CountLine from '@/components/Charts/countLine'
 import ParkCountLine from '@/components/Charts/parkCountLine'
@@ -99,25 +99,25 @@ export default {
 
   methods: {
     init: async function() {
-      let data = []
-      const { aid, local } = this
-      const arg = {
-        st: this.st,
-        et: this.et
-      }
-      data = await Waits.waitCountAttractionsId(local, aid, arg)
-      data = data.reverse()
-      this.attCount[aid] = data
-      this.isLoad.attCount = true
+      // let data = []
+      // const { aid, local } = this
+      // const arg = {
+      //   st: this.st,
+      //   et: this.et
+      // }
+      // data = await Waits.waitCountAttractionsId(local, aid, arg)
+      // data = data.reverse()
+      // this.attCount[aid] = data
+      // this.isLoad.attCount = true
 
-      data = await Waits.waitCountPark(local, arg)
-      data = data.reverse()
-      this.parkCount[local] = data
-      this.isLoad.parkCount = true
+      // data = await Waits.waitCountPark(local, arg)
+      // data = data.reverse()
+      // this.parkCount[local] = data
+      // this.isLoad.parkCount = true
 
-      data = await Ticket.available(local, arg)
-      this.ticketCount[local] = data
-      this.isLoad.ticketCount = true
+      // data = await Ticket.available(local, arg)
+      // this.ticketCount[local] = data
+      // this.isLoad.ticketCount = true
     }
   }
 }

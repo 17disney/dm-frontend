@@ -2,8 +2,10 @@
 @require '../../styles/disney/var/color.styl';
 
 .att-item {
+  display: flex;
+  padding: 16px 0;
+
   &-meta {
-    padding: 16px 0;
     display: flex;
     align-items: flex-start;
     flex: 1 1 0%;
@@ -11,8 +13,8 @@
     &__avatar {
       border-radius: 5px;
       overflow: hidden;
-      width: 64px;
-      height: 64px;
+      width: 48px;
+      height: 48px;
       margin-right: 16px;
 
       img {
@@ -27,7 +29,8 @@
 
     &__title {
       color: $color-dark-grey;
-      font-size: 18px;
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 }
@@ -42,18 +45,30 @@
         <h4 class="att-item-meta__title">{{data.name}}</h4>
         <div class="att-item-meta__desc"></div>
       </div>
-
+    </div>
+    <div class="att-item__content">
+      <div class="att-item__status">
+        {{wait.status}}
+      </div>
+      <div class="att-item__waits">
+        平均等候：{{wait.waitAvg}} 最高等候：{{wait.waitMax}}
+        <!-- {{wait}} -->
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+
 export default {
   components: {},
 
   props: {
     data: {
+      type: Object
+    },
+    wait: {
       type: Object
     }
   },
@@ -63,7 +78,9 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+
+  },
 
   mounted() { },
 

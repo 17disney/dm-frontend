@@ -80,9 +80,11 @@ export default {
   },
   computed: {
     ...mapState({
+      attsWait: state => state.wait.attsWait
     }),
     ...mapGetters([
       'attractionList'
+
     ])
   },
   mounted() {
@@ -91,10 +93,14 @@ export default {
 
   methods: {
     ...mapActions([
-      'getDestinationsList'
+      'getDestinationsList',
+      'getAttractionsWait',
+      'getSchedules'
     ]),
     init() {
+      this.getAttractionsWait(this.date)
       this.getDestinationsList()
+      this.getSchedules(this.date)
     },
 
     prevDate() {

@@ -9,15 +9,13 @@
 </style>
 <template>
   <div class="att-list">
-    <att-list-item v-for="item in data" :data="item" :key="item.id">
-
-    </att-list-item>
+    <att-list-item v-for="item in data" :wait="attsWait[item.aid]" :schedule="schedules[item.aid]" :data="item" :key="item.id"></att-list-item>
   </div>
 </template>
 
 <script>
 import AttListItem from '@/components/AttList/AttListItem'
-
+import { mapState } from 'vuex'
 export default {
   components: { AttListItem },
 
@@ -32,7 +30,12 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapState({
+      attsWait: state => state.wait.attsWait,
+      schedules: state => state.explorer.schedules
+    })
+  },
 
   mounted() { },
 

@@ -1,5 +1,5 @@
-import Wait from '@/api/waits'
-import Ticket from '@/common/api/ticket'
+import Wait from '@/common/api/waits'
+import moment from 'moment'
 import { mathRegression } from '@/utils'
 // mathArrAvg
 const count = {
@@ -7,15 +7,10 @@ const count = {
     local: 'shanghai',
     st: '2018-02-20',
     et: '2018-03-07',
+    attsWait: {},
     parkList: [],
-    ticketList: [],
-    tickets: {},
     isLoad: {
       parkList: false
-    },
-    fts: {},
-    ftRate: {
-      flowIn: 0
     }
   },
   getters: {
@@ -36,6 +31,43 @@ const count = {
   },
 
   mutations: {
+    SET_ATTS_WAIT: (state, data) => {
+      const waits = {}
+      data.forEach(item => {
+        const { fpList, waitList, endTime } = item
+
+        if (fpList && fpList.length > 0) {
+          item.fpAvailable = true
+          const [utime, fpStartTime] = fpList[0]
+          item.fpStatus = true
+          item.fpUtime = utime
+          if (fpStartTime === 'FASTPASS is Not Available') {
+            item.fpStatus = false
+          } else {
+            item.fpStartTime = moment(fpStartTime, 'HH:mm:ss').format('H:mm')
+
+            let fpEndTime = moment(fpStartTime, 'HH:mm:ss')
+              .add(1, 'h')
+              .format('H:mm')
+            if (fpEndTime > moment(endTime, 'HH:mm:ss')) {
+              fpEndTime = moment(endTime, 'HH:mm:ss').format('H:mm')
+            }
+            item.fpEndTime = fpEndTime
+          }
+        }
+
+        if (waitList && waitList.length > 0) {
+          const [utime, postedWaitMinutes, status] = item.waitList[0]
+          item.status = status
+          item.utime = utime
+          item.postedWaitMinutes = postedWaitMinutes
+        }
+        waits[item.id] = item
+      })
+
+      state.attsWait = waits
+    },
+
     SET_PARK_LIST: (state, data) => {
       state.parkList = data
       state.isLoad.parkList = true
@@ -85,6 +117,12 @@ const count = {
     }
   },
   actions: {
+    // 获取等待时间
+    async getAttractionsWait({ commit, state }, date) {
+      const data = await Wait.attractions(state.local, date)
+      commit('SET_ATTS_WAIT', data)
+    },
+
     // 获取乐园统计列表
     async getParkCountList({ commit, state }) {
       const { local, st, et } = state
@@ -95,29 +133,10 @@ const count = {
       const data = await Wait.waitCountPark(local, arg)
       data.forEach(item => {
         const { flowMax } = item
-        item.flowIn = Math.round((flowMax) * 0.9)
+        item.flowIn = Math.round(flowMax * 0.9)
       })
       data.reverse()
       commit('SET_PARK_LIST', data)
-    },
-    // 获取售票量统计列表
-    async getTicketList({ commit, state }) {
-      const { local, st, et } = state
-      const arg = {
-        st,
-        et
-      }
-      const data = await Ticket.available(local, arg)
-      commit('SET_TICKETS', data)
-      commit('SET_TICKET_LIST', data)
-    },
-    async getTicketDate({ commit, state }, date) {
-      const { local } = state
-      const data = await Ticket.availableDate(local, date)
-      commit('SET_TICKETS', data, date)
-    },
-    mathParkCount({ commit, state }, data) {
-      commit('SET_MATH', data)
     }
   }
 }
