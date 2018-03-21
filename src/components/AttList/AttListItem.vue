@@ -53,6 +53,7 @@
       <div class="att-item__waits">
         平均等候：{{wait.waitAvg}} 最高等候：{{wait.waitMax}}
         <!-- {{wait}} -->
+        {{schedulesToday.startTime}} - {{schedulesToday.endTime}}
       </div>
     </div>
 
@@ -60,9 +61,11 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 export default {
-  components: {},
+  components: {
+
+  },
 
   props: {
     data: {
@@ -70,6 +73,9 @@ export default {
     },
     wait: {
       type: Object
+    },
+    scheduleList: {
+      type: Array
     }
   },
 
@@ -79,7 +85,12 @@ export default {
   },
 
   computed: {
-
+    ...mapState({
+      today: state => state.app.today
+    }),
+    schedulesToday() {
+      return this.scheduleList.find(item => item.date === this.today)
+    }
   },
 
   mounted() { },

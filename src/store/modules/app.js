@@ -1,7 +1,9 @@
 import Cookies from 'js-cookie'
+import moment from 'moment'
 
 const app = {
   state: {
+    today: moment().format('YYYY-MM-DD'),
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
     }

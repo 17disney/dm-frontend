@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .menu-wrapper
   .icon--pep
     font-size: 14px;

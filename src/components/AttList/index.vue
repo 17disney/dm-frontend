@@ -9,7 +9,7 @@
 </style>
 <template>
   <div class="att-list">
-    <att-list-item v-for="item in data" :wait="attsWait[item.aid]" :schedule="schedules[item.aid]" :data="item" :key="item.id"></att-list-item>
+    <att-list-item v-for="item in data" :wait="attsWait[item.aid]" :schedule-list="schedules[item.aid]" :data="item" :key="item.id"></att-list-item>
   </div>
 </template>
 

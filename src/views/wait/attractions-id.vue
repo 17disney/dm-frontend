@@ -54,8 +54,6 @@
 </template>
 
 <script>
-// import Waits from '@/api/waits'
-import Ticket from '@/api/ticket'
 import CountLine from '@/components/Charts/countLine'
 import ParkCountLine from '@/components/Charts/parkCountLine'
 import TicketCountLine from '@/components/Charts/ticketCountLine'

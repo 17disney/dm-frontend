@@ -72,28 +72,28 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/wait-count',
+    path: '/wait',
     component: Layout,
-    redirect: '/wait-count/attractions',
+    redirect: '/wait/attractions',
     name: 'wait',
     meta: { title: '等候时间', icon: 'time' },
     children: [
       {
         path: 'attractions',
         name: 'attractions',
-        component: () => import('@/views/wait-count/attractions'),
+        component: () => import('@/views/wait/attractions'),
         meta: { title: '游乐项目', icon: '' }
       },
       {
         path: 'attractions/:id',
         name: 'attractions-id',
-        component: () => import('@/views/wait-count/attractions-id'),
+        component: () => import('@/views/wait/attractions-id'),
         meta: { title: '项目详情', icon: '' }
       },
       {
         path: 'park',
         name: 'park',
-        component: () => import('@/views/wait-count/park'),
+        component: () => import('@/views/wait/park'),
         meta: { title: '乐园', icon: '' }
       }
     ]

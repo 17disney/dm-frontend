@@ -1,19 +1,22 @@
 <template>
   <div class="page bg--gray">
-    <div class="page-header">
-      <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="filters.date" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
-      </el-date-picker>
-      <el-button-group>
-        <el-button @click="prevDate" type="primary" icon="el-icon-arrow-left">上一天</el-button>
-        <el-button @click="nextDate" type="primary">下一天
-          <i class="el-icon-arrow-right el-icon--right"></i>
-        </el-button>
-      </el-button-group> -->
-    </div>
+    <!-- <div class="page-header">
+
+    </div> -->
 
     <div class="page-content">
       <div class="card">
         <div class="card__body">
+          <div class="att-list-form">
+            <el-date-picker value-format="yyyy-MM-dd" v-model="filters.date" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+            </el-date-picker>
+            <el-button-group>
+              <el-button @click="prevDate" type="primary" icon="el-icon-arrow-left">上一天</el-button>
+              <el-button @click="nextDate" type="primary">下一天
+                <i class="el-icon-arrow-right el-icon--right"></i>
+              </el-button>
+            </el-button-group>
+          </div>
           <att-list :data="attractionList"></att-list>
         </div>
       </div>

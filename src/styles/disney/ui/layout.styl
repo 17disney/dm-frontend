@@ -10,10 +10,24 @@
 }
 
 .layout {
+  min-height: 100%;
+  transition: margin-left 0.28s;
+  margin-left: 256px;
+  margin-top: 64px;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .layout-content {
   flex: auto;
+  height: 100%;
+  margin: 24px 24px 0px;
+}
+
+.page {
+  margin: -24px -24px 0px;
 }
 
 .bg--gray {
@@ -29,7 +43,4 @@
 
 .page-content {
   margin: 24px 24px 0;
-}
-
-.page {
 }
