@@ -7,7 +7,7 @@ export default {
 
   destinations: function destinations(local) {
     return request({
-      url: `${base}/destinations/${local}`,
+      url: `${base}/explorer/destinations/${local}`,
       method: 'get'
     })
   },

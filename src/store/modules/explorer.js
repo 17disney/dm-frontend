@@ -1,26 +1,37 @@
 import moment from 'moment'
-import { destinations, schedules } from '@/common/api/explorer'
+import Explorer from '@/common/api/explorer'
 import { lineToObject } from '@/utils/tool'
-import { landName } from '@/utils/filter'
+// import { landName } from '@/utils/filter'
 
 const explorer = {
   state: {
     local: 'shanghai',
     date: moment().format('YYYY-MM-DD'),
     attList: [],
+    atts: {},
+    facetGroups: {},
     schedules: {}
   },
+  getters: {
+    attractionList: (state, getters) => {
+      return state.attList.filter(item => item.type === 'attraction')
+    }
+
+  },
   mutations: {
+    SET_FACET_GROUPS: (state, data) => {
+      state.facetGroups = data
+    },
     SET_ATT_LIST: (state, data) => {
       data.forEach(item => {
-        const { id, ancestors } = item
+        const { id, medias } = item
         item.aid = lineToObject(id)['__id__']
 
-        for (const ancestorsItem of ancestors) {
-          if (ancestorsItem.type === 'land') {
-            item.landName = landName(ancestorsItem.id)
-          }
-        }
+        // for (const ancestorsItem of ancestors) {
+        //   if (ancestorsItem.type === 'land') {
+        //     // item.landName = landName(ancestorsItem.id)
+        //   }
+        // }
 
         item.type = item.type.toLowerCase()
         // 提取坐标
@@ -40,11 +51,13 @@ const explorer = {
         }
 
         // 提取主图
-        item.finderListMobileSquare = item.medias.filter(_ => {
-          return _.type === 'finderListMobileSquare'
-        })[0]
+        if (medias && medias.constructor === Array) {
+          item.finderListMobileSquare = medias.filter(_ => {
+            return _.type === 'finderListMobileSquare'
+          })[0]
+        }
       })
-      state.list = data
+      state.attList = data
     },
     SET_WAITS: (state, data) => {
       const waits = {}
@@ -83,7 +96,7 @@ const explorer = {
       const { list } = state
       list.forEach(item => {
         const wait = waits[item.aid]
-        if (wait && wait['waitList'] && wait.status == 'Operating') {
+        if (wait && wait['waitList'] && wait.status === 'Operating') {
           // item.icon = L.divIcon({
           //   className: 'att-marker att-marker--wait',
           //   popupAnchor: [17, 57],
@@ -120,9 +133,11 @@ const explorer = {
   },
   actions: {
     // 获取项目列表
-    async getDestinationsList({ commit, state }, type) {
-      const data = await destinations(state.local, type)
-      commit('SET_LIST', data)
+    async getDestinationsList({ commit, state }) {
+      const data = await Explorer.destinations(state.local)
+      const { added, facetGroups } = data
+      commit('SET_ATT_LIST', added)
+      commit('SET_FACET_GROUPS', facetGroups)
     },
 
     // // 获取等待时间
@@ -134,7 +149,7 @@ const explorer = {
 
     // 获取时间表
     async getSchedules({ commit, state }) {
-      const data = await schedules(state.local, state.date)
+      const data = await Explorer.schedules(state.local, state.date)
 
       // this.updateCache(key, data)
       // wepy.setStorageSync('destinationsSchedules', data)

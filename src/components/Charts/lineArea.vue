@@ -6,7 +6,7 @@
 
 <script>
 import echarts from 'echarts'
-import { sortBy } from '@/utils'
+// import { sortBy } from '@/utils'
 
 export default {
   props: {

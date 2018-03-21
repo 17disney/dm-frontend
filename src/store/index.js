@@ -3,8 +3,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import explorer from './modules/explorer'
 import user from './modules/user'
-import park from './modules/park'
-import count from './modules/count'
+import wait from './modules/wait'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -14,8 +13,7 @@ const store = new Vuex.Store({
     app,
     explorer,
     user,
-    park,
-    count
+    wait
   },
   getters
 })

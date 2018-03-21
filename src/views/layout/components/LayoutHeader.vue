@@ -1,11 +1,11 @@
 <style lang="stylus" scoped>
-$navbar-height = 64px;
+$layout-header-height = 64px;
 
-.navbar {
+.layout-header {
   position: fixed;
   z-index: 999;
-  height: $navbar-height;
-  line-height: $navbar-height;
+  height: $layout-header-height;
+  line-height: $layout-header-height;
   border-radius: 0px !important;
   top: 0px;
   right: 0px;
@@ -13,8 +13,8 @@ $navbar-height = 64px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
-    line-height: 64px;
-    height: $navbar-height;
+    line-height: $layout-header-height;
+    height: $layout-header-height;
     float: left;
     padding: 0 24px;
     vertical-align: middle;
@@ -22,7 +22,7 @@ $navbar-height = 64px;
   }
 
   .app-breadcrumb.el-breadcrumb {
-    line-height: $navbar-height;
+    line-height: $layout-header-height;
   }
 
   .screenfull {
@@ -33,7 +33,7 @@ $navbar-height = 64px;
   }
 
   .avatar-container {
-    height: $navbar-height;
+    height: $layout-header-height;
     display: inline-block;
     position: absolute;
     right: 35px;
@@ -60,9 +60,8 @@ $navbar-height = 64px;
 }
 </style>
 
-
 <template>
-  <el-menu class="navbar" mode="horizontal">
+  <el-menu class="layout-header" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
     <el-dropdown class="avatar-container" trigger="click">

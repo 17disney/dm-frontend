@@ -1,22 +1,22 @@
 <template>
   <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
     <sidebar class="sidebar-container"></sidebar>
-    <div class="main-container">
-      <navbar></navbar>
-      <app-main></app-main>
+    <div class="layout">
+      <layout-header></layout-header>
+      <layout-content></layout-content>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from '@/views/layout/components'
+import { LayoutHeader, Sidebar, LayoutContent } from '@/views/layout/components'
 
 export default {
   name: 'layout',
   components: {
-    Navbar,
+    LayoutHeader,
     Sidebar,
-    AppMain
+    LayoutContent
   },
   computed: {
     sidebar() {

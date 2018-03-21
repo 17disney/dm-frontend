@@ -1,7 +1,7 @@
 import Wait from '@/api/waits'
 import Ticket from '@/common/api/ticket'
-import { mathRegression, mathArrAvg } from '@/utils'
-
+import { mathRegression } from '@/utils'
+// mathArrAvg
 const count = {
   state: {
     local: 'shanghai',
@@ -94,7 +94,7 @@ const count = {
       }
       const data = await Wait.waitCountPark(local, arg)
       data.forEach(item => {
-        const { flowAvg, flowMax } = item
+        const { flowMax } = item
         item.flowIn = Math.round((flowMax) * 0.9)
       })
       data.reverse()
