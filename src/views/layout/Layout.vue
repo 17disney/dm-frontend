@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
-    <sidebar class="sidebar-container"></sidebar>
+    <layout-sidebar></layout-sidebar>
     <div class="layout">
       <layout-header></layout-header>
       <layout-content></layout-content>
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import { LayoutHeader, Sidebar, LayoutContent } from '@/views/layout/components'
+import { LayoutHeader, LayoutSidebar, LayoutContent } from '@/views/layout/components'
 
 export default {
   name: 'layout',
   components: {
     LayoutHeader,
-    Sidebar,
+    LayoutSidebar,
     LayoutContent
   },
   computed: {
