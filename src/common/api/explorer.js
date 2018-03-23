@@ -4,11 +4,25 @@ const base = 'explorer-service'
 const cdn = 'https://park-explorer.17disney.com'
 
 export default {
-
   destinations: function destinations(local) {
     return request({
       url: `${base}/explorer/destinations/${local}`,
       method: 'get'
+    })
+  },
+
+  destinationsRaw: function destinationsRaw(local) {
+    return request({
+      url: `${base}/explorer/destinations-raw/${local}`,
+      method: 'get'
+    })
+  },
+
+  updateDestinationsId: function updateDestinationsId(id, data) {
+    return request({
+      url: `${base}/explorer/destinations/${id}`,
+      method: 'put',
+      data
     })
   },
 

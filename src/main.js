@@ -23,7 +23,7 @@ Object.keys(Filters).forEach(key => {
 })
 
 Vue.prototype.Utils = Utils
-Vue.prototype.Message = Message()
+Vue.prototype.Message = Message
 Vue.prototype.Filters = Filters
 Vue.config.productionTip = false
 

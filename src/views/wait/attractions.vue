@@ -96,7 +96,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'getDestinationsList',
+      'getDestinationsRawList',
       'getAttractionsWait',
       'getSchedules'
     ]),
