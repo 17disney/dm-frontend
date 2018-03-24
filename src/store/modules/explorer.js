@@ -2,7 +2,7 @@ import moment from 'moment'
 import Explorer from '@/common/api/explorer'
 import { lineToObject } from '@/utils/tool'
 import attType from '@/common/data/att-type'
-
+import playType from '@/common/data/play-type'
 const explorer = {
   state: {
     local: 'shanghai',
@@ -11,9 +11,13 @@ const explorer = {
     attRawList: [],
     facetGroups: {},
     schedules: {},
-    attType
+    attType,
+    playType
   },
   getters: {
+    landList: (state, getters) => {
+      return state.attList.filter(item => item.type === 'land')
+    },
     attractionList: (state, getters) => {
       return state.attList.filter(item => item.type === 'attraction')
     },
@@ -90,14 +94,18 @@ const explorer = {
     // 获取项目列表
     async getDestinationsRawList({ commit, state }) {
       const data = await Explorer.destinationsRaw(state.local)
-      const { added, facetGroups } = data
-      commit('SET_ATT_RAW_LIST', added)
-      commit('SET_FACET_GROUPS', facetGroups)
+      if (data) {
+        const { added, facetGroups } = data
+        commit('SET_ATT_RAW_LIST', added)
+        commit('SET_FACET_GROUPS', facetGroups)
+      }
     },
 
     async getDestinationsList({ commit, state }) {
       const data = await Explorer.destinations(state.local)
-      commit('SET_ATT_LIST', data)
+      if (data) {
+        commit('SET_ATT_LIST', data)
+      }
     },
 
     // // 获取项目列表
