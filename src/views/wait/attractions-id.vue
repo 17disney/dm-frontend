@@ -1,4 +1,3 @@
-
 <template>
   <div class="page bg--gray">
     <!-- <div class="panel">
@@ -52,6 +51,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
 import CountLine from '@/components/Charts/countLine'
 import ParkCountLine from '@/components/Charts/parkCountLine'
 import TicketCountLine from '@/components/Charts/ticketCountLine'
@@ -65,18 +65,29 @@ export default {
     return {
       st: '2018-02-16',
       et: '2018-03-14',
-      isLoad: {
-        attCount: false,
-        parkCount: false,
-        ticketCount: false
+      filters: {
+        hotLevel: 3,
+        type: 'attraction'
       }
     }
   },
 
   computed: {
-    // aid: function () {
-    //   return this.$route.params.id
-    // }
+    ...mapState({
+      local: state => state.explorer.local,
+      attsWait: state => state.wait.attsWait,
+      attType: state => state.explorer.attType,
+      playType: state => state.explorer.playType,
+      attLoading: state => state.wait.loading
+    }),
+    ...mapGetters([
+      'attListFilter',
+      'attractionList'
+    ]),
+    activeAttList() {
+      const { type, hotLevel } = this.filters
+      return this.attListFilter(type, hotLevel)
+    }
   },
 
   mounted() {
@@ -84,26 +95,9 @@ export default {
   },
 
   methods: {
-    init: async function() {
-      // let data = []
-      // const { aid, local } = this
-      // const arg = {
-      //   st: this.st,
-      //   et: this.et
-      // }
-      // data = await Waits.waitCountAttractionsId(local, aid, arg)
-      // data = data.reverse()
-      // this.attCount[aid] = data
-      // this.isLoad.attCount = true
-
-      // data = await Waits.waitCountPark(local, arg)
-      // data = data.reverse()
-      // this.parkCount[local] = data
-      // this.isLoad.parkCount = true
-
-      // data = await Ticket.available(local, arg)
-      // this.ticketCount[local] = data
-      // this.isLoad.ticketCount = true
+    init: function() {
+      this.getDestinationsList()
+      this.getAttractionsWait(this.date)
     }
   }
 }

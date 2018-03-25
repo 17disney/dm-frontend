@@ -67,7 +67,6 @@ export default {
   data() {
     return {
       date: moment().format('YYYY-MM-DD'),
-      waits: {},
       attNumber: {},
       filters: {
         hotLevel: 3,
