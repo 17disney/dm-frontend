@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export function mathRegression(coefficients, x) {
   let y = 0
   let k = 0
@@ -121,3 +123,34 @@ export function sortBy(attr, rev = true) {
     return 0
   }
 }
+
+export function objectToLine(arg) {
+  let line = []
+
+  for (const k in arg) {
+    const item = arg[k]
+    if (k === '__id__') {
+      line.push(item)
+    } else {
+      line.push(`${k}=${item}`)
+    }
+  }
+
+  line = line.join(';')
+  return line
+}
+
+export function mathOpenMinutes(startTime, endTime) {
+  const start = moment(startTime, 'HH:mm:ss')
+  const end = moment(endTime, 'HH:mm:ss')
+
+  const openMinutes = end.diff(start, 'minutes')
+  // const { runDefault } = this.data
+  // const maxNumber = openMinutes * runDefault
+  // this.percentage = Math.round(this.number / maxNumber * 100)
+  // console.log(this.percentage)
+  // this.maxNumber = maxNumber
+  return openMinutes
+}
+
+// const { startTime, endTime } = this.wait

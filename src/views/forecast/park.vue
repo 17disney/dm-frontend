@@ -101,12 +101,12 @@
 </template>
 
 <script>
-import lineArea from '@/components/Charts/lineArea'
+import LineArea from '@/components/Charts/LineArea'
 import { mapActions, mapState, mapGetters } from 'vuex'
 import PolynomialRegression from 'ml-regression-polynomial'
 
 export default {
-  components: { lineArea },
+  components: { LineArea },
 
   props: {
 

@@ -2,13 +2,17 @@
 .att-media {
   width: 50px;
   height: 50px;
-  border-radius: 100%;
+  border-radius: 5px;
   overflow: hidden;
-  margin-right: 10px;
 
   &--finderListMobileSquare {
     width: 48px;
     height: 48px;
+
+    &.size-small {
+      width: 36px;
+      height: 36px;
+    }
   }
 
   >img {
@@ -18,7 +22,7 @@
 }
 </style>
 <template>
-  <div class="att-media" :class="'att-media--' + type"><img :src="url" alt=""></div>
+  <div class="att-media" :class="['att-media--' + type, 'size-' + size]"><img :src="url" alt=""></div>
 </template>
 
 <script>
@@ -30,6 +34,10 @@ export default {
       type: Array
     },
     type: {
+      type: String,
+      default: 'finderListMobileSquare'
+    },
+    size: {
       type: String
     }
   },

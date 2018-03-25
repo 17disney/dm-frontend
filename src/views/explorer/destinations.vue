@@ -33,6 +33,7 @@
             <el-radio-button :label="false">存档值</el-radio-button>
             <el-radio-button :label="true">原始值</el-radio-button>
           </el-radio-group>
+           <el-checkbox v-model="filters.visible">显示可见</el-checkbox>
         </div>
         <div class="card__body">
           <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
@@ -58,19 +59,19 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="热门等级"  width="150">
+            <el-table-column label="热门等级" width="150">
               <template slot-scope="scope">
                 <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
               </template>
             </el-table-column>
-            <el-table-column label="承载量"  width="150">
+            <el-table-column label="承载量" width="150">
               <template slot-scope="scope">
                 <span>
                   {{scope.row.runDefault}} / 分
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="游览时长"  width="150">
+            <el-table-column label="游览时长" width="150">
               <template slot-scope="scope">
                 <span>
                   {{scope.row.runTimer}} 秒
@@ -114,6 +115,11 @@
         <el-form-item label="运行时长（秒）">
           <el-input v-model="editForm.form.runTimer" auto-complete="off"></el-input>
         </el-form-item>
+        <el-form-item label="是否显示">
+          <el-switch v-model="editForm.form.visible">
+          </el-switch>
+        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editForm.visible = false">取 消</el-button>
@@ -141,6 +147,7 @@ export default {
       },
       filters: {
         type: 'attraction',
+        visible: true,
         isRaw: false,
         keyword: null
       }
@@ -161,7 +168,6 @@ export default {
     this.getDestinationsList()
   },
   computed: {
-
     ...mapState({
       attList: state => state.explorer.attList,
       attRawList: state => state.explorer.attRawList,
@@ -174,11 +180,16 @@ export default {
       'attRawListFilter'
     ]),
     activeAttList() {
+      let data = []
       if (this.filters.isRaw) {
-        return this.attRawListFilter(this.filters.type)
+        data = this.attRawListFilter(this.filters.type)
       } else {
-        return this.attListFilter(this.filters.type)
+        data = this.attListFilter(this.filters.type)
       }
+      if (this.filters.visible) {
+        data = data.filter(_ => _.visible)
+      }
+      return data
     }
   },
   methods: {

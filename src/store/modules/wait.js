@@ -6,27 +6,29 @@ const count = {
   state: {
     local: 'shanghai',
     st: '2018-02-20',
-    et: '2018-03-07',
+    et: moment().format('YYYY-MM-DD'),
+    date: moment().format('YYYY-MM-DD'),
     attsWait: {},
     parkList: [],
-    isLoad: {
-      parkList: false
+    parks: {},
+    loading: {
+      attsWait: true
     }
   },
   getters: {
-    parkCountList: (state, getters) => {
-      const list = []
-      const { parkList, tickets, fts } = state
-
-      parkList.forEach(item => {
-        const { date } = item
-        list.push(Object.assign({}, item, tickets[date], fts[date]))
-      })
-
-      return list
+    parkTargetList: (state, getters) => id => {
+      return state.parkList.map(_ => _[id])
     }
-    // tickets: (state, getters) => {
+    // parkCountList: (state, getters) => {
+    //   const list = []
+    //   const { parkList, tickets, fts } = state
 
+    //   parkList.forEach(item => {
+    //     const { date } = item
+    //     list.push(Object.assign({}, item, tickets[date], fts[date]))
+    //   })
+
+    //   return list
     // }
   },
 
@@ -66,15 +68,20 @@ const count = {
       })
 
       state.attsWait = waits
+      state.loading.attsWait = false
     },
 
     SET_PARK_LIST: (state, data) => {
       state.parkList = data
-      state.isLoad.parkList = true
+    },
+    SET_PARKS: (state, data) => {
+      data.forEach(item => {
+        const { date } = item
+        state.parks[date] = item
+      })
     },
     SET_TICKET_LIST: (state, data) => {
       state.ticketList = data
-      state.isLoad.parkList = true
     },
     SET_TICKETS: (state, data, date) => {
       if (date) {
@@ -119,17 +126,22 @@ const count = {
   actions: {
     // 获取等待时间
     async getAttractionsWait({ commit, state }, date) {
+      state.loading.attsWait = true
       const data = await Wait.attractions(state.local, date)
-      commit('SET_ATTS_WAIT', data)
+      setTimeout(() => {
+        commit('SET_ATTS_WAIT', data)
+      }, 300)
     },
 
     // 获取乐园统计列表
-    async getParkCountList({ commit, state }) {
-      const { local, st, et } = state
-      const arg = {
-        st,
-        et
-      }
+    async getParkCountList({ commit, state }, arg) {
+      // const { local, st, et } = state
+      // const arg = {
+      //   st,
+      //   et
+      // }
+      const { local } = state
+      arg.local = local
       const data = await Wait.waitCountPark(local, arg)
       data.forEach(item => {
         const { flowMax } = item
@@ -137,6 +149,7 @@ const count = {
       })
       data.reverse()
       commit('SET_PARK_LIST', data)
+      commit('SET_PARKS', data)
     }
   }
 }

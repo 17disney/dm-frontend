@@ -34,20 +34,15 @@ const explorer = {
     },
 
     SET_ATT_LIST: (state, data) => {
+      data.forEach(item => {
+        const { id } = item
+        item.aid = lineToObject(id)['__id__']
+      })
       state.attList = data
     },
 
     SET_ATT_RAW_LIST: (state, data) => {
       data.forEach(item => {
-        // const { id, medias } = item
-        // item.aid = lineToObject(id)['__id__']
-
-        // for (const ancestorsItem of ancestors) {
-        //   if (ancestorsItem.type === 'land') {
-        //     // item.landName = landName(ancestorsItem.id)
-        //   }
-        // }
-
         item.type = item.type.toLowerCase()
         // 提取坐标
         // item.coordinates = [0, 0]
@@ -63,13 +58,6 @@ const explorer = {
         //   coordinates[0] = coordinates[0] + 0.0003
         //   coordinates[1] = coordinates[1] - 0.0001
         //   item.coordinates = coordinates
-        // }
-
-        // 提取主图
-        // if (medias && medias.constructor === Array) {
-        //   item.finderListMobileSquare = medias.filter(_ => {
-        //     return _.type === 'finderListMobileSquare'
-        //   })[0]
         // }
       })
       state.attRawList = data
@@ -91,7 +79,7 @@ const explorer = {
     }
   },
   actions: {
-    // 获取项目列表
+    // 获取项目列表(原始)
     async getDestinationsRawList({ commit, state }) {
       const data = await Explorer.destinationsRaw(state.local)
       if (data) {
@@ -100,22 +88,13 @@ const explorer = {
         commit('SET_FACET_GROUPS', facetGroups)
       }
     },
-
+    // 获取项目列表
     async getDestinationsList({ commit, state }) {
       const data = await Explorer.destinations(state.local)
       if (data) {
         commit('SET_ATT_LIST', data)
       }
     },
-
-    // // 获取项目列表
-    // async getDestinationsRawList({ commit, state }) {
-    //   const data = await Explorer.destinationsRaw(state.local)
-    //   const { added, facetGroups } = data
-    //   commit('SET_ATT_LIST', added)
-    //   commit('SET_FACET_GROUPS', facetGroups)
-    // },
-
     // 获取时间表
     async getSchedules({ commit, state }, date) {
       const data = await Explorer.schedules(state.local, date)

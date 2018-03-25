@@ -7,12 +7,17 @@
 @require './ui/panel.styl';
 @require './ui/sidebar.styl';
 @require './ui/card.styl';
+@require './ui/att.styl';
 
 .el-date-editor .el-range-separator {
   padding: 0px !important;
 }
 
 html {
+  box-sizing: border-box;
+}
+
+*, :after, :before {
   box-sizing: border-box;
 }
 
@@ -43,4 +48,24 @@ a, a:focus, a:hover {
     clear: both;
     height: 0;
   }
+}
+
+.color-green {
+  color: $color-green;
+}
+
+.color-red {
+  color: $color-red;
+}
+
+.bg-primary {
+  background-color: $color-primary !important;
+}
+
+.bg-green {
+  background-color: $color-green !important;
+}
+
+.bg-red {
+  background-color: $color-red !important;
 }

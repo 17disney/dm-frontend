@@ -23,7 +23,8 @@
     "nprogress": "0.2.0",
     "vue": "2.5.10",
     "vue-router": "3.0.1",
-    "vuex": "3.0.1"
+    "vuex": "3.0.1",
+    "vuex-loading": "^0.2.6"
   },
   "devDependencies": {
     "autoprefixer": "7.2.3",

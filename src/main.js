@@ -4,10 +4,17 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 import App from './App'
 import store from './store'
 import router from './common/router'
-import Icon from '@/components/Icon'
 import { Message } from 'element-ui'
 import * as Utils from './utils'
 import * as Filters from './common/filters'
+
+import Icon from '@/components/Icon'
+import AttMedia from '@/components/Att/AttMedia'
+import AttStatus from '@/components/Att/AttStatus'
+import AttWaitTime from '@/components/Att/AttWaitTime'
+import AttCountNumber from '@/components/Att/AttCountNumber'
+import AttDateSelect from '@/components/Att/AttDateSelect'
+import AttList from '@/components/AttList/AttList'
 
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -16,7 +23,14 @@ import '@/common/icons'
 import '@/common/permission'
 
 Vue.use(ElementUI, { locale })
-Vue.component('icon', Icon)
+
+Vue.component('Icon', Icon)
+Vue.component('AttMedia', AttMedia)
+Vue.component('AttWaitTime', AttWaitTime)
+Vue.component('AttStatus', AttStatus)
+Vue.component('AttCountNumber', AttCountNumber)
+Vue.component('AttDateSelect', AttDateSelect)
+Vue.component('AttList', AttList)
 
 Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])
