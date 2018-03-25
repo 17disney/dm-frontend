@@ -83,7 +83,7 @@ export const constantRouterMap = [
         meta: { title: '游乐项目', icon: '' }
       },
       {
-        path: 'attractions/:id',
+        path: 'attractions-id',
         name: 'attractions-id',
         component: () => import('@/views/wait/attractions-id'),
         meta: { title: '项目详情', icon: '' }

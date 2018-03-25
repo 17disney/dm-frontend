@@ -21,11 +21,11 @@ const explorer = {
     attractionList: (state, getters) => {
       return state.attList.filter(item => item.type === 'attraction')
     },
-    attListFilter: (state, getters) => type => {
-      return state.attList.filter(item => item.type === type)
+    attListFilter: (state, getters) => (type, hotLevel = 0) => {
+      return state.attList.filter(item => item.type === type && item.hotLevel >= hotLevel)
     },
-    attRawListFilter: (state, getters) => type => {
-      return state.attRawList.filter(item => item.type === type)
+    attRawListFilter: (state, getters) => (type, hotLevel = 0) => {
+      return state.attRawList.filter(item => item.type === type && item.hotLevel >= hotLevel)
     }
   },
   mutations: {

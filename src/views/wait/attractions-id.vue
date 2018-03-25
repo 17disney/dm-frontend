@@ -1,7 +1,7 @@
 
 <template>
-  <div class="app-container bg--gray">
-    <div class="panel">
+  <div class="page bg--gray">
+    <!-- <div class="panel">
       <div class="panel__heading">
         <h3 class="panel__title">{{aid}}</h3>
       </div>
@@ -15,7 +15,6 @@
         <h3 class="panel__title">乐园客流量</h3>
       </div>
       <div class="panel__body">
-        <!-- <park-count-line v-if="isLoad.parkCount" :data="parkCount[local]" :id="local" height='100%' width='100%'></park-count-line> -->
         <countLine type="park" v-if="isLoad.attCount" :data="parkCount[local]" :id="'park-' + local" height='100%' width='100%'></countLine>
       </div>
     </div>
@@ -26,30 +25,29 @@
       </div>
       <div class="panel__body">
         <countLine type="ticket" v-if="isLoad.ticketCount" :data="ticketCount[local]" :id="'ticket-' + local" height='100%' width='100%'></countLine>
-
-        <!-- <ticket-count-line v-if="isLoad.ticketCount" :data="ticketCount[local]" :id="'ticket-' + local" height='100%' width='100%'></ticket-count-line> -->
       </div>
+    </div> -->
+    <div class="page-content">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div class="panel">
+            <div class="panel__heading">
+              <h3 class="panel__title">日统计</h3>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content bg-purple"></div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content bg-purple"></div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content bg-purple"></div>
+        </el-col>
+      </el-row>
     </div>
 
-    <el-row :gutter="20">
-      <el-col :span="6">
-        <div class="panel">
-          <div class="panel__heading">
-            <h3 class="panel__title">日统计</h3>
-          </div>
-        </div>
-        <!-- <div class="grid-content bg-purple"></div> -->
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-    </el-row>
   </div>
 </template>
 
@@ -65,12 +63,8 @@ export default {
 
   data() {
     return {
-      local: 'shanghai',
       st: '2018-02-16',
       et: '2018-03-14',
-      attCount: {},
-      parkCount: {},
-      ticketCount: {},
       isLoad: {
         attCount: false,
         parkCount: false,
@@ -80,18 +74,12 @@ export default {
   },
 
   computed: {
-    aid: function() {
-      return this.$route.params.id
-    }
+    // aid: function () {
+    //   return this.$route.params.id
+    // }
   },
 
   mounted() {
-    const { aid } = this
-    if (aid === ':id') {
-      this.$router.push({
-        path: '/wait-count/attractions/attSoaringOverHorizon'
-      })
-    }
     this.init()
   },
 
