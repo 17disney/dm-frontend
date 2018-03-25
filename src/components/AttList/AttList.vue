@@ -48,6 +48,10 @@
 
   .att-item {
     border-bottom: 1px solid #EEE;
+
+    &:last-child {
+      border: none !important;
+    }
   }
 }
 </style>

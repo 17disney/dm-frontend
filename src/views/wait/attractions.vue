@@ -1,3 +1,9 @@
+<style lang="stylus" scoped>
+.att-date-select {
+  margin-bottom: 20px;
+}
+</style>
+
 <template>
   <div class="page bg--gray">
 
