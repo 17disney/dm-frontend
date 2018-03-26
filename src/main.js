@@ -4,6 +4,7 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 import App from './App'
 import store from './store'
 import router from './common/router'
+import Color from './common/color'
 import { Message } from 'element-ui'
 import * as Utils from './utils'
 import * as Filters from './common/filters'
@@ -38,6 +39,7 @@ Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])
 })
 
+Vue.prototype.Color = Color
 Vue.prototype.Utils = Utils
 Vue.prototype.Message = Message
 Vue.prototype.Filters = Filters

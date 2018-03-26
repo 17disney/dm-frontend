@@ -2,6 +2,9 @@
 @require '../../styles/disney/var/color.styl';
 
 .att-list-select {
+  position: relative;
+  background: $color-light-grey-sss;
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -12,8 +15,6 @@
     font-size: 15px;
     line-height: 32px;
   }
-
-  background: $color-light-grey-sss;
 
   &__item {
     padding: 8px 16px;

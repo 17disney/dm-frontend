@@ -16,7 +16,37 @@
 .att-list-table {
   .el-table__header-wrapper {
     tr {
-      background-color: $color-light-grey-sss
+      background-color: $color-light-grey-sss;
     }
   }
 }
+
+.att-desc-list {
+  &__list {
+    display: flex;
+    text-align: center;
+  }
+
+  &__item {
+    flex: 1;
+    list-style: none;
+  }
+
+  &__desc {
+    margin-top: 8px;
+    font-size: 14px;
+    color: $color-primary-dark;
+  }
+
+  &__num {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-primary;
+  }
+}
+
+.el-card
+  .el-card__header
+    span
+      font-weight: 600
+      color: $color-primary-dark;

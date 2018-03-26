@@ -124,7 +124,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/views/forecast/park',
     name: 'forecast',
-    meta: { title: '模型管理', icon: 'business-excellence' },
+    meta: { title: '客流预测', icon: 'business-excellence' },
     children: [
       {
         path: 'park',
