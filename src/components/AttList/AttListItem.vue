@@ -1,23 +1,20 @@
-<style lang='stylus'>
-
-</style>
 <template>
-  <div class="att-item"  @click="clickAttItem(data)">
-    <div class="att-item-meta">
+  <div class="att-list__item" @click="clickAttItem(data)">
+    <div class="att-list__item-meta">
       <icon name="check"></icon>
-      <div class="att-item-meta__avatar">
+      <div class="att-list__item-meta__avatar">
         <att-media :medias="data.medias"></att-media>
       </div>
-      <div class="att-item-meta__content">
-        <h4 class="att-item-meta__title">{{data.name}}</h4>
-        <div class="att-item-meta__desc"></div>
+      <div class="att-list__item-meta__content">
+        <h4 class="att-list__item-meta__title">{{data.name}}</h4>
+        <div class="att-list__item-meta__desc"></div>
       </div>
     </div>
-    <div class="att-item__content">
-      <!-- <div class="att-item__status">
+    <div class="att-list__item__content">
+      <!-- <div class="att-list__item__status">
         {{wait.status}}
       </div> -->
-      <div v-if="wait" class="att-item__waits">
+      <div v-if="wait" class="att-list__item__waits">
         平均等候：{{wait.waitAvg}} 最高等候：{{wait.waitMax}}
         <!-- {{schedulesToday.startTime}} - {{schedulesToday.endTime}} -->
       </div>

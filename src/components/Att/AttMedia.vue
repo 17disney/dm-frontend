@@ -1,7 +1,5 @@
 <style lang='stylus'>
 .att-media {
-  width: 50px;
-  height: 50px;
   border-radius: 5px;
   overflow: hidden;
 
@@ -13,6 +11,10 @@
       width: 36px;
       height: 36px;
     }
+  }
+
+  &--finderDetailMobileHero {
+    max-width: 600px;
   }
 
   >img {

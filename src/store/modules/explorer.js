@@ -26,6 +26,9 @@ const explorer = {
     },
     attRawListFilter: (state, getters) => (type, hotLevel = 0) => {
       return state.attRawList.filter(item => item.type === type && item.hotLevel >= hotLevel)
+    },
+    attFind: (state, getters) => (aid) => {
+      return state.attList.find(item => item.aid === aid)
     }
   },
   mutations: {
