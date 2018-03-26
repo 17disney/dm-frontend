@@ -41,18 +41,18 @@
             <el-radio-button label="7d">最近7天</el-radio-button>
             <el-radio-button label="30d">最近30天</el-radio-button>
           </el-radio-group>
-          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="countMode" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-card>
 
-        <el-card v-if="countMode==='daterange'">
+        <el-card v-if="dateType==='daterange'">
           <div slot="header" class="clearfix">
             <span>日平均等候时间</span>
           </div>
           <charts-att-count :data="attCount" xAxisKey="date" :indexList="['waitAvg']"></charts-att-count>
         </el-card>
 
-        <el-card v-if="countMode==='date'">
+        <el-card v-if="dateType==='date'">
           <div slot="header" class="clearfix">
             <span>每日等候时间</span>
           </div>
@@ -65,14 +65,17 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import ChartsAttCount from '@/components/Charts/ChartsAttCount'
 import ChartsAttWait from '@/components/Charts/ChartsAttWait'
 import Waits from '@/common/api/waits'
 import moment from 'moment'
+import base from '@/common/mixins/base'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
+  mixins: [base],
+
   components: { ChartsAttCount, ChartsAttWait },
 
   props: {
@@ -94,18 +97,10 @@ export default {
 
   computed: {
     ...mapState({
-      local: state => state.explorer.local,
       attsWait: state => state.wait.attsWait,
-      attType: state => state.explorer.attType,
-      playType: state => state.explorer.playType,
       attLoading: state => state.wait.loading
     }),
-    ...mapGetters([
-      'attListFilter',
-      'attractionList',
-      'attFind'
-    ]),
-    countMode() {
+    dateType() {
       const { dateRang } = this
       if (typeof dateRang === 'string') {
         return 'date'
@@ -145,19 +140,12 @@ export default {
   },
   mounted() {
     this.getDestinationsList()
-    this.dateRang = moment().format(DATE_FORMAT)
+    this.init()
   },
   methods: {
-    ...mapActions([
-      'getDestinationsList',
-      'getDestinationsRawList',
-      'getAttractionsWait',
-      'getSchedules'
-    ]),
-
     async init() {
-      const { countMode } = this
-      if (countMode === 'date') {
+      const { dateType } = this
+      if (dateType === 'date') {
         this.getAttWait()
       } else {
         this.getAttCount()
@@ -167,7 +155,7 @@ export default {
     async getAttCount() {
       const { local, aid } = this
       const [st, et] = this.dateRang
-      const attCount = await Waits.waitCountAttractionsId(local, aid, { st, et })
+      const attCount = await Waits.attractionsIdCount(local, aid, { st, et })
       this.attCount = attCount.reverse()
     },
 
