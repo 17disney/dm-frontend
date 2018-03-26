@@ -59,7 +59,7 @@
       }
 
       .att-status__badge {
-        // background-color: #999;
+        background-color: #999;
       }
     }
 
@@ -98,13 +98,15 @@ export default {
         Operating: '开放',
         Closed: '关闭',
         Renewal: '计划性维护',
-        Refurbishment: '计划性维护'
+        Refurbishment: '计划性维护',
+        Down: '暂时关闭'
       },
       cssList: {
         Operating: 'static-processing',
         Closed: 'static-default',
         Renewal: 'static-error',
-        Refurbishment: 'static-error'
+        Refurbishment: 'static-error',
+        Down: 'static-error'
       }
     }
   },

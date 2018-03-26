@@ -1,24 +1,25 @@
-.card {
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.65);
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: #fff;
-  border-radius: 2px;
-  position: relative;
-  transition: all 0.3s;
+.el-card {
+  // font-size: 14px;
+  // line-height: 1.5;
+  // color: rgba(0, 0, 0, 0.65);
+  // box-sizing: border-box;
+  // margin: 0;
+  // padding: 0;
+  // list-style: none;
+  // background: #fff;
+  // border-radius: 2px;
+  // position: relative;
+  // transition: all 0.3s;
+  // border-color: $color-light-grey-ss;
+  box-shadow: none;
+  border-radius: 0px;
 
   &__header {
-    padding: 24px 32px;
-  }
+    border-color: $color-light-grey-sss;
 
-  &__body {
-    transition: padding 0.3s;
-    padding: 24px 32px;
-    zoom: 1;
-    clearfix();
+    span {
+      font-weight: 600;
+      color: $color-primary-dark;
+    }
   }
 }

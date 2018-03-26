@@ -41,8 +41,8 @@
             <el-radio-button label="7d">最近7天</el-radio-button>
             <el-radio-button label="30d">最近30天</el-radio-button>
           </el-radio-group>
-          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-          </el-date-picker>
+          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+          <att-date-select @select-date="clickDate" style="margin-top: 16px" v-model="dateRang"></att-date-select>
         </el-card>
 
         <el-card v-if="dateType==='daterange'">
@@ -56,7 +56,7 @@
           <div slot="header" class="clearfix">
             <span>每日等候时间</span>
           </div>
-          <att-date-select @select-date="clickDate" style="margin-bottom: 16px" v-model="dateRang"></att-date-select>
+
           <charts-att-wait :data="attWait"></charts-att-wait>
         </el-card>
       </el-main>
