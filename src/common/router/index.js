@@ -65,7 +65,14 @@ export const constantRouterMap = [
         name: 'schedules',
         component: () => import('@/views/explorer/schedules'),
         meta: { title: '开放时间表', icon: '' }
+      },
+      {
+        path: 'tickets',
+        name: 'tickets',
+        component: () => import('@/views/explorer/tickets'),
+        meta: { title: '售票量', icon: '' }
       }
+
     ]
   },
 

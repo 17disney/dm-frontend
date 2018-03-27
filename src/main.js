@@ -14,6 +14,7 @@ import AttMedia from '@/components/Att/AttMedia'
 import AttStatus from '@/components/Att/AttStatus'
 import AttWaitTime from '@/components/Att/AttWaitTime'
 import AttCountNumber from '@/components/Att/AttCountNumber'
+import AttCountDateSelect from '@/components/Att/AttCountDateSelect'
 import AttDateSelect from '@/components/Att/AttDateSelect'
 import AttListSelect from '@/components/Att/AttListSelect'
 import AttList from '@/components/AttList/AttList'
@@ -31,6 +32,7 @@ Vue.component('AttMedia', AttMedia)
 Vue.component('AttWaitTime', AttWaitTime)
 Vue.component('AttStatus', AttStatus)
 Vue.component('AttCountNumber', AttCountNumber)
+Vue.component('AttCountDateSelect', AttCountDateSelect)
 Vue.component('AttDateSelect', AttDateSelect)
 Vue.component('AttListSelect', AttListSelect)
 Vue.component('AttList', AttList)

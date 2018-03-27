@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import Ticket from '@/api/ticket'
+import Ticket from '@/api/common/tickets'
 import Waits from '@/api/waits'
 import Forecast from '@/api/forecast'
 import moment from 'moment'

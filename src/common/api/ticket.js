@@ -10,7 +10,7 @@ export default {
     })
   },
 
-  availableDate: function available(local, date) {
+  availableDate: function availableDate(local, date) {
     return request({
       url: `${base}/ticket/available/${local}/${date}`,
       method: 'get'

@@ -52,12 +52,17 @@
           <charts-att-count :data="attCount" xAxisKey="date" :indexList="['waitAvg']"></charts-att-count>
         </el-card>
 
-        <el-card v-if="dateType==='date'">
+        <el-card class="card-bottom" v-if="dateType==='date'">
           <div slot="header" class="clearfix">
             <span>每日等候时间</span>
           </div>
-
           <charts-att-wait :data="attWait"></charts-att-wait>
+        </el-card>
+        <el-card v-if="dateType==='date' && att && attWait.fpList && attWait.fpList.length > 0">
+          <div slot="header" class="clearfix">
+            <span>快速通行证</span>
+          </div>
+          <charts-att-fp :att="att" :data="attWait"></charts-att-fp>
         </el-card>
       </el-main>
     </el-container>
@@ -68,6 +73,7 @@
 import { mapState } from 'vuex'
 import ChartsAttCount from '@/components/Charts/ChartsAttCount'
 import ChartsAttWait from '@/components/Charts/ChartsAttWait'
+import ChartsAttFp from '@/components/Charts/ChartsAttFp'
 import Waits from '@/common/api/waits'
 import moment from 'moment'
 import base from '@/common/mixins/base'
@@ -76,7 +82,7 @@ const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
   mixins: [base],
 
-  components: { ChartsAttCount, ChartsAttWait },
+  components: { ChartsAttCount, ChartsAttWait, ChartsAttFp },
 
   props: {
   },

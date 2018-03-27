@@ -112,6 +112,7 @@
 import moment from 'moment'
 import Emitter from '@/common/mixins/emitter'
 
+const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
   mixins: [Emitter],
   props: {
@@ -141,7 +142,7 @@ export default {
     },
     initList(value) {
       const val = value || this.value
-      const date = moment(val, 'YYYY-MM-DD')
+      const date = moment(val, DATE_FORMAT)
       const dateList = [date]
       for (let i = 1; i <= 3; i++) {
         let _date = moment(date).add(i, 'day')
@@ -154,7 +155,7 @@ export default {
         list.push({
           view: moment(item).format('M月D日'),
           week: '星期' + this.weekName[moment(item).format('E')],
-          value: moment(item).format('YYYY-MM-DD')
+          value: moment(item).format(DATE_FORMAT)
         })
       })
       this.list = list
@@ -165,9 +166,9 @@ export default {
     clickBtn(type) {
       var value
       if (type === 'previous') {
-        value = moment(this.list[3]['value'], 'YYYY-MM-DD').subtract(7, 'day').format('YYYY-MM-DD')
+        value = moment(this.list[3]['value'], DATE_FORMAT).subtract(7, 'day').format(DATE_FORMAT)
       } else {
-        value = moment(this.list[3]['value'], 'YYYY-MM-DD').add(7, 'day').format('YYYY-MM-DD')
+        value = moment(this.list[3]['value'], DATE_FORMAT).add(7, 'day').format(DATE_FORMAT)
       }
       this.initList(value)
     },
