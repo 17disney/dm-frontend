@@ -55,7 +55,6 @@
         </div>
         <charts-park-count id="charts-park-count-mark" :indexList="['markMax']" :data="parkCount"></charts-park-count>
       </el-card>
-
     </div>
   </div>
 </template>

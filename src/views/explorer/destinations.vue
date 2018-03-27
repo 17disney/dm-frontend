@@ -1,18 +1,5 @@
 <style lang="stylus">
 @require '../../styles/disney/var/color.styl';
-
-.att-list-item__meta {
-  display: flex;
-  align-items: center;
-
-  .att-media {
-    margin: 16px;
-  }
-
-  .title {
-    font-size: 16px;
-  }
-}
 </style>
 
 <template>
@@ -22,9 +9,9 @@
       <el-button>发布</el-button>
     </div>
 
-    <div class="content">
-      <div class="card">
-        <div class="card__header">
+    <div class="page-content">
+      <el-card>
+        <div slot="header" class="clearfix">
           <el-select v-model="filters.type" placeholder="请选择">
             <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
@@ -33,60 +20,58 @@
             <el-radio-button :label="false">存档值</el-radio-button>
             <el-radio-button :label="true">原始值</el-radio-button>
           </el-radio-group>
-           <el-checkbox v-model="filters.visible">显示可见</el-checkbox>
+          <el-checkbox v-model="filters.visible">显示可见</el-checkbox>
         </div>
-        <div class="card__body">
-          <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
-            <el-table-column type="expand">
-              <template slot-scope="scope">
-                <el-form label-position="left" inline class="demo-table-expand">
-                  <el-form-item label="WebLink">
-                    <span>{{ scope.row.webLink }}</span>
-                  </el-form-item>
-                  <el-form-item label="介绍">
-                    <span v-for="desc in scope.row.descriptions">{{ desc.text}}</span>
-                  </el-form-item>
-                </el-form>
-              </template>
-            </el-table-column>
-            <el-table-column label="名称">
-              <template slot-scope="scope">
-                <div class="att-list-item__meta">
-                  <att-media :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
-                  <span class="title">
-                    {{scope.row.name}}
-                  </span>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="热门等级" width="150">
-              <template slot-scope="scope">
-                <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
-              </template>
-            </el-table-column>
-            <el-table-column label="承载量" width="150">
-              <template slot-scope="scope">
-                <span>
-                  {{scope.row.runDefault}} / 分
+        <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
+          <el-table-column type="expand">
+            <template slot-scope="scope">
+              <el-form label-position="left" inline class="demo-table-expand">
+                <el-form-item label="WebLink">
+                  <span>{{ scope.row.webLink }}</span>
+                </el-form-item>
+                <el-form-item label="介绍">
+                  <span v-for="desc in scope.row.descriptions">{{ desc.text}}</span>
+                </el-form-item>
+              </el-form>
+            </template>
+          </el-table-column>
+          <el-table-column label="名称">
+            <template slot-scope="scope">
+              <div class="att-list-item__meta">
+                <att-media :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
+                <span class="title">
+                  {{scope.row.name}}
                 </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="游览时长" width="150">
-              <template slot-scope="scope">
-                <span>
-                  {{scope.row.runTimer}} 秒
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="200" align="type">
-              <template slot-scope="scope">
-                <el-button size="small" type="primary" @click="clickEditAtt(scope.row)" icon="el-icon-edit">编辑</el-button>
-                <el-button size="small" type="default" @click="clickUpdateAtt(scope.row)" plain>更新</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="热门等级" width="150">
+            <template slot-scope="scope">
+              <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
+            </template>
+          </el-table-column>
+          <el-table-column label="承载量" width="150">
+            <template slot-scope="scope">
+              <span>
+                {{scope.row.runDefault}} / 分
+              </span>
+            </template>
+          </el-table-column>
+          <el-table-column label="游览时长" width="150">
+            <template slot-scope="scope">
+              <span>
+                {{scope.row.runTimer}} 秒
+              </span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="200" align="type">
+            <template slot-scope="scope">
+              <el-button size="small" type="primary" @click="clickEditAtt(scope.row)" icon="el-icon-edit">编辑</el-button>
+              <el-button size="small" type="default" @click="clickUpdateAtt(scope.row)" plain>更新</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-card>
     </div>
 
     <!-- Form -->
@@ -119,7 +104,6 @@
           <el-switch v-model="editForm.form.visible">
           </el-switch>
         </el-form-item>
-
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editForm.visible = false">取 消</el-button>
@@ -131,10 +115,11 @@
 
 <script>
 import Explorer from '@/common/api/explorer'
-
-import { mapActions, mapState, mapGetters } from 'vuex'
+import base from '@/common/mixins/base'
+import { mapState, mapGetters } from 'vuex'
 import AttMedia from '@/components/Att/AttMedia'
 export default {
+  mixins: [base],
   components: {
     AttMedia
   },
@@ -153,16 +138,6 @@ export default {
       }
     }
   },
-  // filters: {
-  //   statusFilter(status) {
-  //     const statusMap = {
-  //       published: 'success',
-  //       draft: 'gray',
-  //       deleted: 'danger'
-  //     }
-  //     return statusMap[status]
-  //   }
-  // },
   created() {
     this.getDestinationsRawList()
     this.getDestinationsList()
@@ -170,10 +145,7 @@ export default {
   computed: {
     ...mapState({
       attList: state => state.explorer.attList,
-      attRawList: state => state.explorer.attRawList,
-      attType: state => state.explorer.attType,
-      playType: state => state.explorer.playType,
-      local: state => state.explorer.local
+      attRawList: state => state.explorer.attRawList
     }),
     ...mapGetters([
       'attListFilter',
@@ -193,12 +165,6 @@ export default {
     }
   },
   methods: {
-
-    ...mapActions([
-      'getDestinationsList',
-      'getDestinationsRawList'
-    ]),
-
     clickUpdateAtt(row) {
       this.updateAtt(row)
     },
@@ -235,20 +201,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-@require '../../styles/disney/var/color.styl';
-
-.att-list-item__meta {
-  display: flex;
-  align-items: center;
-
-  .att-media {
-    margin: 16px;
-  }
-
-  .title {
-    font-size: 16px;
-  }
-}
-</style>

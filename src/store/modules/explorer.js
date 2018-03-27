@@ -32,6 +32,9 @@ const explorer = {
     }
   },
   mutations: {
+    SET_LOCAL: (state, data) => {
+      state.local = data
+    },
     SET_FACET_GROUPS: (state, data) => {
       state.facetGroups = data
     },
