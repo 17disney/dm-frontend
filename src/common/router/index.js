@@ -134,16 +134,22 @@ export const constantRouterMap = [
     meta: { title: '客流预测', icon: 'business-excellence' },
     children: [
       {
+        path: 'flow',
+        name: 'forecast-flow',
+        component: () => import('@/views/forecast/flow'),
+        meta: { title: '客流量预测', icon: '' }
+      },
+      {
         path: 'park',
-        name: 'forecast_park',
+        name: 'forecast-park',
         component: () => import('@/views/forecast/park'),
-        meta: { title: '乐园', icon: '' }
+        meta: { title: '乐园综合预测', icon: '' }
       },
       {
         path: 'atts',
-        name: 'atts',
+        name: 'forecast-atts',
         component: () => import('@/views/forecast/atts'),
-        meta: { title: '项目', icon: '' }
+        meta: { title: '等候时间预测', icon: '' }
       }
     ]
   },

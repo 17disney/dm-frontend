@@ -135,11 +135,6 @@ const count = {
 
     // 获取乐园统计列表
     async getParkCountList({ commit, state }, arg) {
-      // const { local, st, et } = state
-      // const arg = {
-      //   st,
-      //   et
-      // }
       const { local } = state
       arg.local = local
       const data = await Wait.waitCountPark(local, arg)
@@ -147,9 +142,9 @@ const count = {
         const { flowMax } = item
         item.flowIn = Math.round(flowMax * 0.9)
       })
-      data.reverse()
+      // data.reverse()
       commit('SET_PARK_LIST', data)
-      commit('SET_PARKS', data)
+      // commit('SET_PARKS', data)
     }
   }
 }

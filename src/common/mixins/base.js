@@ -15,7 +15,8 @@ export default {
       'getDestinationsList',
       'getDestinationsRawList',
       'getAttractionsWait',
-      'getSchedules'
+      'getSchedules',
+      'getParkCountList'
     ])
   }
 }
