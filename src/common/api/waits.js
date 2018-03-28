@@ -33,7 +33,7 @@ export default {
     })
   },
 
-  parkCount: function waitCountPark(local, params) {
+  parkCount: function parkCount(local, params) {
     return request({
       url: `${base}/wait-count/park/${local}`,
       method: 'get',
