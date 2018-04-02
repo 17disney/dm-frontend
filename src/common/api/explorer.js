@@ -38,9 +38,28 @@ export default {
       url: `${base}/explorer/schedules/${local}/${date}`,
       method: 'get'
     })
-  }
+  },
 
-  // destinations,
-  // destinationsCdn,
-  // schedules
+  timesguide: function timesguide(local) {
+    return request({
+      url: `${base}/timesguide/${local}`,
+      method: 'get'
+    })
+  },
+
+  timesguideUpdate: function timesguideUpdate(local, id, data) {
+    return request({
+      url: `${base}/timesguide/${local}/${id}`,
+      method: 'put',
+      data
+    })
+  },
+
+  timesguideCreate: function timesguideCreate(local, data) {
+    return request({
+      url: `${base}/timesguide/${local}`,
+      method: 'post',
+      data
+    })
+  }
 }

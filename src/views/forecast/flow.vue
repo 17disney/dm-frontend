@@ -11,69 +11,63 @@
         <el-table class="att-list-table" :data="parkCountList">
           <el-table-column label="日期">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{scope.row.date}}
-                </span>
-              </div>
+              <span>
+                {{scope.row.date}}
+              </span>
             </template>
           </el-table-column>
 
           <el-table-column label="天气">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{scope.row.wea}}
-                </span>
-              </div>
+              <span>
+                {{scope.row.wea}}
+              </span>
             </template>
           </el-table-column>
           <el-table-column label="气温">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{scope.row.temMin}} - {{scope.row.temMax}}
-                </span>
-              </div>
+              <span>
+                {{scope.row.temMin}} - {{scope.row.temMax}}
+              </span>
             </template>
           </el-table-column>
 
           <el-table-column label="售票量">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{tickets[scope.row.date]['saleCount']}}
-                </span>
-              </div>
+              <span>
+                {{tickets[scope.row.date]['saleCount']}}
+              </span>
             </template>
           </el-table-column>
           <el-table-column label="等候指数">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{scope.row.markMax}}
-                </span>
-              </div>
+              <span>
+                {{scope.row.markMax}}
+              </span>
             </template>
           </el-table-column>
 
           <el-table-column label="客流量">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                  {{scope.row.flowMax}}
-                </span>
-              </div>
+              <span>
+                {{scope.row.flowMax}}
+              </span>
             </template>
           </el-table-column>
 
           <el-table-column label="预测客流">
             <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <span>
-                   {{maths[scope.row.date]['flowFt']}}
-                </span>
-              </div>
+              <span>
+                {{maths[scope.row.date]['flowFt']}}
+              </span>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="准确率">
+            <template slot-scope="scope">
+              <!-- {{maths[scope.row.date]['flowRate']}} -->
+              <el-progress :text-inside="true" :stroke-width="18" :percentage="maths[scope.row.date]['flowRate']"></el-progress>
+
             </template>
           </el-table-column>
 
@@ -103,7 +97,7 @@ export default {
 
   data() {
     return {
-      dateRange: [moment().subtract(30, 'days').format(DATE_FORMAT), moment().format(DATE_FORMAT)],
+      dateRange: [moment().subtract(55, 'days').format(DATE_FORMAT), moment().add(10, 'days').format(DATE_FORMAT)],
       tickets: {},
       maths: {}
     }
@@ -143,8 +137,19 @@ export default {
         const { flowMax, markMax, date } = item
         const { saleCount } = tickets[date]
 
+        let flowFt = 0
+
+        if (saleCount < 10000) {
+          flowFt += Math.round(saleCount * 5 + 14000)
+        } else {
+          flowFt += Math.round((saleCount - 10000) * 1 + 14000 + 80000)
+        }
+
+        let flowRate = 100 - Math.round(Math.abs(flowMax - flowFt) / flowMax * 100)
+        if (flowRate < 0) flowRate = 0
         maths[date] = {
-          flowFt: Math.round(saleCount * 8.6 + 14000)
+          flowFt,
+          flowRate
         }
         _temp.push([saleCount, markMax, flowMax])
       })

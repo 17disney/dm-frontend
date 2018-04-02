@@ -23,6 +23,13 @@ module.exports = {
         pathRewrite: {
           '^/forecast-service': '/'
         }
+      },
+      '/timesguide-service': {
+        target: 'http://localhost:7002',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/timesguide-service': '/'
+        }
       }
     },
 

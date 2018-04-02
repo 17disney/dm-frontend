@@ -155,6 +155,45 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/timesguide',
+    component: Layout,
+    redirect: '/timesguide/task',
+    name: 'timesguide',
+    meta: { title: '乐园时间表', icon: 'security-notice' },
+    children: [
+      {
+        path: 'timesguide',
+        name: 'timesguide',
+        component: () => import('@/views/timesguide/timesguide'),
+        meta: { title: '所有时间表', icon: '' }
+      }, {
+        path: 'timesguide',
+        name: 'timesguide_contribute',
+        component: () => import('@/views/timesguide/contribute'),
+        meta: { title: '贡献审核', icon: '' }
+      },
+      {
+        path: 'timesguide_exchange',
+        name: 'timesguide_exchange',
+        component: () => import('@/views/timesguide/exchange'),
+        meta: { title: '交易管理', icon: '' }
+      },
+      {
+        path: 'timesguide_users',
+        name: 'timesguide_users',
+        component: () => import('@/views/timesguide/users'),
+        meta: { title: '用户管理', icon: '' }
+      },
+      {
+        path: 'timesguide_voucher',
+        name: 'timesguide_voucher',
+        component: () => import('@/views/timesguide/voucher'),
+        meta: { title: '卡券管理', icon: '' }
+      }
+    ]
+  },
+
+  {
     path: '/fastpass',
     component: Layout,
     redirect: '/fastpass/task',
