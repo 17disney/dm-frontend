@@ -14,6 +14,12 @@
         <el-form-item label="组名" prop="name">
           <el-input v-model="addDialog.form.groupId"></el-input>
         </el-form-item>
+        <el-form-item label="位置" prop="name">
+          <el-input v-model="addDialog.form.local"></el-input>
+        </el-form-item>
+        <el-form-item label="质量" prop="name">
+          <el-rate v-model="addDialog.form.rate"></el-rate>
+        </el-form-item>
         <el-form-item label="图片名" prop="name">
           <el-input v-model="addDialog.form.picName"></el-input>
         </el-form-item>
@@ -41,6 +47,7 @@
 
 <script>
 import Explorer from '@/common/api/explorer'
+import Timesguide from '@/common/api/Timesguide'
 import base from '@/common/mixins/base'
 import moment from 'moment'
 import TimesGuide from '@/components/timesguide/timesguide'
@@ -85,29 +92,30 @@ export default {
       const [startDate, endDate] = this.addDialog.form.daterange
       const id = moment(startDate, 'YYYY-MM-DD').format('YYMMDD') + moment(endDate, 'YYYY-MM-DD').format('MMDD')
       const picName = id + '.jpg'
-      this.addDialog.form.id = id
       this.addDialog.form.picName = picName
     },
     async getList() {
       const { local } = this
-      const list = await Explorer.timesguide(local)
+      const list = await Timesguide.explorerList(local)
       this.list = list
     },
     updateById() {
 
     },
     async clickCreate() {
-      const { daterange, id, picName, groupId } = this.addDialog.form
-      const { local } = this
+      const { daterange, id, picName, groupId, local, rate, author } = this.addDialog.form
       const [startDate, endDate] = daterange
       const data = {
-        startDate,
-        endDate,
         id,
+        startDate: moment(startDate).format('YYYY-MM-DD'),
+        endDate: moment(endDate).format('YYYY-MM-DD'),
+        rate,
+        author,
         picName,
-        groupId
+        groupId,
+        local
       }
-      await Explorer.timesguideUpdate(local, id, data)
+      await Timesguide.updateExplorerId(id, data)
       this.Message({
         message: '添加成功',
         type: 'Success'
