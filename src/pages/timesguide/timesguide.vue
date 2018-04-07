@@ -46,8 +46,7 @@
 </template>
 
 <script>
-// import Explorer from '@/common/api/explorer'
-import Timesguide from '@/common/api/Timesguide'
+import Timesguide from '@/common/api/timesguide'
 import base from '@/common/mixins/base'
 import moment from 'moment'
 import TimesGuide from '@/components/timesguide/timesguide'
