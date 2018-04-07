@@ -105,6 +105,7 @@ export default {
       const { daterange, id, picName, groupId, local, rate, author } = this.addDialog.form
       const [startDate, endDate] = daterange
       const data = {
+
         id,
         startDate: moment(startDate).format('YYYY-MM-DD'),
         endDate: moment(endDate).format('YYYY-MM-DD'),

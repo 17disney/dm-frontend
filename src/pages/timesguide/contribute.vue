@@ -149,7 +149,11 @@ export default {
     async handleActive(active) {
       const { rate, startDate, endDate, tid, local, id, picUrl } = this.editDialog.form
 
-      const arg = { rate, startDate, endDate, tid, local, picUrl }
+      const arg = {
+        rate, startDate, endDate, tid, local, picUrl,
+        adminid: '0c8cbd35-e3ba-48c9-844f-833240f9bc78',
+        password: ''
+      }
 
       await Timesguide.activeContributesId(id, arg)
       console.log(arg)
