@@ -5,7 +5,7 @@ import Router from 'vue-router'
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 Vue.use(Router)
 
-import Layout from '@/views/layout/Layout'
+import Layout from '@/components/Layout/Layout'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -22,13 +22,13 @@ import Layout from '@/views/layout/Layout'
 export const constantRouterMap = [
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/pages/login/index'),
     hidden: true
   },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/404', component: () => import('@/pages/404'), hidden: true },
 
   {
-    path: '/',
+    path: '/dashboard',
     component: Layout,
     redirect: '/dashboard/index',
     name: 'Dashboard',
@@ -36,12 +36,12 @@ export const constantRouterMap = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/pages/dashboard/index'),
         meta: { title: '乐园实况' }
       },
       {
         path: 'map',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/pages/dashboard/index'),
         meta: { title: '地图' }
       }
     ]
@@ -57,22 +57,21 @@ export const constantRouterMap = [
       {
         path: 'destinations',
         name: 'destinations',
-        component: () => import('@/views/explorer/destinations'),
+        component: () => import('@/pages/explorer/destinations'),
         meta: { title: '项目管理', icon: '' }
       },
       {
         path: 'schedules',
         name: 'schedules',
-        component: () => import('@/views/explorer/schedules'),
+        component: () => import('@/pages/explorer/schedules'),
         meta: { title: '开放时间表', icon: '' }
       },
       {
         path: 'tickets',
         name: 'tickets',
-        component: () => import('@/views/explorer/tickets'),
+        component: () => import('@/pages/explorer/tickets'),
         meta: { title: '售票量', icon: '' }
       }
-
     ]
   },
 
@@ -86,19 +85,19 @@ export const constantRouterMap = [
       {
         path: 'attractions',
         name: 'attractions',
-        component: () => import('@/views/wait/attractions'),
+        component: () => import('@/pages/wait/attractions'),
         meta: { title: '游乐项目', icon: '' }
       },
       {
         path: 'attractions-id',
         name: 'attractions-id',
-        component: () => import('@/views/wait/attractions-id'),
+        component: () => import('@/pages/wait/attractions-id'),
         meta: { title: '项目详情', icon: '' }
       },
       {
         path: 'park',
         name: 'park',
-        component: () => import('@/views/wait/park'),
+        component: () => import('@/pages/wait/park'),
         meta: { title: '乐园', icon: '' }
       }
     ]
@@ -114,13 +113,13 @@ export const constantRouterMap = [
       {
         path: 'oneday',
         name: 'oneday',
-        component: () => import('@/views/simulation/oneday'),
+        component: () => import('@/pages/simulation/oneday'),
         meta: { title: '乐园的一天', icon: '' }
       },
       {
         path: 'plan',
         name: 'plan',
-        component: () => import('@/views/simulation/plan'),
+        component: () => import('@/pages/simulation/plan'),
         meta: { title: '路径规划', icon: '' }
       }
     ]
@@ -129,26 +128,26 @@ export const constantRouterMap = [
   {
     path: '/forecast',
     component: Layout,
-    redirect: '/views/forecast/park',
+    redirect: '/pages/forecast/park',
     name: 'forecast',
     meta: { title: '客流预测', icon: 'business-excellence' },
     children: [
       {
         path: 'flow',
         name: 'forecast-flow',
-        component: () => import('@/views/forecast/flow'),
+        component: () => import('@/pages/forecast/flow'),
         meta: { title: '客流量预测', icon: '' }
       },
       {
         path: 'park',
         name: 'forecast-park',
-        component: () => import('@/views/forecast/park'),
+        component: () => import('@/pages/forecast/park'),
         meta: { title: '乐园综合预测', icon: '' }
       },
       {
         path: 'atts',
         name: 'forecast-atts',
-        component: () => import('@/views/forecast/atts'),
+        component: () => import('@/pages/forecast/atts'),
         meta: { title: '等候时间预测', icon: '' }
       }
     ]
@@ -164,30 +163,31 @@ export const constantRouterMap = [
       {
         path: 'timesguide',
         name: 'timesguide',
-        component: () => import('@/views/timesguide/timesguide'),
+        component: () => import('@/pages/timesguide/timesguide'),
         meta: { title: '所有时间表', icon: '' }
-      }, {
-        path: 'timesguide',
+      },
+      {
+        path: 'contribute',
         name: 'timesguide_contribute',
-        component: () => import('@/views/timesguide/contribute'),
+        component: () => import('@/pages/timesguide/contribute'),
         meta: { title: '贡献审核', icon: '' }
       },
       {
-        path: 'timesguide_exchange',
+        path: 'exchange',
         name: 'timesguide_exchange',
-        component: () => import('@/views/timesguide/exchange'),
+        component: () => import('@/pages/timesguide/exchange'),
         meta: { title: '交易管理', icon: '' }
       },
       {
-        path: 'timesguide_users',
+        path: 'users',
         name: 'timesguide_users',
-        component: () => import('@/views/timesguide/users'),
+        component: () => import('@/pages/timesguide/users'),
         meta: { title: '用户管理', icon: '' }
       },
       {
-        path: 'timesguide_voucher',
+        path: 'voucher',
         name: 'timesguide_voucher',
-        component: () => import('@/views/timesguide/voucher'),
+        component: () => import('@/pages/timesguide/voucher'),
         meta: { title: '卡券管理', icon: '' }
       }
     ]
@@ -203,13 +203,13 @@ export const constantRouterMap = [
       {
         path: 'task',
         name: 'task',
-        component: () => import('@/views/fastpass/task'),
+        component: () => import('@/pages/fastpass/task'),
         meta: { title: '任务列表', icon: '' }
       },
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/fastpass/record'),
+        component: () => import('@/pages/fastpass/record'),
         meta: { title: '领取记录', icon: '' }
       }
     ]

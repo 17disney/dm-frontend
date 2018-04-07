@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { LayoutHeader, LayoutSidebar, LayoutContent } from '@/views/layout/components'
+import { LayoutHeader, LayoutSidebar, LayoutContent } from './components'
 
 export default {
   name: 'layout',
