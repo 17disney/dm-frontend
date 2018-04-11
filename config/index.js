@@ -10,11 +10,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/explorer-service': {
+      '/wait-times-service': {
         target: 'http://192.168.31.46:7001',
         changeOrigin: true,
         pathRewrite: {
-          '^/explorer-service': '/'
+          '^/wait-times-service': '/'
         }
       },
       '/forecast-service': {

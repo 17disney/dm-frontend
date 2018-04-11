@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const base = 'explorer-service'
+const base = 'wait-times-service'
 export default {
   available: function available(local, params) {
     return request({

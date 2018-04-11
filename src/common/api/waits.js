@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
-const base = 'explorer-service'
+const base = 'wait-times-service'
 
 export default {
   attractions: function attractions(local, date, params = {}) {
     return request({
-      url: `${base}/wait-times/attractions/${local}/${date}`,
+      url: `${base}/wait-times/home/${local}/${date}`,
       method: 'get',
       params
     })
@@ -13,7 +13,7 @@ export default {
 
   attractionsId: function attractionsId(local, date, id) {
     return request({
-      url: `${base}/wait-times/attractions/${local}/${date}/${id}`,
+      url: `${base}/wait-times/attractions/${local}/${id}/${date}/`,
       method: 'get'
     })
   },
