@@ -63,7 +63,7 @@
 </style>
 <template>
   <div @click="clickItem" class="timesguide__item">
-    <img class="timesguide__pic" onerror="this.style.display='none'" :src="pic">
+    <img class="timesguide__pic" onerror="this.style.display='none'" :src="data.picUrl">
     <div class="timesguide__default">
       <h3 class="timesguide__title">乐园时间表</h3>
       <h3 class="timesguide__entitle">TIMES GUIDE</h3>
@@ -89,9 +89,6 @@ export default {
   },
 
   computed: {
-    pic() {
-      return '//weather.17disney.com/images/timesguide/' + this.data.picName
-    },
     startDate() {
       return moment(this.data.startDate, 'YYYY-MM-DD').format('YYYY.MM.DD')
     },

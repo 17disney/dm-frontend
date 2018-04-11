@@ -1,0 +1,41 @@
+.page {
+  overflow: auto;
+  position: relative;
+  display: flex;
+
+  &-sidebar {
+    width: 240px;
+    height: 100%;
+    position: relative;
+    background: $color-light-grey-ss;
+
+    &__inner {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.page-header {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 15px;
+  padding: 20px;
+  background: #FFF;
+}
+
+.page-content {
+  margin: 24px 24px 0;
+  padding-bottom: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

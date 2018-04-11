@@ -4,14 +4,13 @@
 $layout-header-height = 64px;
 
 .layout-header {
-  position: fixed;
+  // position: fixed;
   z-index: 999;
   height: $layout-header-height;
   line-height: $layout-header-height;
-  top: 0px;
-  right: 0px;
-  left: 256px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  height: 64px;
+  flex-shrink: 0;
 
   &__user {
     height: $layout-header-height;

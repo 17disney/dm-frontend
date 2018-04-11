@@ -4,6 +4,7 @@
 .att-list-select {
   position: relative;
   background: $color-light-grey-sss;
+  height: 100%;
 
   &__list {
     display: flex;

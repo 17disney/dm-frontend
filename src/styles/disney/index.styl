@@ -2,20 +2,16 @@
 @require './icon/icon.styl';
 @require './icon/pepmdx-icons.styl';
 @require './mixin.styl';
-@require './ui/layout.styl';
+@require './ui/base.styl';
+@require './ui/page.styl';
 @require './ui/chart.styl';
 @require './ui/panel.styl';
-@require './ui/sidebar.styl';
 @require './ui/card.styl';
 @require './ui/att.styl';
 @require './ui/dn-table.styl';
 
 .el-date-editor .el-range-separator {
   padding: 0px !important;
-}
-
-html {
-  box-sizing: border-box;
 }
 
 *, :after, :before {
@@ -27,10 +23,11 @@ html {
   padding: 0;
 }
 
-// *, *:before, *:after {
-// margin: 0px;
-// box-sizing: inherit;
-// }
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
 div:focus {
   outline: none;
 }
@@ -43,17 +40,6 @@ a, a:focus, a:hover {
   cursor: pointer;
   color: inherit;
   text-decoration: none;
-}
-
-.clearfix {
-  &:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: ' ';
-    clear: both;
-    height: 0;
-  }
 }
 
 .color-green {
@@ -80,6 +66,3 @@ a, a:focus, a:hover {
   margin-bottom: 16px;
 }
 
-html, body, #app {
-  // height: 100%;
-}

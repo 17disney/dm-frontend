@@ -1,71 +1,71 @@
 <template>
   <div class="page">
-    <el-container>
-      <el-aside width="300px">
+    <div class="page-sidebar">
+      <div class="page-sidebar__inner">
         <att-list-select @click-item="selectAtt" v-model="aid" :data="activeAttList"></att-list-select>
-      </el-aside>
-      <el-main>
-        <el-card v-if="att" class="card-bottom">
-          <div slot="header" class="clearfix">
-            <span class="card__title">{{att.name}}</span>
+      </div>
+    </div>
+    <div class="page-main">
+      <el-card v-if="att" class="card-bottom">
+        <div slot="header" class="clearfix">
+          <span class="card__title">{{att.name}}</span>
+        </div>
+        <el-row>
+          <!-- <att-media type="finderDetailMobileHero" :medias="att.medias"></att-media> -->
+          <div class="att-desc-list">
+            <ul class="att-desc-list__list">
+              <li class="att-desc-list__item">
+                <div class="att-desc-list__num">{{att.runDefault}}人/分钟</div>
+                <div class="att-desc-list__desc">承载量</div>
+              </li>
+              <li class="att-desc-list__item">
+                <div class="att-desc-list__num">{{att.groupNum}}人</div>
+                <div class="att-desc-list__desc">每组人数</div>
+              </li>
+              <li class="att-desc-list__item">
+                <div class="att-desc-list__num">{{att.runInterval}}秒</div>
+                <div class="att-desc-list__desc">运行间隔</div>
+              </li>
+              <li class="att-desc-list__item">
+                <div class="att-desc-list__num">{{att.runTimer}}秒</div>
+                <div class="att-desc-list__desc">游玩时长</div>
+              </li>
+            </ul>
           </div>
-          <el-row>
-            <!-- <att-media type="finderDetailMobileHero" :medias="att.medias"></att-media> -->
-            <div class="att-desc-list">
-              <ul class="att-desc-list__list">
-                <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runDefault}}人/分钟</div>
-                  <div class="att-desc-list__desc">承载量</div>
-                </li>
-                <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.groupNum}}人</div>
-                  <div class="att-desc-list__desc">每组人数</div>
-                </li>
-                <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runInterval}}秒</div>
-                  <div class="att-desc-list__desc">运行间隔</div>
-                </li>
-                <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runTimer}}秒</div>
-                  <div class="att-desc-list__desc">游玩时长</div>
-                </li>
-              </ul>
-            </div>
-          </el-row>
-        </el-card>
+        </el-row>
+      </el-card>
 
-        <el-card class="card-bottom">
-          <el-radio-group v-model="dateMode">
-            <el-radio-button label="today">今天</el-radio-button>
-            <el-radio-button label="yestday">昨天</el-radio-button>
-            <el-radio-button label="7d">最近7天</el-radio-button>
-            <el-radio-button label="30d">最近30天</el-radio-button>
-          </el-radio-group>
-          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-          <att-date-select @select-date="clickDate" style="margin-top: 16px" v-model="dateRang"></att-date-select>
-        </el-card>
+      <el-card class="card-bottom">
+        <el-radio-group v-model="dateMode">
+          <el-radio-button label="today">今天</el-radio-button>
+          <el-radio-button label="yestday">昨天</el-radio-button>
+          <el-radio-button label="7d">最近7天</el-radio-button>
+          <el-radio-button label="30d">最近30天</el-radio-button>
+        </el-radio-group>
+        <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <att-date-select @select-date="clickDate" style="margin-top: 16px" v-model="dateRang"></att-date-select>
+      </el-card>
 
-        <el-card v-if="dateType==='daterange'">
-          <div slot="header" class="clearfix">
-            <span>日平均等候时间</span>
-          </div>
-          <charts-att-count :data="attCount" xAxisKey="date" :indexList="['waitAvg']"></charts-att-count>
-        </el-card>
+      <el-card v-if="dateType==='daterange'">
+        <div slot="header" class="clearfix">
+          <span>日平均等候时间</span>
+        </div>
+        <charts-att-count :data="attCount" xAxisKey="date" :indexList="['waitAvg']"></charts-att-count>
+      </el-card>
 
-        <el-card class="card-bottom" v-if="dateType==='date'">
-          <div slot="header" class="clearfix">
-            <span>每日等候时间</span>
-          </div>
-          <charts-att-wait :data="attWait"></charts-att-wait>
-        </el-card>
-        <el-card v-if="dateType==='date' && att && attWait.fpList && attWait.fpList.length > 0">
-          <div slot="header" class="clearfix">
-            <span>快速通行证</span>
-          </div>
-          <charts-att-fp :att="att" :data="attWait"></charts-att-fp>
-        </el-card>
-      </el-main>
-    </el-container>
+      <el-card class="card-bottom" v-if="dateType==='date'">
+        <div slot="header" class="clearfix">
+          <span>每日等候时间</span>
+        </div>
+        <charts-att-wait :data="attWait"></charts-att-wait>
+      </el-card>
+      <el-card v-if="dateType==='date' && att && attWait.fpList && attWait.fpList.length > 0">
+        <div slot="header" class="clearfix">
+          <span>快速通行证</span>
+        </div>
+        <charts-att-fp :att="att" :data="attWait"></charts-att-fp>
+      </el-card>
+    </div>
   </div>
 </template>
 

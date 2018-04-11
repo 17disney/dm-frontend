@@ -1,7 +1,7 @@
 <template>
-  <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
+  <div class="layout" :class="{hideSidebar:!sidebar.opened}">
     <layout-sidebar></layout-sidebar>
-    <div class="layout">
+    <div class="layout-main">
       <layout-header></layout-header>
       <layout-content></layout-content>
     </div>
@@ -25,3 +25,26 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.layout {
+  &-main {
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    overflow: auto;
+  }
+
+  &-footer {
+  }
+}
+</style>

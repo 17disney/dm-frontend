@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 const base = 'wait-times-service'
-const cdn = 'https://park-explorer.17disney.com'
+// const cdn = 'https://park-explorer.17disney.com'
 
 export default {
   destinations: function destinations(local) {
