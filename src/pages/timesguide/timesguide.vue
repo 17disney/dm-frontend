@@ -1,7 +1,6 @@
-<style lang='stylus' scoped>
-</style>
 <template>
-  <div class="page bg--gray">
+  <el-container>
+    <!-- <div class="page bg--gray"> -->
     <el-dialog title="添加" :visible.sync="addDialog.visible">
       <el-form :model="addDialog.form" ref="ruleForm" label-width="100px">
         <el-form-item label="Id" prop="name">
@@ -32,17 +31,22 @@
         <el-button type="primary" @click="clickCreate">确 定</el-button>
       </span>
     </el-dialog>
-    <div class="page-content">
+
+    <el-header>
+
       <div class="card">
         <el-button type="primary" @click="clickAddBtn">添加</el-button>
       </div>
-    </div>
 
-    <div class="timesguide__list">
-      <times-guide @click-item="clickUpdate(item)" v-for="item in list" :key="item.id" :data="item"></times-guide>
-    </div>
+    </el-header>
+    <el-main>
 
-  </div>
+      <div class="timesguide__list">
+        <times-guide @click-item="clickUpdate(item)" v-for="item in list" :key="item.id" :data="item"></times-guide>
+      </div>
+    </el-main>
+  </el-container>
+
 </template>
 
 <script>

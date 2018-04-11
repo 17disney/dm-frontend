@@ -29,8 +29,8 @@ export default {
 <style lang="stylus">
 .layout {
   &-main {
-    flex-grow: 1;
     overflow: hidden;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
   }

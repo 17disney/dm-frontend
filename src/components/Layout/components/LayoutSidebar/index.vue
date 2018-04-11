@@ -42,17 +42,25 @@ export default {
 $layout-sidebar-width = 256px;
 
 .layout-sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  flex-shrink: 0;
   transition: width 0.28s;
   width: $layout-sidebar-width !important;
   background: $color-primary-dark;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-  flex-shrink: 0;
-  height: inherit;
-  flex-direction: column;
-  position: relative;
-  height: 100%;
-  display: flex;
   transition: all 0.15s;
+
+  &__lists {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow: auto;
+  }
 
   &__logo {
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -75,15 +83,6 @@ $layout-sidebar-width = 256px;
       vertical-align: middle;
       font-weight: 600;
     }
-  }
-
-  &__lists {
-    flex-grow: 1;
-    display: flex;
-    overflow: hidden;
-    flex-direction: column;
-    flex: 1;
-    overflow: auto;
   }
 
   a {

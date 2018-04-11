@@ -1,78 +1,77 @@
-<style lang="stylus">
-@require '../../styles/disney/var/color.styl'
-</style>
-
 <template>
   <div class="page bg--gray">
-    <div class="page-header">
-      <el-button type="primary" @click="clickUpdateAttRawList">更新全部</el-button>
-      <el-button>发布</el-button>
-    </div>
-
-    <div class="page-content">
-      <el-card>
-        <div slot="header" class="clearfix">
-          <el-select v-model="filters.type" placeholder="请选择">
-            <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
-            </el-option>
-          </el-select>
-          <el-radio-group v-model="filters.isRaw">
-            <el-radio-button :label="false">存档值</el-radio-button>
-            <el-radio-button :label="true">原始值</el-radio-button>
-          </el-radio-group>
-          <el-checkbox v-model="filters.visible">显示可见</el-checkbox>
-        </div>
-        <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
-          <el-table-column type="expand">
-            <template slot-scope="scope">
-              <el-form label-position="left" inline class="demo-table-expand">
-                <el-form-item label="WebLink">
-                  <span>{{ scope.row.webLink }}</span>
-                </el-form-item>
-                <el-form-item label="介绍">
-                  <span v-for="desc in scope.row.descriptions">{{ desc.text}}</span>
-                </el-form-item>
-              </el-form>
-            </template>
-          </el-table-column>
-          <el-table-column label="名称">
-            <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <att-media :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
-                <span class="title">
-                  {{scope.row.name}}
+    <el-container>
+      <el-header>
+        <el-button type="primary" @click="clickUpdateAttRawList">更新全部</el-button>
+        <el-button>发布</el-button>
+      </el-header>
+      <el-main>
+      <!-- <div class="page-content"> -->
+        <el-card>
+          <div slot="header" class="clearfix">
+            <el-select v-model="filters.type" placeholder="请选择">
+              <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
+              </el-option>
+            </el-select>
+            <el-radio-group v-model="filters.isRaw">
+              <el-radio-button :label="false">存档值</el-radio-button>
+              <el-radio-button :label="true">原始值</el-radio-button>
+            </el-radio-group>
+            <el-checkbox v-model="filters.visible">显示可见</el-checkbox>
+          </div>
+          <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
+            <el-table-column type="expand">
+              <template slot-scope="scope">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="WebLink">
+                    <span>{{ scope.row.webLink }}</span>
+                  </el-form-item>
+                  <el-form-item label="介绍">
+                    <span v-for="desc in scope.row.descriptions">{{ desc.text}}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
+            <el-table-column label="名称">
+              <template slot-scope="scope">
+                <div class="att-list-item__meta">
+                  <att-media :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
+                  <span class="title">
+                    {{scope.row.name}}
+                  </span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="热门等级" width="150">
+              <template slot-scope="scope">
+                <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
+              </template>
+            </el-table-column>
+            <el-table-column label="承载量" width="150">
+              <template slot-scope="scope">
+                <span>
+                  {{scope.row.runDefault}} / 分
                 </span>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="热门等级" width="150">
-            <template slot-scope="scope">
-              <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
-            </template>
-          </el-table-column>
-          <el-table-column label="承载量" width="150">
-            <template slot-scope="scope">
-              <span>
-                {{scope.row.runDefault}} / 分
-              </span>
-            </template>
-          </el-table-column>
-          <el-table-column label="游览时长" width="150">
-            <template slot-scope="scope">
-              <span>
-                {{scope.row.runTimer}} 秒
-              </span>
-            </template>
-          </el-table-column>
-          <el-table-column label="操作" width="200" align="type">
-            <template slot-scope="scope">
-              <el-button size="small" type="primary" @click="clickEditAtt(scope.row)" icon="el-icon-edit">编辑</el-button>
-              <el-button size="small" type="default" @click="clickUpdateAtt(scope.row)" plain>更新</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-    </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="游览时长" width="150">
+              <template slot-scope="scope">
+                <span>
+                  {{scope.row.runTimer}} 秒
+                </span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="200" align="type">
+              <template slot-scope="scope">
+                <el-button size="small" type="primary" @click="clickEditAtt(scope.row)" icon="el-icon-edit">编辑</el-button>
+                <el-button size="small" type="default" @click="clickUpdateAtt(scope.row)" plain>更新</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </el-main>
+
+    </el-container>
 
     <!-- Form -->
     <el-dialog :title="editForm.form.name" :visible.sync="editForm.visible">
