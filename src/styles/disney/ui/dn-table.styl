@@ -24,3 +24,34 @@
     width: 100%;
   }
 }
+
+.forecast-num {
+  width: 350px;
+  display: flex;
+  border: 1px solid $color-primary-s;
+  // border-radius: 5px;
+  overflow: hidden;
+  color: $color-primary-dark;
+
+  &__item {
+    flex: 1;
+    text-align: center;
+
+    &:nth-child(even) {
+      background-color: $color-light-grey-sss;
+    }
+  }
+
+  &__num {
+    font-weight: 600;
+  }
+
+  &__day {
+    background-color: $color-primary-s;
+    color: $color-dark-primary;
+  }
+
+  &__mk {
+    // background-color: $color-primary;
+  }
+}

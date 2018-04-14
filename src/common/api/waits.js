@@ -20,7 +20,7 @@ export default {
 
   attractionsIdCount: function attractionsIdCount(local, id, params) {
     return request({
-      url: `${base}/wait-count/attractions/${local}/${id}`,
+      url: `${base}/wait-times/attractions/${local}/${id}`,
       method: 'get',
       params
     })
@@ -35,7 +35,7 @@ export default {
 
   parkCount: function parkCount(local, params) {
     return request({
-      url: `${base}/wait-count/park/${local}`,
+      url: `${base}/wait-times/park/${local}`,
       method: 'get',
       params
     })

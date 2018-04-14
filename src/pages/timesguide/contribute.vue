@@ -41,9 +41,7 @@
             <el-form-item label="审核操作" prop="name">
               <el-button @click="handleActive">确认审核</el-button>
             </el-form-item>
-
           </el-form>
-
         </el-col>
       </el-row>
 
@@ -108,7 +106,6 @@
           </el-table-column>
         </el-table>
       </el-card>
-
     </div>
   </div>
 </template>

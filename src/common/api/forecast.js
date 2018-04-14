@@ -1,17 +1,47 @@
 import request from '@/utils/request'
 
+const base = 'forecast-service'
+
 export default {
-  getPark: function getPark(local, date) {
+  tickets: function tickets(local, st, et) {
     return request({
-      url: `/forecast-service/park/${local}/${date}`,
+      url: `${base}/tickets/${local}`,
+      method: 'get',
+      params: { st, et }
+    })
+  },
+  weatherHistory: function weatherHistory(st, et) {
+    return request({
+      url: `${base}/weather/history`,
+      method: 'get',
+      params: { st, et }
+    })
+  },
+  weatherForecast: function weatherForecast(st, et) {
+    return request({
+      url: `${base}/weather/forecast`,
+      method: 'get',
+      params: { st, et }
+    })
+  },
+  dayRank: function dayRank(st, et) {
+    return request({
+      url: `${base}/day/rank`,
+      method: 'get',
+      params: { st, et }
+    })
+  },
+  forecastPark: function forecastgPark(local, st, et) {
+    return request({
+      url: `${base}/forecast/park/${local}`,
       method: 'get'
     })
   },
-  updatePark: function updatePark(local, date, data) {
+  forecastTicket: function forecastTicket(local, st, et) {
     return request({
-      url: `/forecast-service/park/${local}/${date}`,
-      method: 'put',
-      data
+      url: `${base}/forecast/${local}/tickets`,
+      method: 'get',
+      params: { st, et }
     })
   }
 }

@@ -163,7 +163,7 @@ export default {
       const { local, aid } = this
       const [st, et] = this.dateRang
       const attCount = await Waits.attractionsIdCount(local, aid, { st, et })
-      this.attCount = attCount.reverse()
+      this.attCount = attCount
     },
 
     async getAttWait() {

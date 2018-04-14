@@ -5,6 +5,7 @@ import explorer from './modules/explorer'
 import user from './modules/user'
 import wait from './modules/wait'
 import ticket from './modules/ticket'
+import forecast from './modules/forecast'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     explorer,
     user,
     wait,
-    ticket
+    ticket,
+    forecast
   },
   getters
 })
