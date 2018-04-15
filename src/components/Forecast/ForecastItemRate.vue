@@ -3,6 +3,7 @@
 
 .forecast-item-rate {
   background: $color-grey;
+  text-align center
 }
 </style>
 <template>

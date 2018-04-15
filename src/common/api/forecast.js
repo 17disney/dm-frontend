@@ -34,7 +34,8 @@ export default {
   forecastPark: function forecastgPark(local, st, et) {
     return request({
       url: `${base}/forecast/park/${local}`,
-      method: 'get'
+      method: 'get',
+      params: { st, et }
     })
   },
   forecastTicket: function forecastTicket(local, st, et) {
