@@ -5,7 +5,13 @@
 </template>
 
 <script>
+import base from '@/common/mixins/base'
 export default {
-  name: 'app'
+  mixins: [base],
+
+  name: 'app',
+  async mounted() {
+    await this.getDestinationsList()
+  }
 }
 </script>

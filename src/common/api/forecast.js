@@ -40,9 +40,15 @@ export default {
   },
   forecastTicket: function forecastTicket(local, st, et) {
     return request({
-      url: `${base}/forecast/${local}/tickets`,
+      url: `${base}/forecast/tickets/${local}`,
       method: 'get',
       params: { st, et }
+    })
+  },
+  forecastReport: function forecastReport(local) {
+    return request({
+      url: `${base}/forecast/report/${local}`,
+      method: 'get'
     })
   }
 }

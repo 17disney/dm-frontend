@@ -28,6 +28,12 @@ export const constantRouterMap = [
   { path: '/404', component: () => import('@/pages/404'), hidden: true },
 
   {
+    path: '/',
+    redirect: '/dashboard',
+    hidden: true
+  },
+
+  {
     path: '/dashboard',
     component: Layout,
     redirect: '/dashboard/index',
@@ -147,8 +153,8 @@ export const constantRouterMap = [
       {
         path: 'park',
         name: 'forecast-park',
-        component: () => import('@/pages/forecast/park'),
-        meta: { title: '乐园综合预测', icon: '' }
+        component: () => import('@/pages/forecast/report'),
+        meta: { title: '预测报告', icon: '' }
       },
       {
         path: 'atts',

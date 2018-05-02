@@ -22,10 +22,11 @@ const explorer = {
       return state.attList.filter(item => item.type === 'attraction')
     },
     attListFilter: (state, getters) => (type, hotLevel = 0) => {
-      return state.attList.filter(item => item.type === type && item.hotLevel >= hotLevel)
+      return state.attList.filter(item => item.type === type)
+      // return state.attList.filter(item => item.type === type && item.hotLevel >= hotLevel)
     },
-    attRawListFilter: (state, getters) => (type, hotLevel = 0) => {
-      return state.attRawList.filter(item => item.type === type && item.hotLevel >= hotLevel)
+    attRawListFilter: (state, getters) => (type) => {
+      return state.attRawList.filter(item => item.type === type)
     },
     attFind: (state, getters) => (aid) => {
       return state.attList.find(item => item.aid === aid)
@@ -66,6 +67,7 @@ const explorer = {
         //   item.coordinates = coordinates
         // }
       })
+      console.log(data)
       state.attRawList = data
     },
 

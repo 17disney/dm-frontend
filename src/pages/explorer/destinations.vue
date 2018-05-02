@@ -6,7 +6,7 @@
         <el-button>发布</el-button>
       </el-header>
       <el-main>
-      <!-- <div class="page-content"> -->
+        <!-- <div class="page-content"> -->
         <el-card>
           <div slot="header" class="clearfix">
             <el-select v-model="filters.type" placeholder="请选择">
@@ -154,11 +154,12 @@ export default {
       let data = []
       if (this.filters.isRaw) {
         data = this.attRawListFilter(this.filters.type)
+        console.log(data)
       } else {
         data = this.attListFilter(this.filters.type)
-      }
-      if (this.filters.visible) {
-        data = data.filter(_ => _.visible)
+        if (this.filters.visible) {
+          data = data.filter(_ => _.visible)
+        }
       }
       return data
     }

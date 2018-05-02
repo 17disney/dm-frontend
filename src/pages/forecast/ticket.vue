@@ -89,7 +89,7 @@ export default {
 
   data() {
     return {
-      dateRange: [moment().subtract(45, 'days').format(DATE_FORMAT), moment().add(7, 'days').format(DATE_FORMAT)],
+      dateRange: [moment().subtract(45, 'days').format(DATE_FORMAT), moment().add(-1, 'days').format(DATE_FORMAT)],
       data: []
     }
   },
@@ -106,6 +106,11 @@ export default {
     async init() {
       const [st, et] = this.dateRange
       const { local } = this
+
+      const ftData = await Forecast.forecastReport(local)
+
+      console.log(ftData)
+
       const data = await Forecast.forecastTicket(local, st, et)
       this.data = data
     }

@@ -1,60 +1,64 @@
-<style lang='stylus' scoped>
-</style>
 <template>
   <div class="page bg--gray">
     <div class="page-content">
       <el-card>
         <el-date-picker v-model="dateRange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-card>
-
       <el-card>
-        <el-table class="att-list-table" :data="data">
-          <el-table-column label="日期">
+        <el-table height="900" class="att-list-table" :data="data">
+          <el-table-column label="日期" width="120">
             <template slot-scope="scope">
               <span>
                 {{scope.row.date}}
               </span>
             </template>
           </el-table-column>
-
-          <!-- <el-table-column label="天气">
+          <!-- <el-table-column label="节日因素" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.wea}}
+                {{scope.row.dayRank}}
               </span>
             </template>
           </el-table-column>
-          <el-table-column label="气温">
+          <el-table-column label="天气因素" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.temMin}} - {{scope.row.temMax}}
+                {{scope.row.weaRank}}
               </span>
             </template>
           </el-table-column> -->
-          <el-table-column label="售票量">
+          <!-- <el-table-column label="大团队" width="100">
+            <template slot-scope="scope">
+              <span>
+                {{scope.row.teamNum}}
+              </span>
+            </template>
+          </el-table-column> -->
+          <el-table-column label="当前售票量" width="100">
             <template slot-scope="scope">
               <span>
                 {{scope.row.ticketNum}}
               </span>
             </template>
           </el-table-column>
-          <el-table-column label="欢乐度">
+
+          <el-table-column label="预测售票量" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.markMax}}
+                {{scope.row.ticketNumFT}}
               </span>
             </template>
           </el-table-column>
 
-          <el-table-column label="客流量">
+          <el-table-column label="售票趋势" width="200">
             <template slot-scope="scope">
               <span>
-                {{scope.row.flowMax}}
+                <base-line v-if="scope.row.dayList" :data="scope.row.dayList" :id="scope.row.date"></base-line>
               </span>
             </template>
           </el-table-column>
 
-          <el-table-column label="预测客流">
+          <el-table-column label="预测客流量" width="100">
             <template slot-scope="scope">
               <span>
                 {{scope.row.flowMaxFT}}
@@ -62,11 +66,15 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="准确率">
+          <el-table-column label="等候时间预测">
             <template slot-scope="scope">
               <span>
-                <!-- <forecast-item-rate :rate="scope.row.flowMaxFTRate"></forecast-item-rate> -->
-                <el-progress :text-inside="true" :stroke-width="18" :percentage="scope.row.flowMaxFTRate"></el-progress>
+              <div class="forecast-num">
+                <div class="forecast-num__item" v-for="(item, index) in activeAttList">
+                  <div class="forecast-num__day">{{item.name}}</div>
+                  <div class="forecast-num__num">{{scope.row.atts[item.aid]['waitAvg']}}分钟</div>
+                </div>
+              </div>
               </span>
             </template>
           </el-table-column>
@@ -79,30 +87,37 @@
 
 <script>
 import base from '@/common/mixins/base'
-import { mapState } from 'vuex'
-import moment from 'moment'
+// import moment from 'moment'
+import BaseLine from '@/components/Charts/BaseLine'
 import Forecast from '@/common/api/forecast'
+import { mapGetters } from 'vuex'
+
 import ForecastItemRate from '@/components/Forecast/ForecastItemRate'
 
-const DATE_FORMAT = 'YYYY-MM-DD'
+// const DATE_FORMAT = 'YYYY-MM-DD'
 
 export default {
   mixins: [base],
   components: {
-    ForecastItemRate
+    BaseLine, ForecastItemRate
   },
 
   data() {
     return {
-      dateRange: [moment().subtract(15, 'days').format(DATE_FORMAT), moment().add(-1, 'days').format(DATE_FORMAT)],
       data: []
     }
   },
 
   computed: {
-    ...mapState({
-      parkCountList: state => state.wait.parkList
-    })
+    ...mapGetters([
+      'attListFilter',
+      'attractionList'
+    ]),
+
+    activeAttList() {
+      return this.attListFilter('attraction', 5)
+    }
+
   },
 
   async mounted() {
@@ -111,10 +126,18 @@ export default {
 
   methods: {
     async init() {
-      const [st, et] = this.dateRange
       const { local } = this
+      const data = await Forecast.forecastReport(local)
 
-      this.data = await Forecast.forecastPark(local, st, et)
+      data.forEach(item => {
+        const { attractions } = item
+        const atts = {}
+        attractions.forEach(_ => {
+          atts[_.id] = _
+        })
+        item.atts = atts
+      })
+      this.data = data
     }
   }
 }

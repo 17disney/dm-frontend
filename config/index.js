@@ -18,7 +18,8 @@ module.exports = {
         }
       },
       '/forecast-service': {
-        target: 'http://192.168.31.46:7100',
+        // target: 'http://192.168.31.46:7100',
+        target: 'http://api.17disney.com/forecast-service',
         changeOrigin: true,
         pathRewrite: {
           '^/forecast-service': '/'
