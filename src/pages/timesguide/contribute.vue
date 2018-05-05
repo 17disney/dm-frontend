@@ -18,9 +18,18 @@
               <el-date-picker value-format="yyyy-MM-dd" v-model="editDialog.form.startDate" type="date" placeholder="开始时间"></el-date-picker>
               <el-date-picker value-format="yyyy-MM-dd" v-model="editDialog.form.endDate" type="date" placeholder="结束时间"></el-date-picker>
             </el-form-item>
+
+            <el-form-item label="类型" prop="name">
+              <el-select v-model="editDialog.form.type" placeholder="请选择">
+                <el-option v-for="item in TIMESGUIDE_TYPE_LIST" :key="item.id" :label="item.name" :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+
             <el-form-item label="TID" prop="name">
-              <el-select v-model="editDialog.form.tid" placeholder="请选择">
-                <el-option v-for="item in tidList" :key="item.id" :label="item.startDate + '-' + item.endDate" :value="item.id">
+              <el-select popper-class="timesguide-dropdown" v-model="editDialog.form.tid" placeholder="请选择">
+                <el-option  v-for="item in tidList" :key="item.id" :label="item.startDate + '-' + item.endDate" :value="item.id">
+                   <img width="30px" height="100px"  :src="item.picUrl" alt="">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -112,6 +121,7 @@
 
 <script>
 import Timesguide from '@/common/api/timesguide'
+import { TIMESGUIDE_TYPE_LIST } from '@/common/const'
 // import moment from 'moment'
 
 export default {
@@ -120,6 +130,7 @@ export default {
 
   data() {
     return {
+      TIMESGUIDE_TYPE_LIST,
       list: [],
       tidList: [],
       editDialog: {
@@ -144,21 +155,15 @@ export default {
     },
 
     async handleActive(active) {
-      const { rate, startDate, endDate, tid, local, id, picUrl } = this.editDialog.form
+      const { rate, startDate, endDate, tid, local, id, picUrl, type } = this.editDialog.form
 
       const arg = {
-        rate, startDate, endDate, tid, local, picUrl,
+        rate, startDate, endDate, tid, local, picUrl, type,
         adminid: '0c8cbd35-e3ba-48c9-844f-833240f9bc78',
         password: ''
       }
 
       await Timesguide.activeContributesId(id, arg)
-      console.log(arg)
-      // if (active) {
-
-      // } else {
-
-      // }
     },
     handleEdit(form) {
       this.editDialog.visible = true

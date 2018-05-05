@@ -1,13 +1,9 @@
-
+<style lang='stylus'>
+</style>
 <template>
-  <!-- <div> -->
-
-  <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-  </el-container>
-
-  <!-- </div> -->
+  <div class="admin-header">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -24,7 +20,7 @@ export default {
 
   computed: {},
 
-  mounted() { },
+  mounted() {},
 
   methods: {}
 }

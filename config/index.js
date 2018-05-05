@@ -26,8 +26,8 @@ module.exports = {
         }
       },
       '/timesguide-service': {
-        // target: 'http://localhost:7002',
-        target: 'http://api.17disney.com/timesguide-service',
+        target: 'http://localhost:7001',
+        // target: 'http://api.17disney.com/timesguide-service',
         changeOrigin: true,
         pathRewrite: {
           '^/timesguide-service': '/'
