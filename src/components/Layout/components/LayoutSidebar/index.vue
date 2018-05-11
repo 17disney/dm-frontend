@@ -27,23 +27,31 @@ $layout-sidebar-width = 256px;
   }
 
   .el-menu {
-    border: none;
+    border: none !important;
   }
 
   &-list {
     flex: 1;
     display: flex;
-    overflow: hidden;
     flex-grow: 1;
     flex-direction: column;
-    overflow: auto;
+    overflow-x: auto;
   }
 }
 
 .hideSidebar {
+  .layout-sidebar {
+    width: 80px;
+
+    &-list {
+      overflow: visible;
+    }
+  }
+}
+
+.hideSidebar2 {
   .sidebar-container, .sidebar-container .el-menu {
     width: 36px;
-    // overflow: inherit;
   }
 
   .main-container {

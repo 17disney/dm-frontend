@@ -1,9 +1,44 @@
 <style lang="stylus">
 @require '../../../../styles/disney/var/color.styl';
 
+.hideSidebar {
+  .el-submenu {
+    &__title {
+      padding: 0 32px !important;
+    }
+
+    .icon--pep {
+      margin-right: 0px;
+    }
+
+    span, i {
+      opacity: 0;
+      max-width: 0;
+    }
+
+    .el-menu.el-menu--collapse {
+      padding: 0px;
+      margin-left: 20px;
+      overflow: hidden;
+      border-radius: 4px;
+
+      &-item {
+        background-color: $color-primary-dark;
+        padding-left: 10px !important;
+
+        span {
+          opacity: 1;
+          vertical-align: top;
+          // color: hsla(0, 0%, 100%, 0.65);
+        }
+      }
+    }
+  }
+}
+
 .el-submenu {
   .icon--pep {
-    font-size: 14px;
+    font-size: 15px;
     display: inline-block;
     margin-right: 8px;
   }
@@ -36,7 +71,7 @@
   .el-menu-item {
     height: 40px;
     line-height: 40px;
-    padding-left: 48px;
+    padding-left: 50px !important;
     background-color: darken($color-primary-dark, 10);
 
     &:hover {

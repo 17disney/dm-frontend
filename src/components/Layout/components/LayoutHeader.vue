@@ -4,7 +4,6 @@
 $layout-header-height = 64px;
 
 .layout-header {
-  // position: fixed;
   z-index: 999;
   height: $layout-header-height;
   line-height: $layout-header-height;
