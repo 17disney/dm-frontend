@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       list: [],
-      type: TIMESGUIDE_TYPE.STICKER,
+      type: TIMESGUIDE_TYPE.TICKET,
       page: 1,
       token: '',
       addDialog: {
@@ -139,7 +139,7 @@ export default {
         groupId,
         local,
         adminid: '0c8cbd35-e3ba-48c9-844f-833240f9bc78',
-        password: ''
+        password: 'shds2'
       }
       await Timesguide.updateExplorerId(id, data)
       this.getList()
