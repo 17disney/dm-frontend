@@ -4,7 +4,6 @@
   <div class="page bg--gray">
 
     <el-dialog class="dn-dialog" title="审核" :visible.sync="editDialog.visible">
-
       <el-row>
         <el-col :span="8">
           <img class="timesguide" :src="editDialog.form.picUrl" alt="">
@@ -18,14 +17,12 @@
               <el-date-picker value-format="yyyy-MM-dd" v-model="editDialog.form.startDate" type="date" placeholder="开始时间"></el-date-picker>
               <el-date-picker value-format="yyyy-MM-dd" v-model="editDialog.form.endDate" type="date" placeholder="结束时间"></el-date-picker>
             </el-form-item>
-
             <el-form-item label="类型" prop="name">
-              <el-select v-model="editDialog.form.type" placeholder="请选择">
+              <el-select @change="updateTimeguideLine" v-model="editDialog.form.type" placeholder="请选择">
                 <el-option v-for="item in TIMESGUIDE_TYPE_LIST" :key="item.id" :label="item.name" :value="item.id">
                 </el-option>
               </el-select>
             </el-form-item>
-
             <el-form-item label="TID" prop="name">
               <el-select popper-class="timesguide-dropdown" v-model="editDialog.form.tid" placeholder="请选择">
                 <el-option  v-for="item in tidList" :key="item.id" :label="item.startDate + '-' + item.endDate" :value="item.id">
@@ -125,7 +122,6 @@ import { TIMESGUIDE_TYPE_LIST } from '@/common/const'
 // import moment from 'moment'
 
 export default {
-
   components: {},
 
   data() {
@@ -149,9 +145,15 @@ export default {
   methods: {
     async init() {
       const list = await Timesguide.contributesList()
-
       this.list = list
-      this.tidList = await Timesguide.explorerList()
+    },
+
+    async updateTimeguideLine() {
+      const params = {
+        local: 'shanghai',
+        type: this.editDialog.form.type
+      }
+      this.tidList = await Timesguide.explorerList(params)
     },
 
     async handleActive(active) {

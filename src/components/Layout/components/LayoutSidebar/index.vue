@@ -28,6 +28,7 @@ $layout-sidebar-width = 256px;
 
   .el-menu {
     border: none !important;
+
   }
 
   &-list {
