@@ -80,7 +80,10 @@ $layout-header-height = 64px;
   <div class="layout-header">
     <el-menu mode="horizontal">
       <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-      <!-- <breadcrumb></breadcrumb> -->
+      <el-select v-model="local" placeholder="请选择">
+        <el-option v-for="item in LOCAL_LIST" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
       <div class="layout-header__user">
         <div class="layout-header__action">
           <el-dropdown trigger="hover" class="layout-header__avatar">
@@ -106,17 +109,21 @@ $layout-header-height = 64px;
 </template>
 
 <script>
-import avatar from '@/assets/mickey-characterSmall.png'
 import { mapGetters } from 'vuex'
+import { LOCAL_LIST } from '@/common/const'
+import avatar from '@/assets/mickey-characterSmall.png'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import base from '@/common/mixins/base'
 
 export default {
   data() {
     return {
-      avatar
+      avatar,
+      LOCAL_LIST
     }
   },
+  mixins: [base],
   components: {
     Breadcrumb,
     Hamburger

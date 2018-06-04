@@ -106,6 +106,17 @@ const TIMESGUIDE_TYPE_LIST = [
   }
 ]
 
+const LOCAL_LIST = [
+  {
+    label: '上海迪士尼',
+    value: 'shanghai'
+  },
+  {
+    label: '香港迪士尼',
+    value: 'hongkong'
+  }
+]
+
 const MAX_GIVE = 4
 
 module.exports = {
@@ -121,5 +132,6 @@ module.exports = {
   MESSAGE_TYPE,
   EXCHANGE_STATUS,
   TIMESGUIDE_CHILDREN_STATUS,
-  ERROR_CODE
+  ERROR_CODE,
+  LOCAL_LIST
 }
