@@ -80,7 +80,7 @@ $layout-header-height = 64px;
   <div class="layout-header">
     <el-menu mode="horizontal">
       <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-      <el-select v-model="local" placeholder="请选择">
+      <el-select :value="local" @change="setLocal" placeholder="请选择">
         <el-option v-for="item in LOCAL_LIST" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
@@ -117,13 +117,14 @@ import Hamburger from '@/components/Hamburger'
 import base from '@/common/mixins/base'
 
 export default {
+  mixins: [base],
   data() {
     return {
       avatar,
-      LOCAL_LIST
+      LOCAL_LIST,
+      local2: 'sd'
     }
   },
-  mixins: [base],
   components: {
     Breadcrumb,
     Hamburger
@@ -137,6 +138,7 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },
+
     logout() {
       this.$store.dispatch('LogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug

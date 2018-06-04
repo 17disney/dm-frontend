@@ -174,31 +174,31 @@ export const constantRouterMap = [
     children: [
       {
         path: 'timesguide',
-        name: 'timesguide',
+        name: 'timesguide-explorer',
         component: () => import('@/pages/timesguide/timesguide'),
         meta: { title: '所有时间表', icon: '' }
       },
       {
         path: 'contribute',
-        name: 'timesguide_contribute',
+        name: 'timesguide-contribute',
         component: () => import('@/pages/timesguide/contribute'),
         meta: { title: '贡献审核', icon: '' }
       },
       {
         path: 'exchange',
-        name: 'timesguide_exchange',
+        name: 'timesguide-exchange',
         component: () => import('@/pages/timesguide/exchange'),
         meta: { title: '交易管理', icon: '' }
       },
       {
         path: 'users',
-        name: 'timesguide_users',
+        name: 'timesguide-users',
         component: () => import('@/pages/timesguide/users'),
         meta: { title: '用户管理', icon: '' }
       },
       {
         path: 'voucher',
-        name: 'timesguide_voucher',
+        name: 'timesguide-voucher',
         component: () => import('@/pages/timesguide/voucher'),
         meta: { title: '卡券管理', icon: '' }
       }

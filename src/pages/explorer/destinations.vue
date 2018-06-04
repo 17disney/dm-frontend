@@ -8,7 +8,7 @@
             <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
-          <el-radio-group v-model="filters.isRaw">
+          <el-radio-group @change="handleFilterChange" v-model="filters.isRaw">
             <el-radio-button :label="false">存档值</el-radio-button>
             <el-radio-button :label="true">原始值</el-radio-button>
           </el-radio-group>
@@ -142,10 +142,6 @@ export default {
       }
     }
   },
-  created() {
-    this.getDestinationsRawList()
-    this.getDestinationsList()
-  },
   computed: {
     ...mapState({
       attList: state => state.explorer.attList,
@@ -159,7 +155,6 @@ export default {
       let data = []
       if (this.filters.isRaw) {
         data = this.attRawListFilter(this.filters.type)
-        console.log(data)
       } else {
         data = this.attListFilter(this.filters.type)
         if (this.filters.visible) {
@@ -170,6 +165,13 @@ export default {
     }
   },
   methods: {
+    handleFilterChange() {
+      const { isRaw } = this.filters
+      if (isRaw) {
+        this.getDestinationsRawList()
+      }
+    },
+
     clickUpdateAtt(row) {
       this.updateAtt(row)
     },
@@ -186,6 +188,8 @@ export default {
         await this.updateAtt(row)
       }
     },
+
+    // 更新数据
     async updateAtt(row) {
       if (!row) row = this.editForm.form
       const { id } = row

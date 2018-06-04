@@ -5,7 +5,7 @@ import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'
 const explorer = {
   state: {
-    local: 'shanghai',
+    local: 'hongkong', // 'shanghai',
     date: moment().format('YYYY-MM-DD'),
     attList: [],
     attRawList: [],
@@ -67,7 +67,7 @@ const explorer = {
         //   item.coordinates = coordinates
         // }
       })
-      console.log(data)
+      // console.log(data)
       state.attRawList = data
     },
 
@@ -96,6 +96,7 @@ const explorer = {
         commit('SET_FACET_GROUPS', facetGroups)
       }
     },
+
     // 获取项目列表
     async getDestinationsList({ commit, state }) {
       const data = await Explorer.destinations(state.local)
@@ -103,10 +104,16 @@ const explorer = {
         commit('SET_ATT_LIST', data)
       }
     },
+
     // 获取时间表
     async getSchedules({ commit, state }, date) {
       const data = await Explorer.schedules(state.local, date)
       commit('SET_SCHEDULES', data)
+    },
+
+    //
+    setLocal({ commit }, data) {
+      commit('SET_LOCAL', data)
     }
   }
 }

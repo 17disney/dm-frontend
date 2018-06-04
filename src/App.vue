@@ -12,6 +12,11 @@ export default {
   name: 'app',
   async mounted() {
     await this.getDestinationsList()
+  },
+  watch: {
+    local: function(val, oVal) {
+      this.getDestinationsList()
+    }
   }
 }
 </script>
