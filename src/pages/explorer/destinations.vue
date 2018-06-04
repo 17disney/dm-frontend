@@ -12,16 +12,14 @@
             <el-radio-button :label="false">存档值</el-radio-button>
             <el-radio-button :label="true">原始值</el-radio-button>
           </el-radio-group>
-          <el-checkbox v-model="!filters.visible">查看全部</el-checkbox>
+          <el-checkbox v-model="filters.visible">隐藏不可见</el-checkbox>
         </el-col>
 
         <el-col :span="8">
           <el-button type="primary" @click="clickUpdateAttRawList">更新全部</el-button>
           <el-button>发布</el-button>
         </el-col>
-
       </el-row>
-
     </dm-header>
 
     <dm-content>
@@ -136,7 +134,7 @@ export default {
       },
       filters: {
         type: 'attraction',
-        visible: true,
+        visible: false,
         isRaw: false,
         keyword: null
       }
@@ -147,10 +145,12 @@ export default {
       attList: state => state.explorer.attList,
       attRawList: state => state.explorer.attRawList
     }),
+
     ...mapGetters([
       'attListFilter',
       'attRawListFilter'
     ]),
+
     activeAttList() {
       let data = []
       if (this.filters.isRaw) {
@@ -181,6 +181,7 @@ export default {
       this.editForm.form = row
     },
 
+    // 更新全部数据
     async clickUpdateAttRawList() {
       const { attRawList } = this
       for (let i = 0; i < attRawList.length; i++) {

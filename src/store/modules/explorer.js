@@ -21,9 +21,8 @@ const explorer = {
     attractionList: (state, getters) => {
       return state.attList.filter(item => item.type === 'attraction')
     },
-    attListFilter: (state, getters) => (type, hotLevel = 0) => {
+    attListFilter: (state, getters) => (type) => {
       return state.attList.filter(item => item.type === type)
-      // return state.attList.filter(item => item.type === type && item.hotLevel >= hotLevel)
     },
     attRawListFilter: (state, getters) => (type) => {
       return state.attRawList.filter(item => item.type === type)
@@ -36,6 +35,7 @@ const explorer = {
     SET_LOCAL: (state, data) => {
       state.local = data
     },
+
     SET_FACET_GROUPS: (state, data) => {
       state.facetGroups = data
     },
