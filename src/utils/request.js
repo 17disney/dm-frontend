@@ -1,16 +1,13 @@
 import axios from 'axios'
-// MessageBox
-import { Message } from 'element-ui'
 import store from '../store'
+import Message from './message'
 import { getToken } from '@/utils/auth'
 
 const service = axios.create({
-  // baseURL: 'http://park-cn.17disney.com/api/v3', // process.env.BASE_API, // api的base_url
   baseURL: '/',
-  timeout: 15000 // 请求超时时间
+  timeout: 8000
 })
 
-// request拦截器
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
@@ -19,47 +16,40 @@ service.interceptors.request.use(
     return config
   },
   error => {
-    console.log(error)
     Promise.reject(error)
   }
 )
 
-// respone拦截器
 service.interceptors.response.use(
-  response => {
-    const res = response
-    const { status } = res
-
+  res => {
+    const { status, data } = res
     if (status === 200) {
-      const { message } = response.data
-
-      if (message) {
+      const { error } = data
+      if (error) {
         Message({
-          message,
+          error,
           type: 'warning',
           duration: 5 * 1000
         })
       }
-      return response.data
-    } else if (status === 204) {
-      Message({
-        message: '无内容',
-        type: 'warning',
-        duration: 5 * 1000
-      })
+      return data
     } else {
       Message({
         message: res.data,
         type: 'error',
         duration: 5 * 1000
       })
-
       return Promise.reject('error')
     }
   },
+
   error => {
+    let { response, message } = error
+    if (response && response.data && response.data.error) {
+      message = response.data.error
+    }
     Message({
-      message: error.message,
+      message,
       type: 'error',
       duration: 5 * 1000
     })

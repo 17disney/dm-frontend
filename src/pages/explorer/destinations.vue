@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import Explorer from '@/common/api/explorer'
 import base from '@/common/mixins/base'
 import { mapState, mapGetters } from 'vuex'
 import AttMedia from '@/components/Att/AttMedia'
@@ -206,7 +205,7 @@ export default {
       Object.assign(data, row)
 
       delete data.__v
-      await Explorer.updateDestinationsId(id, data)
+      await this.$Api.waitTimes.updateDestinationsId(id, data)
       this.Message({
         message: '更新成功',
         type: 'Success'

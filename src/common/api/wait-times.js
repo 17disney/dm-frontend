@@ -54,11 +54,32 @@ export default {
     })
   },
 
-  destinations: function destinations(local, id, params) {
+  destinations: function destinations(local) {
     return request({
-      url: `${BASE}/destinations/${local}`,
-      method: 'get',
-      params
+      url: `${BASE}/destinations/park/${local}`,
+      method: 'get'
+    })
+  },
+
+  destinationsRaw: function destinationsRaw(local) {
+    return request({
+      url: `${BASE}/destinations/raw/${local}`,
+      method: 'get'
+    })
+  },
+
+  updateDestinationsId: function updateDestinationsId(id, data) {
+    return request({
+      url: `${BASE}/destinations/park/destinations/${id}`,
+      method: 'put',
+      data
+    })
+  },
+
+  schedules: function schedules(local, date) {
+    return request({
+      url: `${BASE}/explorer/park/schedules/${local}/${date}`,
+      method: 'get'
     })
   }
 }
