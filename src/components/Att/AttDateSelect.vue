@@ -76,7 +76,7 @@
 <template>
   <div class="att-date-select">
     <div @click="clickBtn('previous')" class="att-date-select__btn btn-previous">
-      <icon name="previous"></icon>
+      <att-icon name="previous"></att-icon>
     </div>
     <div class="att-date-select__list">
       <div @click="clickItem(item.value)" class="att-date-select__item" :class="{'is-active': item.value === value}" v-for="item in list">
@@ -87,7 +87,7 @@
       </div>
     </div>
     <div @click="clickBtn('next')" class="att-date-select__btn btn-after">
-      <icon name="next"></icon>
+      <att-icon name="next"></att-icon>
     </div>
   </div>
 </template>

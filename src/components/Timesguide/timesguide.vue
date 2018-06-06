@@ -69,7 +69,7 @@
       <h3 class="timesguide__entitle">TIMES GUIDE</h3>
       <span class="timesguide__daterange" v-if="data.startDate === data.endDate">{{startDate}}</span>
       <span class="timesguide__daterange" v-else>{{startDate}}-{{endDate}}</span>
-      <icon class="timesguide__icon" name="shanghai-disney-resort"></icon>
+      <att-icon class="timesguide__icon" name="shanghai-disney-resort"></att-icon>
     </div>
   </div>
 </template>

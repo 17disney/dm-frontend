@@ -1,7 +1,7 @@
 <template>
   <div class="att-list__item" @click="clickAttItem(data)">
     <div class="att-list__item-meta">
-      <icon name="check"></icon>
+      <att-icon name="check"></att-icon>
       <div class="att-list__item-meta__avatar">
         <att-media :medias="data.medias"></att-media>
       </div>
