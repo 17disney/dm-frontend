@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'att-icon',
   props: {
     name: {
       type: String,

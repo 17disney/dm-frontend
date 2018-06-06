@@ -122,7 +122,7 @@ $layout-sidebar-width = 256px;
 <template>
   <div class="layout-sidebar">
     <div class="logo">
-      <icon class="icon" name="shanghai-disney-resort"></icon>
+      <att-icon class="icon" name="shanghai-disney-resort"></att-icon>
     </div>
     <div class="layout-sidebar-list">
       <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">

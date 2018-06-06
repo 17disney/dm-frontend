@@ -1,9 +1,7 @@
 <style lang='stylus'>
 </style>
 <template>
-  <div class="admin-header">
-    <slot></slot>
-  </div>
+  <div></div>
 </template>
 
 <script>

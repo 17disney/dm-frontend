@@ -5,12 +5,13 @@ import App from './App'
 import store from './store'
 import router from './common/router'
 import Color from './common/color'
-import { Message } from 'element-ui'
-import * as Utils from './utils'
-import * as Filters from './common/filters'
-import waitTimes from './common/api/wait-times'
 
-import Icon from '@/components/Icon'
+import * as Filters from './common/filters'
+import * as Api from './common/api'
+
+import DmUI from '@/dm-ui'
+import AttUI from '@/att-ui'
+
 import AttMedia from '@/components/Att/AttMedia'
 import AttStatus from '@/components/Att/AttStatus'
 import AttWaitTime from '@/components/Att/AttWaitTime'
@@ -27,11 +28,9 @@ import '@/common/icons'
 import '@/common/permission'
 
 Vue.use(ElementUI, { locale })
-
-import DmUI from '@/dm-ui'
 Vue.use(DmUI)
+Vue.use(AttUI)
 
-Vue.component('Icon', Icon)
 Vue.component('AttMedia', AttMedia)
 Vue.component('AttWaitTime', AttWaitTime)
 Vue.component('AttStatus', AttStatus)
@@ -45,14 +44,11 @@ Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])
 })
 
-Vue.prototype.Color = Color
-Vue.prototype.Utils = Utils
-Vue.prototype.Message = Message
-Vue.prototype.Filters = Filters
-Vue.prototype.$Api = {
-  waitTimes
-}
 Vue.config.productionTip = false
+
+Vue.prototype.Color = Color
+Vue.prototype.Filters = Filters
+Vue.prototype.$Api = Api
 
 new Vue({
   el: '#app',

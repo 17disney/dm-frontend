@@ -46,10 +46,9 @@
     </el-dialog>
     <el-header>
       <div class="ds-card">
-        <admin-header>
-
+        <dm-header>
           <!-- <el-button type="primary" @click="clickAddBtn">添加</el-button> -->
-        </admin-header>
+        </dm-header>
       </div>
     </el-header>
     <el-main>
@@ -67,10 +66,9 @@ import moment from 'moment'
 import TimesGuide from '@/components/timesguide/timesguide'
 import TimesguideItem from '@/components/Timesguide/TimesguideItem'
 import { TIMESGUIDE_TYPE } from '@/common/const'
-import AdminHeader from '@/components/Admin/AdminHeader'
 
 export default {
-  components: { TimesGuide, TimesguideItem, AdminHeader },
+  components: { TimesGuide, TimesguideItem },
   mixins: [base],
 
   data() {
