@@ -4,7 +4,6 @@
   <div class="page bg--gray">
     <div class="card">
       <div class="card__body">
-        <!-- {{}} -->
         <att-list @click-att-item="clickAttItem" :data="activeAttList"></att-list>
 
         <el-form ref="form" :model="planForm" label-width="80px">

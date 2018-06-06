@@ -1,44 +1,42 @@
  <template>
-  <div class="page bg--gray">
-    <div class="page-content">
-      <el-card class="card-bottom">
-        <att-date-select @select-date="clickDate" v-model="date"></att-date-select>
-      </el-card>
-      <el-card>
-        <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
-          <el-table-column label="名称">
-            <template slot-scope="scope">
-              <div class="att-list-item__meta">
-                <att-media size="small" :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
-                <span class="title">
-                  {{scope.row.name}}
-                </span>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="状态" width="150">
-            <template slot-scope="scope">
-              <att-status v-if="attsWait[scope.row.aid]" :status="attsWait[scope.row.aid]['status']"></att-status>
-            </template>
-          </el-table-column>
-          <el-table-column label="平均等候" width="150">
-            <template slot-scope="scope">
-              <att-wait-time v-if="attsWait[scope.row.aid]" :wait="attsWait[scope.row.aid]" :time="attsWait[scope.row.aid]['waitAvg']"></att-wait-time>
-            </template>
-          </el-table-column>
-          <el-table-column label="趋势" width="250">
-            <template slot-scope="scope">
-              <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"></base-line>
-            </template>
-          </el-table-column>
-          <el-table-column label="乘坐人数" width="250">
-            <template slot-scope="scope">
-              <att-count-number v-if="attsWait[scope.row.aid] && attNumber[scope.row.aid]" :data="scope.row" :wait="attsWait[scope.row.aid]" :number="attNumber[scope.row.aid]"></att-count-number>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-    </div>
+  <div>
+    <dm-header>
+      <att-date-select @select-date="clickDate" v-model="date"></att-date-select>
+    </dm-header>
+    <dm-content>
+      <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
+        <el-table-column label="名称">
+          <template slot-scope="scope">
+            <div class="att-list-item__meta">
+              <att-media size="small" :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
+              <span class="title">
+                {{scope.row.name}}
+              </span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="状态" width="150">
+          <template slot-scope="scope">
+            <att-status v-if="attsWait[scope.row.aid]" :status="attsWait[scope.row.aid]['status']"></att-status>
+          </template>
+        </el-table-column>
+        <el-table-column label="平均等候" width="150">
+          <template slot-scope="scope">
+            <att-wait-time v-if="attsWait[scope.row.aid]" :wait="attsWait[scope.row.aid]" :time="attsWait[scope.row.aid]['waitAvg']"></att-wait-time>
+          </template>
+        </el-table-column>
+        <el-table-column label="趋势" width="250">
+          <template slot-scope="scope">
+            <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"></base-line>
+          </template>
+        </el-table-column>
+        <el-table-column label="乘坐人数" width="250">
+          <template slot-scope="scope">
+            <att-count-number v-if="attsWait[scope.row.aid] && attNumber[scope.row.aid]" :data="scope.row" :wait="attsWait[scope.row.aid]" :number="attNumber[scope.row.aid]"></att-count-number>
+          </template>
+        </el-table-column>
+      </el-table>
+    </dm-content>
   </div>
 </template>
 

@@ -127,7 +127,7 @@ const count = {
     // 获取等待时间列表
     async getAttractionsWait({ commit, state }, { date, local }) {
       state.loading.attsWait = true
-      const data = await WaitTimes.attractions(local, date)
+      const data = await WaitTimes.waitsHome(local, date)
       setTimeout(() => {
         commit('SET_ATTS_WAIT', data)
       }, 300)

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 const BASE = 'wait-times-service'
 
 export default {
-  home: function home(local, date) {
+  waitsHome: function waitsHome(local, date) {
     return request({
       url: `${BASE}/wait-times/home/${local}/${date}`,
       method: 'get'

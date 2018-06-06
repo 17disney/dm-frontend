@@ -1,8 +1,10 @@
 <template>
   <el-container>
-    <el-aside width="240px">
-      <att-list-select @click-item="selectAtt" v-model="aid" :data="activeAttList"></att-list-select>
-    </el-aside>
+    <sub-aside>
+      <dm-scroll :settings="settings">
+        <att-list-select @click-item="selectAtt" v-model="aid" :data="activeAttList"></att-list-select>
+      </dm-scroll>
+    </sub-aside>
     <el-container>
       <el-main>
         <el-card v-if="att" class="card-bottom">
@@ -10,7 +12,6 @@
             <span class="card__title">{{att.name}}</span>
           </div>
           <el-row>
-            <!-- <att-media type="finderDetailMobileHero" :medias="att.medias"></att-media> -->
             <div class="att-desc-list">
               <ul class="att-desc-list__list">
                 <li class="att-desc-list__item">
@@ -75,6 +76,8 @@ import { mapState } from 'vuex'
 import ChartsAttCount from '@/components/Charts/ChartsAttCount'
 import ChartsAttWait from '@/components/Charts/ChartsAttWait'
 import ChartsAttFp from '@/components/Charts/ChartsAttFp'
+import SubAside from '@/components/SubAside/SubAside'
+
 import moment from 'moment'
 import base from '@/common/mixins/base'
 
@@ -82,13 +85,16 @@ const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
   mixins: [base],
 
-  components: { ChartsAttCount, ChartsAttWait, ChartsAttFp },
+  components: { ChartsAttCount, ChartsAttWait, ChartsAttFp, SubAside },
 
   props: {
   },
 
   data() {
     return {
+      settings: {
+        maxScrollbarLength: 60
+      },
       filters: {
         hotLevel: 3,
         type: 'attraction'
@@ -168,7 +174,7 @@ export default {
     async getAttWait() {
       const { local, aid } = this
       const date = this.dateRang
-      this.attWait = await this.$Api.waitTimes.attractionsId(local, date, aid)
+      this.attWait = await this.$Api.waitTimes.attractionsDate(local, date, aid)
     },
     clickDate(date) {
       this.dateRang = date

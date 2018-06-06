@@ -1,7 +1,9 @@
 <style lang='stylus'>
 </style>
 <template>
-  <div class="dm-main"></div>
+  <div class="dm-main">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

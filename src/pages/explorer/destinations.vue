@@ -1,25 +1,15 @@
 <template>
   <div class="page bg--gray">
     <dm-header>
-
-      <el-row>
-        <el-col :span="16">
-          <el-select v-model="filters.type" placeholder="请选择">
-            <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
-            </el-option>
-          </el-select>
-          <el-radio-group @change="handleFilterChange" v-model="filters.isRaw">
-            <el-radio-button :label="false">存档值</el-radio-button>
-            <el-radio-button :label="true">原始值</el-radio-button>
-          </el-radio-group>
-          <el-checkbox v-model="filters.visible">隐藏不可见</el-checkbox>
-        </el-col>
-
-        <el-col :span="8">
-          <el-button type="primary" @click="clickUpdateAttRawList">更新全部</el-button>
-          <el-button>发布</el-button>
-        </el-col>
-      </el-row>
+      <el-select v-model="filters.type" placeholder="请选择">
+        <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
+        </el-option>
+      </el-select>
+      <el-radio-group @change="handleFilterChange" v-model="filters.isRaw">
+        <el-radio-button :label="false">存档值</el-radio-button>
+        <el-radio-button :label="true">原始值</el-radio-button>
+      </el-radio-group>
+      <el-checkbox v-model="filters.visible">隐藏不可见</el-checkbox>
     </dm-header>
 
     <dm-content>

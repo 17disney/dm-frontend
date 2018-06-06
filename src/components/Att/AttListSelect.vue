@@ -6,21 +6,20 @@
   height: 100%;
 
   &__list {
-    background: $color-light-grey-sss;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
   }
 
   &__title {
-    font-size: 15px;
-    line-height: 32px;
+    font-size: 14px;
+    // line-height: 20px;
+    align-content: center;
     flex: 1;
   }
 
   &__item {
     padding: 8px 16px;
-    width: 300px;
+    width: 100%;
     cursor: pointer;
     display: flex;
     align-content: center;

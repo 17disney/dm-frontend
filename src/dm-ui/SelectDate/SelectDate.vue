@@ -146,9 +146,7 @@ export default {
       })
       this.list = list
     },
-    clickItem(value) {
-      this.$emit('select-date', value)
-    },
+
     clickBtn(type) {
       var value
       if (type === 'previous') {

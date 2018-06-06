@@ -2,6 +2,7 @@ import Card from './Card'
 import Content from './Content'
 import Header from './Header'
 import Main from './Main'
+import Scroll from './Scroll'
 import SelectDate from './SelectDate'
 
 function install(Vue) {
@@ -9,7 +10,7 @@ function install(Vue) {
     return
   }
   install.installed = true
-  const components = [Card, Content, Header, Main, SelectDate]
+  const components = [Card, Content, Header, Main, Scroll, SelectDate]
   components.forEach(Component => {
     Component.install(Vue)
   })
