@@ -1,26 +1,20 @@
-<style lang='stylus' scoped>
-</style>
 <template>
   <div class="page bg-gray">
     <div class="page-content">
-
       <el-card class="card-bottom">
         <att-count-date-select @click-date="clickDate"></att-count-date-select>
       </el-card>
       <el-card v-if="dateType==='date'">
         <charts-ticket-date v-if="ticketDate" :data="ticketDate"></charts-ticket-date>
       </el-card>
-
       <el-card v-if="dateType==='daterange'">
         <charts-ticket-count :data="ticketCount"></charts-ticket-count>
       </el-card>
     </div>
-
   </div>
 </template>
 
 <script>
-import Ticket from '@/common/api/ticket'
 import base from '@/common/mixins/base'
 import moment from 'moment'
 import ChartsTicketDate from '@/components/Charts/ChartsTicketDate'
@@ -42,7 +36,6 @@ export default {
   },
 
   computed: {
-
     dateType() {
       const { dateRange } = this
       if (typeof dateRange === 'string') {
@@ -51,26 +44,29 @@ export default {
         return 'daterange'
       }
     }
-
   },
 
   mounted() {
-    this.initDate()
+    setTimeout(() => {
+      this.initDate()
+    }, 1000)
   },
 
   methods: {
     async initDate() {
       const { local, dateRange } = this
-      const data = await Ticket.availableDate(local, dateRange)
+      const data = await this.$Api.waitTimes.ticketAvailableDate(local, dateRange)
       this.ticketDate = data
     },
+
     async initCount() {
       const { local, dateRange } = this
       console.log(dateRange)
       const [st, et] = dateRange
-      const data = await Ticket.available(local, { st, et })
+      const data = await this.$Api.waitTimes.ticketAvailable(local, { st, et })
       this.ticketCount = data
     },
+
     clickDate(val) {
       this.dateRange = val
       if (this.dateType === 'date') {

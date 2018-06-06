@@ -164,6 +164,11 @@ export default {
       return data
     }
   },
+
+  mounted() {
+
+  },
+
   methods: {
     handleFilterChange() {
       const { isRaw } = this.filters

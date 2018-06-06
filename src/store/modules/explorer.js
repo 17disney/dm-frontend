@@ -5,7 +5,7 @@ import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'
 const explorer = {
   state: {
-    local: 'hongkong', // 'shanghai',
+    local: 'shanghai', // shanghai hongkong,
     date: moment().format('YYYY-MM-DD'),
     attList: [],
     attRawList: [],

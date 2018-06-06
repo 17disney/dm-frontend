@@ -83,7 +83,17 @@ export default {
     this.init()
   },
 
+  watch: {
+    local: function(val, oVal) {
+      this.init()
+    }
+  },
+
   methods: {
+    async init() {
+      this.getAttractionsWait({ date: this.date, local: this.local })
+    },
+
     initAttListNumber(data) {
       data.forEach(item => {
         this.mathAttNumber(item)
@@ -91,7 +101,7 @@ export default {
     },
     clickDate(date) {
       this.date = date
-      this.getAttractionsWait(this.date)
+      this.getAttractionsWait({ date: this.date, local: this.local })
     },
 
     async mathAttNumber(row) {
@@ -117,11 +127,6 @@ export default {
         }
       }
       this.attNumber[aid] = Math.round(number)
-    },
-
-    async init() {
-      this.getDestinationsList()
-      this.getAttractionsWait(this.date)
     }
   }
 }

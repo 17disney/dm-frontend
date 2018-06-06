@@ -11,14 +11,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/wait-times-service': {
-        target: 'http://192.168.31.46:7001',
+        target: 'http://127.0.0.1:7001',
         changeOrigin: true,
         pathRewrite: {
           '^/wait-times-service': '/'
         }
       },
       '/forecast-service': {
-        // target: 'http://192.168.31.46:7100',
+        // target: 'http://127.0.0.1:7100',
         target: 'http://api.17disney.com/forecast-service',
         changeOrigin: true,
         pathRewrite: {
