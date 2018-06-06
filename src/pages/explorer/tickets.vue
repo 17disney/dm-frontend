@@ -1,16 +1,18 @@
 <template>
   <div class="page bg-gray">
-    <div class="page-content">
-      <el-card class="card-bottom">
-        <att-count-date-select @click-date="clickDate"></att-count-date-select>
-      </el-card>
-      <el-card v-if="dateType==='date'">
-        <charts-ticket-date v-if="ticketDate" :data="ticketDate"></charts-ticket-date>
-      </el-card>
-      <el-card v-if="dateType==='daterange'">
-        <charts-ticket-count :data="ticketCount"></charts-ticket-count>
-      </el-card>
-    </div>
+    <dm-header>
+      <att-count-date-select @click-date="clickDate"></att-count-date-select>
+    </dm-header>
+    <dm-main>
+      <dm-content>
+        <el-card v-if="dateType==='date'">
+          <charts-ticket-date v-if="ticketDate" :data="ticketDate"></charts-ticket-date>
+        </el-card>
+        <el-card v-else>
+          <charts-ticket-count :data="ticketCount"></charts-ticket-count>
+        </el-card>
+      </dm-content>
+    </dm-main>
   </div>
 </template>
 

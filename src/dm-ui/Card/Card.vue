@@ -1,11 +1,16 @@
 <style lang='stylus'>
+.dm-card {
+}
 </style>
 <template>
-  <div class="dm-main"></div>
+  <div class="dm-card">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'dm-card',
   components: {},
 
   props: {
@@ -18,7 +23,7 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() { },
 
   methods: {}
 }

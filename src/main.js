@@ -20,10 +20,6 @@ import AttDateSelect from '@/components/Att/AttDateSelect'
 import AttListSelect from '@/components/Att/AttListSelect'
 import AttList from '@/components/AttList/AttList'
 
-import DmHeader from '@/components/Dm/DmHeader'
-import DmCard from '@/components/Dm/DmCard'
-import DmContent from '@/components/Dm/DmContent'
-
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/disney/index.styl'
@@ -31,6 +27,9 @@ import '@/common/icons'
 import '@/common/permission'
 
 Vue.use(ElementUI, { locale })
+
+import DmUI from '@/dm-ui'
+Vue.use(DmUI)
 
 Vue.component('Icon', Icon)
 Vue.component('AttMedia', AttMedia)
@@ -41,10 +40,6 @@ Vue.component('AttCountDateSelect', AttCountDateSelect)
 Vue.component('AttDateSelect', AttDateSelect)
 Vue.component('AttListSelect', AttListSelect)
 Vue.component('AttList', AttList)
-
-Vue.component('DmHeader', DmHeader)
-Vue.component('DmCard', DmCard)
-Vue.component('DmContent', DmContent)
 
 Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])

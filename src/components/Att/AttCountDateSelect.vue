@@ -14,9 +14,14 @@
 </template>
 
 <script>
-import moment from 'moment'
+const COMPONENT_NAME = 'att-count-date-select'
 const DATE_FORMAT = 'YYYY-MM-DD'
+
+import moment from 'moment'
+
 export default {
+  name: COMPONENT_NAME,
+
   components: {},
 
   props: {

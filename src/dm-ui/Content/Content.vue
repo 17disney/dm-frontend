@@ -11,6 +11,8 @@
 
 <script>
 export default {
+  name: 'dm-content',
+
   components: {},
 
   props: {

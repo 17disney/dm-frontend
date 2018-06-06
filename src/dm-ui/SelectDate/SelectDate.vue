@@ -97,7 +97,9 @@ import moment from 'moment'
 import Emitter from '@/common/mixins/emitter'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
+
 export default {
+  name: 'dm-select-date',
   mixins: [Emitter],
   props: {
     // list: Array,

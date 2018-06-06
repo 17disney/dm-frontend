@@ -1,16 +1,13 @@
 <style lang='stylus'>
-  .dm-card{
-
-  }
 </style>
 <template>
-  <div class="dm-card">
-    <slot></slot>
-  </div>
+  <div class="dm-main"></div>
 </template>
 
 <script>
 export default {
+  name: 'dm-main',
+
   components: {},
 
   props: {

@@ -66,7 +66,7 @@ export default {
       const xAxisData = availableList.map(_ => moment(_[0], 'x').format('MM-DD HH:mm'))
 
       const saleList = availableList.map(_ => {
-        return 20000 - _[1]
+        return _[1]
       })
       const series = []
 
