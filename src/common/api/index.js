@@ -1,5 +1,9 @@
 import waitTimes from './wait-times'
+import forecast from './forecast'
+import timesguide from './timesguide'
 
-export default {
-  waitTimes
+export {
+  waitTimes,
+  forecast,
+  timesguide
 }

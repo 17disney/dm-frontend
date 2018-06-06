@@ -1,5 +1,5 @@
 import moment from 'moment'
-import Explorer from '@/common/api/explorer'
+import WaitTimes from '@/common/api/wait-times'
 import { lineToObject } from '@/utils/tool'
 import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'
@@ -89,7 +89,7 @@ const explorer = {
   actions: {
     // 获取项目列表(原始)
     async getDestinationsRawList({ commit, state }) {
-      const data = await Explorer.destinationsRaw(state.local)
+      const data = await WaitTimes.destinationsRaw(state.local)
       if (data) {
         const { added, facetGroups } = data
         commit('SET_ATT_RAW_LIST', added)
@@ -99,7 +99,7 @@ const explorer = {
 
     // 获取项目列表
     async getDestinationsList({ commit, state }) {
-      const data = await Explorer.destinations(state.local)
+      const data = await WaitTimes.destinations(state.local)
       if (data) {
         commit('SET_ATT_LIST', data)
       }
@@ -107,7 +107,7 @@ const explorer = {
 
     // 获取时间表
     async getSchedules({ commit, state }, date) {
-      const data = await Explorer.schedules(state.local, date)
+      const data = await WaitTimes.schedules(state.local, date)
       commit('SET_SCHEDULES', data)
     },
 

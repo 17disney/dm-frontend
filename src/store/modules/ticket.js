@@ -1,4 +1,4 @@
-import Ticket from '@/common/api/ticket'
+import WaitTimes from '@/common/api/wait-times'
 import { mathRegression } from '@/utils'
 // mathArrAvg
 const count = {
@@ -74,13 +74,13 @@ const count = {
         st,
         et
       }
-      const data = await Ticket.available(local, arg)
+      const data = await WaitTimes.available(local, arg)
       commit('SET_TICKETS', data)
       commit('SET_TICKET_LIST', data)
     },
     async getTicketDate({ commit, state }, date) {
       const { local } = state
-      const data = await Ticket.availableDate(local, date)
+      const data = await WaitTimes.availableDate(local, date)
       commit('SET_TICKETS', data, date)
     },
     mathParkCount({ commit, state }, data) {

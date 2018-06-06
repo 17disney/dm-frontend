@@ -1,4 +1,4 @@
-import Wait from '@/common/api/waits'
+import WaitTimes from '@/common/api/wait-times'
 import moment from 'moment'
 import { mathRegression } from '@/utils'
 // mathArrAvg
@@ -127,7 +127,7 @@ const count = {
     // 获取等待时间列表
     async getAttractionsWait({ commit, state }, { date, local }) {
       state.loading.attsWait = true
-      const data = await Wait.attractions(local, date)
+      const data = await WaitTimes.attractions(local, date)
       setTimeout(() => {
         commit('SET_ATTS_WAIT', data)
       }, 300)
@@ -136,7 +136,7 @@ const count = {
     // 获取乐园统计列表
     async getParkCountList({ commit, state }, arg) {
       const { local } = state
-      const data = await Wait.parkCount(local, arg)
+      const data = await WaitTimes.parkCount(local, arg)
       data.forEach(item => {
         const { flowMax } = item
         item.flowIn = Math.round(flowMax * 0.9)

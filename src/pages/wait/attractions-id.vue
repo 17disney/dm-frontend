@@ -75,7 +75,6 @@ import { mapState } from 'vuex'
 import ChartsAttCount from '@/components/Charts/ChartsAttCount'
 import ChartsAttWait from '@/components/Charts/ChartsAttWait'
 import ChartsAttFp from '@/components/Charts/ChartsAttFp'
-import Waits from '@/common/api/waits'
 import moment from 'moment'
 import base from '@/common/mixins/base'
 
@@ -162,14 +161,14 @@ export default {
     async getAttCount() {
       const { local, aid } = this
       const [st, et] = this.dateRang
-      const attCount = await Waits.attractionsIdCount(local, aid, { st, et })
+      const attCount = await this.$Api.waitTimes.attractionsIdCount(local, aid, { st, et })
       this.attCount = attCount
     },
 
     async getAttWait() {
       const { local, aid } = this
       const date = this.dateRang
-      this.attWait = await Waits.attractionsId(local, date, aid)
+      this.attWait = await this.$Api.waitTimes.attractionsId(local, date, aid)
     },
     clickDate(date) {
       this.dateRang = date

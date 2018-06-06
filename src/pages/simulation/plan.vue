@@ -33,7 +33,6 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 // import moment from 'moment'
-import Waits from '@/common/api/waits'
 
 export default {
   components: {},
@@ -95,7 +94,7 @@ export default {
       const { local } = this
       const { date } = this.planForm
       const id = 'attSevenDwarfsMineTrain'
-      const data = await Waits.attractionsId(local, date, id)
+      const data = await this.$Api.waitTimes.attractionsId(local, date, id)
       console.log(data)
     }
 

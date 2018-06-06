@@ -1,20 +1,64 @@
 import request from '@/utils/request'
-
-const base = 'wait-times-service'
+const BASE = 'wait-times-service'
 
 export default {
-  ticketAvailable: function ticketAvailable(local, params) {
+  home: function home(local, date) {
     return request({
-      url: `${base}/ticket/available/${local}`,
+      url: `${BASE}/wait-times/home/${local}/${date}`,
+      method: 'get'
+    })
+  },
+
+  ticket: function ticketAvailable(local, params) {
+    return request({
+      url: `${BASE}/ticket/available/${local}`,
       method: 'get',
       params
     })
   },
 
-  ticketAvailableDate: function ticketAvailableDate(local, date) {
+  ticketDate: function ticketAvailableDate(local, date) {
     return request({
-      url: `${base}/ticket/available/${local}/${date}`,
+      url: `${BASE}/ticket/available/${local}/${date}`,
       method: 'get'
+    })
+  },
+
+  parkDate: function parkDate(local, date) {
+    return request({
+      url: `${BASE}/wait-times/park/${local}/${date}`,
+      method: 'get'
+    })
+  },
+
+  park: function park(local, params) {
+    return request({
+      url: `${BASE}/wait-times/park/${local}`,
+      method: 'get',
+      params
+    })
+  },
+
+  attractionsDate: function attractionsDate(local, id, date) {
+    return request({
+      url: `${BASE}/wait-times/attractions/${local}/${id}/${date}`,
+      method: 'get'
+    })
+  },
+
+  attractions: function attractions(local, id, params) {
+    return request({
+      url: `${BASE}/wait-times/attractions/${local}/${id}`,
+      method: 'get',
+      params
+    })
+  },
+
+  destinations: function destinations(local, id, params) {
+    return request({
+      url: `${BASE}/destinations/${local}`,
+      method: 'get',
+      params
     })
   }
 }

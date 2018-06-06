@@ -47,7 +47,6 @@ import base from '@/common/mixins/base'
 import { mapState, mapGetters } from 'vuex'
 import moment from 'moment'
 import BaseLine from '@/components/Charts/BaseLine'
-import Waits from '@/common/api/waits'
 
 export default {
   mixins: [base],
@@ -107,7 +106,7 @@ export default {
     async mathAttNumber(row) {
       const { aid, runDefault } = row
       const { local, date } = this
-      const data = await Waits.attractionsId(local, date, aid)
+      const data = await this.$Api.waitsTimes.attractionsId(local, date, aid)
       const { waitList } = data
 
       let number = 0

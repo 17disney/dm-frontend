@@ -61,7 +61,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import Waits from '@/common/api/waits'
 import moment from 'moment'
 import base from '@/common/mixins/base'
 import ChartsParkWait from '@/components/Charts/ChartsParkWait'
@@ -127,10 +126,10 @@ export default {
     async init() {
       const { dateType, local, dateRang } = this
       if (dateType === 'date') {
-        this.parkWait = await Waits.park(local, dateRang)
+        this.parkWait = await this.$Api.waitTimes.park(local, dateRang)
       } else {
         const [st, et] = this.dateRang
-        const parkCount = await Waits.parkCount(local, { st, et })
+        const parkCount = await this.$Api.waitTimes.parkCount(local, { st, et })
         this.parkCount = parkCount.reverse()
       }
     },
