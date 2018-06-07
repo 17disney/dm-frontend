@@ -13,8 +13,8 @@ import App from './App'
 
 // UI
 import ElementUI from 'element-ui'
-import DmUI from '@/dm-ui'
-import AttUI from '@/att-ui'
+import DmUI from 'package/dm-ui'
+import AttUI from 'package/att-ui'
 
 Vue.use(ElementUI)
 Vue.use(DmUI)
