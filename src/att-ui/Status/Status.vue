@@ -84,6 +84,8 @@
 
 <script>
 export default {
+  name: 'att-status',
+
   components: {},
 
   props: {

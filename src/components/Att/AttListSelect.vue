@@ -58,10 +58,9 @@
 </template>
 
 <script>
-import AttListItem from '@/components/AttList/AttListItem'
 import { mapState } from 'vuex'
 export default {
-  components: { AttListItem },
+  components: { },
 
   props: {
     data: {

@@ -40,6 +40,8 @@
 
 <script>
 export default {
+  name: 'att-wait-time',
+
   components: {},
 
   props: {

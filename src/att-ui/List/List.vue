@@ -34,10 +34,12 @@
 </template>
 
 <script>
-import AttListItem from '@/components/AttList/AttListItem'
+import ListItem from './ListItem'
 import { mapState } from 'vuex'
 export default {
-  components: { AttListItem },
+  name: 'att-list',
+
+  components: { ListItem },
 
   props: {
     data: {

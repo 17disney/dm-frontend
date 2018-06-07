@@ -147,10 +147,9 @@ $layout-sidebar-width = 256px;
 <script>
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
-import ScrollBar from '@/components/ScrollBar'
 
 export default {
-  components: { SidebarItem, ScrollBar },
+  components: { SidebarItem },
   computed: {
     ...mapGetters([
       'sidebar'

@@ -18,14 +18,10 @@ import Color from './common/color'
 import initFilters from './common/filters/init'
 import * as Api from './common/api'
 
-import AttMedia from '@/components/Att/AttMedia'
-import AttStatus from '@/components/Att/AttStatus'
-import AttWaitTime from '@/components/Att/AttWaitTime'
 import AttCountNumber from '@/components/Att/AttCountNumber'
 import AttCountDateSelect from '@/components/Att/AttCountDateSelect'
 import AttDateSelect from '@/components/Att/AttDateSelect'
 import AttListSelect from '@/components/Att/AttListSelect'
-import AttList from '@/components/AttList/AttList'
 
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -45,14 +41,10 @@ Vue.locale('zh-cn', zhLocale)
 Vue.config.productionTip = false // 关闭生产提示
 // store.dispatch.setLocale('zh-cn')
 
-Vue.component('AttMedia', AttMedia)
-Vue.component('AttWaitTime', AttWaitTime)
-Vue.component('AttStatus', AttStatus)
 Vue.component('AttCountNumber', AttCountNumber)
 Vue.component('AttCountDateSelect', AttCountDateSelect)
 Vue.component('AttDateSelect', AttDateSelect)
 Vue.component('AttListSelect', AttListSelect)
-Vue.component('AttList', AttList)
 
 initFilters(Vue)
 

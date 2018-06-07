@@ -108,11 +108,11 @@
 <script>
 import base from '@/common/mixins/base'
 import { mapState, mapGetters } from 'vuex'
-import AttMedia from '@/components/Att/AttMedia'
+
 export default {
   mixins: [base],
   components: {
-    AttMedia
+
   },
   data() {
     return {

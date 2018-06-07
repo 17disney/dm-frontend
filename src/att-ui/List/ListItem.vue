@@ -28,6 +28,8 @@ import { mapState } from 'vuex'
 // import
 
 export default {
+  name: 'att-list-item',
+
   components: {
 
   },
