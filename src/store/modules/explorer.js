@@ -1,8 +1,10 @@
 import moment from 'moment'
+
 import WaitTimes from '@/common/api/wait-times'
 import { lineToObject } from '@/utils/tool'
 import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'
+
 const explorer = {
   state: {
     local: 'shanghai', // shanghai hongkong,
@@ -14,6 +16,7 @@ const explorer = {
     attType,
     playType
   },
+
   getters: {
     landList: (state, getters) => {
       return state.attList.filter(item => item.type === 'land')
@@ -31,6 +34,7 @@ const explorer = {
       return state.attList.find(item => item.aid === aid)
     }
   },
+
   mutations: {
     SET_LOCAL: (state, data) => {
       state.local = data
@@ -51,23 +55,7 @@ const explorer = {
     SET_ATT_RAW_LIST: (state, data) => {
       data.forEach(item => {
         item.type = item.type.toLowerCase()
-        // 提取坐标
-        // item.coordinates = [0, 0]
-        // if (
-        //   item.relatedLocations &&
-        //   item.relatedLocations[0] &&
-        //   item.relatedLocations[0]['coordinates'] &&
-        //   item.relatedLocations[0]['coordinates'][0]
-        // ) {
-        //   let coordinates = item.relatedLocations[0]['coordinates'][0]
-        //   const { latitude, longitude } = coordinates
-        //   coordinates = [latitude, longitude].map(parseFloat)
-        //   coordinates[0] = coordinates[0] + 0.0003
-        //   coordinates[1] = coordinates[1] - 0.0001
-        //   item.coordinates = coordinates
-        // }
       })
-      // console.log(data)
       state.attRawList = data
     },
 
@@ -86,6 +74,7 @@ const explorer = {
       state.schedules = data
     }
   },
+
   actions: {
     // 获取项目列表(原始)
     async getDestinationsRawList({ commit, state }) {
@@ -96,7 +85,6 @@ const explorer = {
         commit('SET_FACET_GROUPS', facetGroups)
       }
     },
-
     // 获取项目列表
     async getDestinationsList({ commit, state }) {
       const data = await WaitTimes.destinations(state.local)
@@ -104,14 +92,12 @@ const explorer = {
         commit('SET_ATT_LIST', data)
       }
     },
-
     // 获取时间表
     async getSchedules({ commit, state }, date) {
       const data = await WaitTimes.schedules(state.local, date)
       commit('SET_SCHEDULES', data)
     },
-
-    //
+    // 设置地区
     setLocal({ commit }, data) {
       commit('SET_LOCAL', data)
     }

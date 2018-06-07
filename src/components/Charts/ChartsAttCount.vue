@@ -104,7 +104,7 @@ export default {
           right: 10,
           pieces: [{
             gt: 0,
-            lte: 60,
+            lte: 59,
             color: Color.colorPrimary
           }, {
             gt: 60,

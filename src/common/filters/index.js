@@ -1,4 +1,7 @@
 import moment from 'moment'
+import LOCALE from '../const/locale'
+import LOCAL from '../const/local'
+
 export function time(value) {
   const val = moment(value, 'x').format('H:mm:ss')
   return val
@@ -20,4 +23,12 @@ export function fieldName(value) {
     ticketNum: '售票量'
   }
   return keys[value]
+}
+
+export function locale(value) {
+  return LOCALE.find(_ => _.value === value)['label']
+}
+
+export function local(value) {
+  return LOCAL.find(_ => _.value === value)['label']
 }

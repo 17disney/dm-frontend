@@ -1,4 +1,5 @@
 import Card from './Card'
+import Container from './Container'
 import Content from './Content'
 import Header from './Header'
 import Main from './Main'
@@ -10,7 +11,17 @@ function install(Vue) {
     return
   }
   install.installed = true
-  const components = [Card, Content, Header, Main, Scroll, SelectDate]
+
+  const components = [
+    Card,
+    Container,
+    Content,
+    Header,
+    Main,
+    Scroll,
+    SelectDate
+  ]
+
   components.forEach(Component => {
     Component.install(Vue)
   })

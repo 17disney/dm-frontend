@@ -36,62 +36,64 @@
   }
 }
 
-.el-submenu {
-  .icon--pep {
-    font-size: 15px;
-    display: inline-block;
-    margin-right: 8px;
-  }
+.dm-menu-item {
+  .el-submenu {
+    .icon--pep {
+      font-size: 15px;
+      display: inline-block;
+      margin-right: 8px;
+    }
 
-  &.is-opened {
-    .el-submenu__title {
-      .icon--pep, span, i {
-        color: #FFF;
+    &.is-opened {
+      .el-submenu__title {
+        .icon--pep, span, i {
+          color: #FFF;
+        }
       }
     }
-  }
 
-  .icon--pep, span, i {
-    color: rgba(255, 255, 255, 0.55);
-    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
+    .icon--pep, span, i {
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
 
-  &__title {
-    background-color: $color-primary-dark;
-
-    &:hover {
-      .icon--pep, span, i {
-        color: #FFF;
-      }
-
+    &__title {
       background-color: $color-primary-dark;
-    }
-  }
 
-  .el-menu-item {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 50px !important;
-    background-color: darken($color-primary-dark, 10);
+      &:hover {
+        .icon--pep, span, i {
+          color: #FFF;
+        }
 
-    &:hover {
-      .icon--pep, span, i {
-        color: #FFF;
+        background-color: $color-primary-dark;
       }
     }
 
-    &.is-active {
-      background-color: $color-primary;
+    .el-menu-item {
+      height: 40px;
+      line-height: 40px;
+      padding-left: 50px !important;
+      background-color: darken($color-primary-dark, 10);
 
-      .icon--pep, span, i {
-        color: #FFF;
+      &:hover {
+        .icon--pep, span, i {
+          color: #FFF;
+        }
+      }
+
+      &.is-active {
+        background-color: $color-primary;
+
+        .icon--pep, span, i {
+          color: #FFF;
+        }
       }
     }
   }
 }
 </style>
 <template>
-  <div>
+  <div class="dm-menu-item">
     <template v-for="item in routes" v-if="!item.hidden&&item.children">
       <router-link v-if="item.children.length===1 && !item.children[0].children && !item.alwaysShow" :to="item.path+'/'+item.children[0].path" :key="item.children[0].name">
         <el-menu-item :index="item.path+'/'+item.children[0].path" :class="{'submenu-title-noDropdown':!isNest}">

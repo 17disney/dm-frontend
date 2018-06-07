@@ -11,9 +11,13 @@ $layout-header-height = 64px;
   height: 64px;
   flex-shrink: 0;
 
+  &__menu {
+    float: right;
+  }
+
   &__user {
     height: $layout-header-height;
-    float: right;
+    // float: right;
     display: flex;
   }
 
@@ -78,39 +82,50 @@ $layout-header-height = 64px;
 
 <template>
   <div class="layout-header">
-    <el-menu mode="horizontal">
+    <el-menu @select="handleSelect" mode="horizontal">
       <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-      <el-select :value="local" @change="setLocal" placeholder="请选择">
-        <el-option v-for="item in LOCAL_LIST" :key="item.value" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
-      <div class="layout-header__user">
-        <div class="layout-header__action">
-          <el-dropdown trigger="hover" class="layout-header__avatar">
-            <div class="avatar-image">
-              <img :src="avatar">
-            </div>
-            <div class="user-name">Disney</div>
-            <el-dropdown-menu class="user-dropdown" slot="dropdown">
-              <router-link class="inlineBlock" to="/">
-                <el-dropdown-item>
-                  Home
+
+      <div class="layout-header__menu">
+        <el-submenu index="local">
+          <template slot="title">{{local | local}}</template>
+          <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{item.label}}</el-menu-item>
+        </el-submenu>
+
+        <el-submenu index="locale">
+          <template slot="title">{{locale | locale}}</template>
+          <el-menu-item v-for="item in LOCALE" :key="item.value" :index="'locale--' + item.value">{{item.label}}</el-menu-item>
+        </el-submenu>
+        <div class="layout-header__user">
+          <div class="layout-header__action">
+            <el-dropdown trigger="hover" class="layout-header__avatar">
+              <div class="avatar-image">
+                <img :src="avatar">
+              </div>
+              <div class="user-name">Disney</div>
+              <el-dropdown-menu class="user-dropdown" slot="dropdown">
+                <router-link class="inlineBlock" to="/">
+                  <el-dropdown-item>
+                    Home
+                  </el-dropdown-item>
+                </router-link>
+                <el-dropdown-item divided>
+                  <div @click="logout" style="display:block;">LogOut</div>
                 </el-dropdown-item>
-              </router-link>
-              <el-dropdown-item divided>
-                <div @click="logout" style="display:block;">LogOut</div>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
       </div>
+
     </el-menu>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { LOCAL_LIST } from '@/common/const'
+import Vue from 'vue'
+import { mapGetters, mapState } from 'vuex'
+import LOCAL from '@/common/const/local'
+import LOCALE from '@/common/const/locale'
 import avatar from '@/assets/mickey-characterSmall.png'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
@@ -121,8 +136,8 @@ export default {
   data() {
     return {
       avatar,
-      LOCAL_LIST,
-      local2: 'sd'
+      LOCAL,
+      LOCALE
     }
   },
   components: {
@@ -130,11 +145,26 @@ export default {
     Hamburger
   },
   computed: {
+    ...mapState({
+      'locale': state => state.app.locale
+    }),
     ...mapGetters([
       'sidebar'
     ])
   },
   methods: {
+    handleSelect(e) {
+      const [type, value] = e.split('--')
+
+      if (type === 'locale') {
+        Vue.config.lang = value
+        this.$store.dispatch('setLocale', value)
+      }
+
+      if (type === 'local') {
+        this.$store.dispatch('setLocal', value)
+      }
+    },
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },

@@ -29,8 +29,7 @@ export default {
       'getParkCountList',
       'getTickets',
       'getDays',
-      'getWeatherHistory',
-      'setLocal'
+      'getWeatherHistory'
     ])
   }
 }

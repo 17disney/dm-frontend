@@ -1,11 +1,11 @@
 <template>
-  <el-container>
+  <dm-container>
     <sub-aside>
       <dm-scroll :settings="settings">
         <att-list-select @click-item="selectAtt" v-model="aid" :data="activeAttList"></att-list-select>
       </dm-scroll>
     </sub-aside>
-    <el-container>
+    <dm-container>
       <el-main>
         <el-card v-if="att" class="card-bottom">
           <div slot="header" class="clearfix">
@@ -67,8 +67,8 @@
         </el-card>
 
       </el-main>
-    </el-container>
-  </el-container>
+    </dm-container>
+  </dm-container>
 </template>
 
 <script>
@@ -100,11 +100,12 @@ export default {
         hotLevel: 3,
         type: 'attraction'
       },
-      aid: 'attTronLightcyclePowerRun',
+      aid: null,
       attWait: {},
       attCount: [],
       dateMode: 'today',
-      dateRang: moment().format(DATE_FORMAT)
+      dateRang: moment().format(DATE_FORMAT),
+      activeAttList: []
     }
   },
 
@@ -125,12 +126,8 @@ export default {
 
     att() {
       return this.attFind(this.aid)
-    },
-
-    activeAttList() {
-      const { type, hotLevel } = this.filters
-      return this.attListFilter(type, hotLevel)
     }
+
   },
 
   watch: {
@@ -159,6 +156,24 @@ export default {
   },
   methods: {
     async init() {
+      setTimeout(() => {
+        this.initAttList()
+      }, 500)
+    },
+
+    async initAttList() {
+      const { type, hotLevel } = this.filters
+      const data = await this.attListFilter(type, hotLevel)
+      this.activeAttList = data
+      if (data && data[0]) {
+        this.aid = data[0]['aid']
+        setTimeout(() => {
+          this.initWait()
+        }, 500)
+      }
+    },
+
+    async initWait() {
       const { dateType } = this
       if (dateType === 'date') {
         this.getAttWait()
@@ -185,7 +200,7 @@ export default {
 
     selectAtt(id) {
       this.aid = id
-      this.init()
+      this.initWait()
     }
   }
 }

@@ -1,16 +1,22 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/zh-CN'
-import App from './App'
 import store from './store'
 import router from './common/router'
-import Color from './common/color'
+import VueI18n from 'vue-i18n'
+import App from './App'
 
-import * as Filters from './common/filters'
-import * as Api from './common/api'
-
+// UI
+import ElementUI from 'element-ui'
 import DmUI from '@/dm-ui'
 import AttUI from '@/att-ui'
+
+// Language
+import enLocale from 'element-ui/lib/locale/lang/en'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+
+// Tools
+import Color from './common/color'
+import initFilters from './common/filters/init'
+import * as Api from './common/api'
 
 import AttMedia from '@/components/Att/AttMedia'
 import AttStatus from '@/components/Att/AttStatus'
@@ -27,9 +33,17 @@ import '@/styles/disney/index.styl'
 import '@/common/icons'
 import '@/common/permission'
 
-Vue.use(ElementUI, { locale })
+Vue.use(VueI18n)
+Vue.use(ElementUI)
 Vue.use(DmUI)
 Vue.use(AttUI)
+
+Vue.locale('en', enLocale)
+Vue.locale('zh-cn', zhLocale)
+
+// Vue.config.lang = 'zh-cn'
+Vue.config.productionTip = false // 关闭生产提示
+// store.dispatch.setLocale('zh-cn')
 
 Vue.component('AttMedia', AttMedia)
 Vue.component('AttWaitTime', AttWaitTime)
@@ -40,14 +54,9 @@ Vue.component('AttDateSelect', AttDateSelect)
 Vue.component('AttListSelect', AttListSelect)
 Vue.component('AttList', AttList)
 
-Object.keys(Filters).forEach(key => {
-  Vue.filter(key, Filters[key])
-})
-
-Vue.config.productionTip = false
+initFilters(Vue)
 
 Vue.prototype.Color = Color
-Vue.prototype.Filters = Filters
 Vue.prototype.$Api = Api
 
 new Vue({
@@ -57,3 +66,4 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+

@@ -3,6 +3,18 @@
 
 $layout-sidebar-width = 256px;
 
+.sidebar-nav-list-divider {
+  margin: 30px 0;
+  height: 1px;
+
+  .divider {
+    margin: 0 auto;
+    height: 1px;
+    width: 180px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
 .layout-sidebar {
   position: relative;
   display: flex;
@@ -16,13 +28,12 @@ $layout-sidebar-width = 256px;
   z-index: 200;
 
   .logo {
-    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    line-height: 64px;
-    height: 64px;
+    line-height: 100px;
+    height: 100px;
     text-align: center;
 
     .icon {
-      color: #FFF;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 36px;
     }
   }
@@ -124,6 +135,7 @@ $layout-sidebar-width = 256px;
     <div class="logo">
       <att-icon class="icon" name="shanghai-disney-resort"></att-icon>
     </div>
+
     <div class="layout-sidebar-list">
       <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
         <sidebar-item :routes="routes"></sidebar-item>

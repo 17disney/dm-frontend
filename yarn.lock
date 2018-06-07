@@ -6688,6 +6688,10 @@ vue-hot-reload-api@^2.2.0:
   version "2.3.0"
   resolved "http://r.cnpmjs.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
 
+vue-i18n@5.x:
+  version "5.0.3"
+  resolved "http://r.cnpmjs.org/vue-i18n/download/vue-i18n-5.0.3.tgz#b6d96cc832604237e6139de471e0d4c820aedbed"
+
 vue-loader@13.5.0:
   version "13.5.0"
   resolved "http://r.cnpmjs.org/vue-loader/download/vue-loader-13.5.0.tgz#52f7b3790a267eff80012b77ea187a54586dd5d4"
