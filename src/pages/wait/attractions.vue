@@ -1,7 +1,7 @@
  <template>
   <div>
     <dm-header>
-      <dm-select-date @select-date="clickDate" v-model="date"></dm-select-date>
+      <dm-select-date @click="handleDateSelect" v-model="date"></dm-select-date>
     </dm-header>
     <dm-content>
       <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
@@ -91,9 +91,11 @@ export default {
         this.mathAttNumber(item)
       })
     },
-    clickDate(date) {
+    handleDateSelect(date) {
       this.date = date
-      this.getAttractionsWait({ date: this.date, local: this.local })
+      setTimeout(() => {
+        this.getAttractionsWait({ date: this.date, local: this.local })
+      }, 150)
     },
 
     async mathAttNumber(row) {

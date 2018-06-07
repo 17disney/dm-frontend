@@ -11,8 +11,11 @@ export default {
 
   name: 'app',
   async mounted() {
-    if (!this.$store.state.app.locale) {
+    const { locale } = this.$store.state.app
+    if (!locale) {
       this.$store.dispatch('setLocale', 'zh-hans')
+    } else {
+      this.$store.dispatch('setLocale', locale)
     }
     await this.getDestinationsList()
   },
