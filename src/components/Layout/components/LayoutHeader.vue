@@ -82,13 +82,13 @@ $layout-header-height = 64px;
 
 <template>
   <div class="layout-header">
-    <el-menu @select="handleSelect" mode="horizontal">
+    <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
       <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
 
       <div class="layout-header__menu">
         <el-submenu index="local">
-          <template slot="title">{{local | local}}</template>
-          <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{item.label}}</el-menu-item>
+          <template slot="title">{{$t('ds.disneyLand.' + local)}}</template>
+          <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{$t(item.label)}}</el-menu-item>
         </el-submenu>
 
         <el-submenu index="locale">
@@ -122,7 +122,6 @@ $layout-header-height = 64px;
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapGetters, mapState } from 'vuex'
 import LOCAL from '@/common/const/local'
 import LOCALE from '@/common/const/locale'
@@ -140,10 +139,12 @@ export default {
       LOCALE
     }
   },
+
   components: {
     Breadcrumb,
     Hamburger
   },
+
   computed: {
     ...mapState({
       'locale': state => state.app.locale
@@ -152,12 +153,15 @@ export default {
       'sidebar'
     ])
   },
+
+  mounted() {
+  },
+
   methods: {
     handleSelect(e) {
       const [type, value] = e.split('--')
 
       if (type === 'locale') {
-        Vue.config.lang = value
         this.$store.dispatch('setLocale', value)
       }
 

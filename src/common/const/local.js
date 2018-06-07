@@ -1,14 +1,14 @@
 const LOCAL = [
   {
-    label: '上海迪士尼乐园',
+    label: 'ds.disneyLand.shanghai',
     value: 'shanghai'
   },
   {
-    label: '香港迪士尼乐园',
+    label: 'ds.disneyLand.hongkong',
     value: 'hongkong'
   },
   {
-    label: '加州迪士尼乐园',
+    label: 'ds.disneyLand.california',
     value: 'california'
   }
 ]

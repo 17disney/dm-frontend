@@ -5,7 +5,7 @@
     </dm-header>
     <dm-content>
       <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
-        <el-table-column label="名称">
+        <el-table-column :label="$t('ds.label.name')">
           <template slot-scope="scope">
             <div class="att-list-item__meta">
               <att-media size="small" :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
@@ -15,17 +15,17 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="150">
+        <el-table-column :label="$t('ds.label.status')" width="150">
           <template slot-scope="scope">
             <att-status v-if="attsWait[scope.row.aid]" :status="attsWait[scope.row.aid]['status']"></att-status>
           </template>
         </el-table-column>
-        <el-table-column label="平均等候" width="150">
+        <el-table-column :label="$t('ds.label.waitsAvg')" width="150">
           <template slot-scope="scope">
             <att-wait-time v-if="attsWait[scope.row.aid]" :wait="attsWait[scope.row.aid]" :time="attsWait[scope.row.aid]['waitAvg']"></att-wait-time>
           </template>
         </el-table-column>
-        <el-table-column label="趋势" width="250">
+        <el-table-column :label="$t('ds.label.trend')" width="250">
           <template slot-scope="scope">
             <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"></base-line>
           </template>

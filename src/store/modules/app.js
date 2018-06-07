@@ -1,9 +1,10 @@
 import Cookies from 'js-cookie'
 import moment from 'moment'
+import Vue from 'vue'
 
 const app = {
   state: {
-    locale: '',
+    locale: null,
     today: moment().format('YYYY-MM-DD'),
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
@@ -20,6 +21,7 @@ const app = {
     },
 
     SET_LOCALE: (state, locale) => {
+      Vue.config.lang = locale
       state.locale = locale
     }
   },

@@ -1,7 +1,7 @@
 const LOCALE = [
   {
-    label: '中文',
-    value: 'zh-cn'
+    label: '简体中文',
+    value: 'zh-hans'
   },
   {
     label: 'English',
