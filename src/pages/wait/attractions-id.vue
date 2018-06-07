@@ -77,6 +77,7 @@ import ChartsAttCount from '@/components/Charts/ChartsAttCount'
 import ChartsAttWait from '@/components/Charts/ChartsAttWait'
 import ChartsAttFp from '@/components/Charts/ChartsAttFp'
 import SubAside from '@/components/SubAside/SubAside'
+import AttListSelect from '@/components/Att/AttListSelect'
 
 import moment from 'moment'
 import base from '@/common/mixins/base'
@@ -86,7 +87,7 @@ const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
   mixins: [base],
 
-  components: { ChartsAttCount, ChartsAttWait, ChartsAttFp, SubAside },
+  components: { ChartsAttCount, ChartsAttWait, ChartsAttFp, SubAside, AttListSelect },
 
   props: {
   },

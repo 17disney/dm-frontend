@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import app from './modules/app'
 import explorer from './modules/explorer'
 import user from './modules/user'
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
     ticket,
     forecast
   },
+  plugins: [createPersistedState()],
   getters
 })
 

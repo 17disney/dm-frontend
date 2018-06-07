@@ -1,7 +1,7 @@
  <template>
   <div>
     <dm-header>
-      <att-date-select @select-date="clickDate" v-model="date"></att-date-select>
+      <dm-select-date @select-date="clickDate" v-model="date"></dm-select-date>
     </dm-header>
     <dm-content>
       <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
@@ -28,11 +28,6 @@
         <el-table-column label="趋势" width="250">
           <template slot-scope="scope">
             <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"></base-line>
-          </template>
-        </el-table-column>
-        <el-table-column label="乘坐人数" width="250">
-          <template slot-scope="scope">
-            <att-count-number v-if="attsWait[scope.row.aid] && attNumber[scope.row.aid]" :data="scope.row" :wait="attsWait[scope.row.aid]" :number="attNumber[scope.row.aid]"></att-count-number>
           </template>
         </el-table-column>
       </el-table>

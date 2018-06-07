@@ -18,11 +18,6 @@ import Color from './common/color'
 import initFilters from './common/filters/init'
 import * as Api from './common/api'
 
-import AttCountNumber from '@/components/Att/AttCountNumber'
-import AttCountDateSelect from '@/components/Att/AttCountDateSelect'
-import AttDateSelect from '@/components/Att/AttDateSelect'
-import AttListSelect from '@/components/Att/AttListSelect'
-
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/disney/index.styl'
@@ -37,19 +32,12 @@ Vue.use(AttUI)
 Vue.locale('en', enLocale)
 Vue.locale('zh-cn', zhLocale)
 
-// Vue.config.lang = 'zh-cn'
-Vue.config.productionTip = false // 关闭生产提示
-// store.dispatch.setLocale('zh-cn')
-
-Vue.component('AttCountNumber', AttCountNumber)
-Vue.component('AttCountDateSelect', AttCountDateSelect)
-Vue.component('AttDateSelect', AttDateSelect)
-Vue.component('AttListSelect', AttListSelect)
-
 initFilters(Vue)
 
 Vue.prototype.Color = Color
 Vue.prototype.$Api = Api
+
+Vue.config.productionTip = false // 关闭生产提示
 
 new Vue({
   el: '#app',
@@ -58,4 +46,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
