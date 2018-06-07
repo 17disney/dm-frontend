@@ -11,14 +11,17 @@
   }
 
   &__title {
-    font-size: 14px;
-    // line-height: 20px;
-    align-content: center;
+    font-size: 15px;
     flex: 1;
+    line-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__item {
-    padding: 8px 16px;
+    padding: 8px 24px;
+    padding-left: 48px;
     width: 100%;
     cursor: pointer;
     display: flex;
@@ -30,7 +33,7 @@
     }
 
     &.is-active {
-      background: #FFF;
+      background: $color-light-grey-sss;
       color: $color-primary;
       font-weight: 600;
     }
@@ -44,10 +47,12 @@
 <template>
   <div class="att-list-select">
     <ul class="att-list-select__list">
-      <li class="att-list-select__item" :class="{'is-active': item.aid === value}" v-for="item in data" :key="item.id" @click="clickAttItem(item.aid)">
-        <att-media size="small" :medias="item.medias"></att-media>
-        <span class="att-list-select__title">{{item.name}}</span>
-      </li>
+      <el-tooltip v-for="item in data" :key="item.id" class="item" effect="dark" :content="item.name" placement="right">
+        <li class="att-list-select__item" :class="{'is-active': item.aid === value}" @click="clickAttItem(item.aid)">
+          <att-media size="small" :medias="item.medias"></att-media>
+          <span class="att-list-select__title">{{item.name}}</span>
+        </li>
+      </el-tooltip>
     </ul>
   </div>
 </template>

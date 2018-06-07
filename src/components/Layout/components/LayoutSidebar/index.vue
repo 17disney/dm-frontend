@@ -13,6 +13,7 @@ $layout-sidebar-width = 256px;
   width: $layout-sidebar-width;
   background: $color-primary-dark;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  z-index: 200;
 
   .logo {
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -28,7 +29,6 @@ $layout-sidebar-width = 256px;
 
   .el-menu {
     border: none !important;
-
   }
 
   &-list {

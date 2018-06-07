@@ -5,6 +5,7 @@
   overflow: hidden;
   width: 300px;
   border-right: 1px solid #EEE;
+  padding: 32px 0;
 }
 </style>
 <template>

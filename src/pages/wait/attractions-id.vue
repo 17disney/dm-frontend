@@ -82,6 +82,7 @@ import moment from 'moment'
 import base from '@/common/mixins/base'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
+
 export default {
   mixins: [base],
 
@@ -112,6 +113,7 @@ export default {
       attsWait: state => state.wait.attsWait,
       attLoading: state => state.wait.loading
     }),
+
     dateType() {
       const { dateRang } = this
       if (typeof dateRang === 'string') {
@@ -124,6 +126,7 @@ export default {
     att() {
       return this.attFind(this.aid)
     },
+
     activeAttList() {
       const { type, hotLevel } = this.filters
       return this.attListFilter(type, hotLevel)
@@ -146,12 +149,12 @@ export default {
         this.dateRang = [st, et]
       }
     },
+
     'dateRang'(val) {
       this.init()
     }
   },
   mounted() {
-    this.getDestinationsList()
     this.init()
   },
   methods: {
@@ -167,18 +170,19 @@ export default {
     async getAttCount() {
       const { local, aid } = this
       const [st, et] = this.dateRang
-      const attCount = await this.$Api.waitTimes.attractionsIdCount(local, aid, { st, et })
+      const attCount = await this.$Api.waitTimes.attractions(local, aid, { st, et })
       this.attCount = attCount
     },
 
     async getAttWait() {
       const { local, aid } = this
-      const date = this.dateRang
-      this.attWait = await this.$Api.waitTimes.attractionsDate(local, date, aid)
+      this.attWait = await this.$Api.waitTimes.attractionsDate(local, aid, this.dateRang)
     },
+
     clickDate(date) {
       this.dateRang = date
     },
+
     selectAtt(id) {
       this.aid = id
       this.init()
