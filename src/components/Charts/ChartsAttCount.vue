@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     initSeries(data, key) {
-      const name = this.Filters.fieldName(key)
+      const name = '' // this.Filters.fieldName(key)
       const series = {
         name,
         data,
