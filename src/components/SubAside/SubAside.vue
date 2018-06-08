@@ -5,7 +5,15 @@
   overflow: hidden;
   width: 300px;
   border-right: 1px solid #EEE;
-  padding: 32px 0;
+
+  .att-list-select__list {
+    margin-top: 32px;
+
+    .att-list-select__item {
+      &:first {
+      }
+    }
+  }
 }
 </style>
 <template>
