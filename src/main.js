@@ -23,12 +23,14 @@ Vue.use(AttUI)
 // Tools
 import Color from './common/color'
 import initFilters from './common/filters/init'
-import * as Api from './common/api'
+import * as Api from 'package/17disney-common/api'
+import Message from './utils/message'
 
 initFilters(Vue)
 
 Vue.prototype.Color = Color
 Vue.prototype.$Api = Api
+Vue.prototype.Message = Message
 
 // CSS
 import 'normalize.css/normalize.css'

@@ -1,4 +1,4 @@
-import WaitTimes from '@/common/api/wait-times'
+import WaitTimes from 'package/17disney-common/api/wait-times'
 import moment from 'moment'
 import { mathRegression } from '@/utils'
 // mathArrAvg

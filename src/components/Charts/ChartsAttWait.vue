@@ -8,8 +8,11 @@
 import echarts from 'echarts'
 import Color from '@/common/color'
 import moment from 'moment'
+import base from '@/common/mixins/base'
+import { xToXUTC } from '@/utils'
 
 export default {
+  mixins: [base],
   props: {
     id: {
       type: String,
@@ -58,13 +61,25 @@ export default {
 
     init() {
       this.chart = echarts.init(document.getElementById(this.id))
-      const { data } = this
+      const { data, utc } = this
       const { startTime, endTime, date } = data
       let { waitList = [] } = data
-      waitList = waitList.filter(item => item[0] >= moment(date + ' ' + startTime, 'YYYY-MM-DD HH:mm:ss').format('x') && item[0] <= moment(date + ' ' + endTime, 'YYYY-MM-DD HH:mm:ss').format('x'))
+
+      let startX = moment(date + ' ' + startTime, 'YYYY-MM-DD HH:mm:ss').format('x')
+      let endX = moment(date + ' ' + endTime, 'YYYY-MM-DD HH:mm:ss').format('x')
+
+      waitList = waitList.filter(_ => {
+        _[0] = xToXUTC(_[0], utc)
+        return _[0] >= startX && _[0] <= endX
+      })
 
       // 设置x轴数据
-      const xAxisData = waitList.map(_ => moment(_[0], 'x').format('HH:mm'))
+      const xAxisData = waitList.map(_ => {
+        let val = moment(_[0], 'x').format('H:mm')
+        return val
+      })
+
+      // const xAxisData = waitList.map(_ => _[0])
 
       const series = []
       const waitNumList = waitList.map(_ => _[1])

@@ -4,6 +4,7 @@ export default {
   computed: {
     ...mapState({
       local: state => state.explorer.local,
+      utc: state => state.explorer.utc,
       attType: state => state.explorer.attType,
       playType: state => state.explorer.playType,
 

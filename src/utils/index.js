@@ -154,3 +154,10 @@ export function mathOpenMinutes(startTime, endTime) {
 }
 
 // const { startTime, endTime } = this.wait
+
+export function xToXUTC(time, utc) {
+  let m = moment(time, 'x').format('YYYY-MM-DD H:mm:ss')
+  m = moment(m, 'YYYY-MM-DD H:mm:ss').utcOffset(utc).format('YYYY-MM-DD H:mm:ss')
+  m = moment(m, 'YYYY-MM-DD H:mm:ss').format('x')
+  return m
+}

@@ -10,6 +10,8 @@
         <el-radio-button :label="true">原始值</el-radio-button>
       </el-radio-group>
       <el-checkbox v-model="filters.visible">隐藏不可见</el-checkbox>
+      <el-button @click="clickUpdateAttRawList">更新全部</el-button>
+
     </dm-header>
 
     <dm-content>
@@ -188,10 +190,15 @@ export default {
     async updateAtt(row) {
       if (!row) row = this.editForm.form
       const { id } = row
-      const { local } = this
+      const { local, subType } = this
       const data = {
         local
       }
+
+      if (subType === 'AED') {
+        return
+      }
+
       Object.assign(data, row)
 
       delete data.__v

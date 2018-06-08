@@ -1,13 +1,14 @@
 import moment from 'moment'
-
-import WaitTimes from '@/common/api/wait-times'
+import Local from '@/common/const/local'
+import WaitTimes from 'package/17disney-common/api/wait-times'
 import { lineToObject } from '@/utils/tool'
 import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'
 
 const explorer = {
   state: {
-    local: 'shanghai', // shanghai hongkong,
+    local: 'shanghai',
+    utc: -1,
     date: moment().format('YYYY-MM-DD'),
     attList: [],
     attRawList: [],
@@ -24,19 +25,21 @@ const explorer = {
     attractionList: (state, getters) => {
       return state.attList.filter(item => item.type === 'attraction')
     },
-    attListFilter: (state, getters) => (type) => {
+    attListFilter: (state, getters) => type => {
       return state.attList.filter(item => item.type === type)
     },
-    attRawListFilter: (state, getters) => (type) => {
+    attRawListFilter: (state, getters) => type => {
       return state.attRawList.filter(item => item.type === type)
     },
-    attFind: (state, getters) => (aid) => {
+    attFind: (state, getters) => aid => {
       return state.attList.find(item => item.aid === aid)
     }
   },
 
   mutations: {
     SET_LOCAL: (state, data) => {
+      const { utc } = Local.find(_ => _.value === data)
+      state.utc = utc
       state.local = data
     },
 
@@ -87,7 +90,9 @@ const explorer = {
     },
     // 获取项目列表
     async getDestinationsList({ commit, state }) {
-      const data = await WaitTimes.destinations(state.local)
+      const data = await WaitTimes.destinations(state.local, {
+        type: 'attraction'
+      })
       if (data) {
         commit('SET_ATT_LIST', data)
       }
