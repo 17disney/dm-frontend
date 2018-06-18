@@ -89,7 +89,7 @@
 import base from '@/common/mixins/base'
 // import moment from 'moment'
 import BaseLine from '@/components/Charts/BaseLine'
-import Forecast from '@/common/api/forecast'
+import Forecast from 'package/17disney-common/api/forecast'
 import { mapGetters } from 'vuex'
 
 import ForecastItemRate from '@/components/Forecast/ForecastItemRate'

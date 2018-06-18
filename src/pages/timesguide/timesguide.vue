@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import Timesguide from '@/common/api/timesguide'
+import Timesguide from 'package/17disney-common/api/timesguide'
 import base from '@/common/mixins/base'
 import moment from 'moment'
 import TimesGuide from '@/components/timesguide/timesguide'

@@ -24,8 +24,16 @@ service.interceptors.response.use(
   res => {
     const { status, data } = res
     if (status === 200) {
-      const { error } = data
+      const { error, message } = data
       if (error) {
+        Message({
+          error,
+          type: 'warning',
+          duration: 5 * 1000
+        })
+      }
+
+      if (message) {
         Message({
           error,
           type: 'warning',
