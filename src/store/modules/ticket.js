@@ -1,4 +1,4 @@
-import WaitTimes from 'package/17disney-common/api/wait-times'
+import WaitTimes from 'pkg/17disney-common/api/wait-times'
 import { mathRegression } from '@/utils'
 // mathArrAvg
 const count = {

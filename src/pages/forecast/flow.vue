@@ -81,7 +81,7 @@
 import base from '@/common/mixins/base'
 import { mapState } from 'vuex'
 import moment from 'moment'
-import Forecast from 'package/17disney-common/api/forecast'
+import Forecast from 'pkg/17disney-common/api/forecast'
 import ForecastItemRate from '@/components/Forecast/ForecastItemRate'
 
 const DATE_FORMAT = 'YYYY-MM-DD'

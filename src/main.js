@@ -23,7 +23,7 @@ Vue.use(AttUI)
 // Tools
 import Color from './common/color'
 import initFilters from './common/filters/init'
-import * as Api from 'package/17disney-common/api'
+import * as Api from 'pkg/17disney-common/api'
 import Message from './utils/message'
 
 initFilters(Vue)

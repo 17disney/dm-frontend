@@ -1,4 +1,3 @@
-<style lang='stylus' scoped>
 </style>
 <template>
   <div class="page bg--gray">
@@ -117,7 +116,7 @@
 </template>
 
 <script>
-import Timesguide from 'package/17disney-common/api/timesguide'
+import Timesguide from 'pkg/17disney-common/api/timesguide'
 import { TIMESGUIDE_TYPE_LIST } from '@/common/const'
 // import moment from 'moment'
 
