@@ -10,7 +10,8 @@ $layout-header-height = 64px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   height: 64px;
   flex-shrink: 0;
-  padding-right 24px
+  padding-right: 24px;
+
   &__menu {
     float: right;
   }
@@ -83,7 +84,7 @@ $layout-header-height = 64px;
 <template>
   <div class="layout-header">
     <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
-      <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
+      <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
 
       <div class="layout-header__menu">
         <el-submenu index="local">

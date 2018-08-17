@@ -1,5 +1,6 @@
 <template>
   <div class="layout" :class="{hideSidebar:!sidebar.opened}">
+    <!-- <dm-alert></dm-alert> -->
     <layout-sidebar></layout-sidebar>
     <div class="layout-main">
       <layout-header></layout-header>

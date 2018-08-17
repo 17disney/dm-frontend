@@ -94,7 +94,16 @@
 </style>
 <template>
   <div class="dm-menu-item">
-    <template v-for="item in routes" v-if="!item.hidden&&item.children">
+    <template v-for="item in routes">
+
+      <router-link :to="`${item.path}/${item.children[0].path}`" :key="item.children[0].name">
+        <dm-menu-item :index="item.path+'/'+item.children[0].path" :class="{'submenu-title-noDropdown':!isNest}">
+          <att-icon v-if="item.children[0].meta&&item.children[0].meta.icon" :name="item.children[0].meta.icon"></att-icon>
+          <span v-if="item.children[0].meta&&item.children[0].meta.title">{{item.children[0].meta.title}}</span>
+        </dm-menu-item>
+      </router-link>
+    </template>
+    <!-- <template v-for="item in routes" v-if="!item.hidden&&item.children">
       <router-link v-if="item.children.length===1 && !item.children[0].children && !item.alwaysShow" :to="item.path+'/'+item.children[0].path" :key="item.children[0].name">
         <el-menu-item :index="item.path+'/'+item.children[0].path" :class="{'submenu-title-noDropdown':!isNest}">
           <att-icon v-if="item.children[0].meta&&item.children[0].meta.icon" :name="item.children[0].meta.icon"></att-icon>
@@ -116,7 +125,7 @@
           </router-link>
         </template>
       </el-submenu>
-    </template>
+    </template> -->
   </div>
 </template>
 

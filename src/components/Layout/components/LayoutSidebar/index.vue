@@ -49,6 +49,37 @@ $layout-sidebar-width = 256px;
     flex-direction: column;
     overflow-x: auto;
   }
+
+  .hideSidebar {
+    .layout-sidebar {
+      width: 80px;
+
+      &-list {
+        overflow: visible;
+      }
+    }
+  }
+
+  .sidebar-collapser {
+    background: rgba(255, 255, 255, 0.2);
+    border-top: 1px solid $color-light-grey;
+    color: #FFF;
+
+    a {
+      display: block;
+      height: 45px;
+      line-height: 45px;
+      padding: 0 27px;
+    }
+
+    .icon {
+      margin-right: 20px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
 }
 
 .hideSidebar {
@@ -129,17 +160,24 @@ $layout-sidebar-width = 256px;
 }
 </style>
 
-
 <template>
   <div class="layout-sidebar">
     <div class="logo">
       <att-icon class="icon" name="shanghai-disney-resort"></att-icon>
     </div>
-
     <div class="layout-sidebar-list">
-      <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
+      <!-- <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse"> -->
+
+      <dm-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
         <sidebar-item :routes="routes"></sidebar-item>
-      </el-menu>
+      </dm-menu>
+      <!-- </el-menu> -->
+    </div>
+    <div class="sidebar-collapser">
+      <a @click="toggleSideBar">
+        <i class="el-icon-d-arrow-left icon"></i>
+        <span class="label">收缩侧边栏</span>
+      </a>
     </div>
   </div>
 </template>
@@ -159,6 +197,11 @@ export default {
     },
     isCollapse() {
       return !this.sidebar.opened
+    }
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('ToggleSideBar')
     }
   }
 }
