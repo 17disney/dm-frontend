@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style lang="stylus" scoped>
 .wscn-http404 {
   position: relative;
   width: 1200px;
