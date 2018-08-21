@@ -4,7 +4,8 @@ import Message from './message'
 import { getToken } from '@/utils/auth'
 
 const service = axios.create({
-  baseURL: '/',
+  // baseURL: '/',
+  baseURL: 'http://api.17disney.com/',
   timeout: 60000
 })
 

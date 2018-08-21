@@ -166,11 +166,14 @@ $layout-sidebar-width = 256px;
       <att-icon class="icon" name="shanghai-disney-resort"></att-icon>
     </div>
     <div class="layout-sidebar-list">
+      <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
+        <sidebar-item :routes="routes"></sidebar-item>
+      </el-menu>
       <!-- <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse"> -->
 
-      <dm-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
+      <!-- <dm-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
         <sidebar-item :routes="routes"></sidebar-item>
-      </dm-menu>
+      </dm-menu> -->
       <!-- </el-menu> -->
     </div>
     <div class="sidebar-collapser">
@@ -189,9 +192,7 @@ import SidebarItem from './SidebarItem'
 export default {
   components: { SidebarItem },
   computed: {
-    ...mapGetters([
-      'sidebar'
-    ]),
+    ...mapGetters(['sidebar']),
     routes() {
       return this.$router.options.routes
     },

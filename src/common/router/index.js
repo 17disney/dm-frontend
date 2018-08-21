@@ -77,6 +77,12 @@ export const constantRouterMap = [
         name: 'tickets',
         component: () => import('@/pages/explorer/tickets'),
         meta: { title: '售票量', icon: '' }
+      },
+      {
+        path: 'firetime',
+        name: 'firetime',
+        component: () => import('@/pages/explorer/firetime'),
+        meta: { title: '烟花时间表', icon: '' }
       }
     ]
   },
