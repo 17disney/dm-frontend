@@ -4,7 +4,7 @@
   <div class="page bg--gray">
     <dm-content>
       <dm-card>
-        <el-table :data="DATA">
+        <el-table :data="data">
           <el-table-column prop="time" label="时间" width="180"></el-table-column>
           <el-table-column prop="time" label="时间" width="180">
             <template slot-scope="scope">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { DATA } from './firetime'
+import * as FIRE from './firetime'
 
 export default {
   components: {},
@@ -34,13 +34,15 @@ export default {
 
   data() {
     return {
-      DATA
+      data: FIRE.DATA
     }
   },
 
   computed: {},
 
-  mounted() { },
+  mounted() {
+    console.log(FIRE)
+  },
 
   methods: {}
 }
