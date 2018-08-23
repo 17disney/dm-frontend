@@ -81,7 +81,7 @@ export const constantRouterMap = [
       {
         path: 'firetime',
         name: 'firetime',
-        component: () => import('@/pages/explorer/firetime'),
+        component: () => import('@/pages/explorer/firetime.vue'),
         meta: { title: '烟花时间表', icon: '' }
       }
     ]

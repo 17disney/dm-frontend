@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import * as FIRE from './firetime'
+import * as FIRE from '@/common/const/fire'
 
 export default {
   components: {},
@@ -34,11 +34,16 @@ export default {
 
   data() {
     return {
+      FIRE,
       data: FIRE.DATA
     }
   },
 
   computed: {},
+
+  created() {
+    console.log('23')
+  },
 
   mounted() {
     console.log(FIRE)

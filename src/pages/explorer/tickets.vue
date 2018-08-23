@@ -21,10 +21,12 @@ import base from '@/common/mixins/base'
 import moment from 'moment'
 import ChartsTicketDate from '@/components/Charts/ChartsTicketDate'
 import ChartsTicketCount from '@/components/Charts/ChartsTicketCount'
+import AttCountDateSelect from '@/components/Att/AttCountDateSelect'
+
 const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
   mixins: [base],
-  components: { ChartsTicketDate, ChartsTicketCount },
+  components: { ChartsTicketDate, ChartsTicketCount, AttCountDateSelect },
 
   props: {
   },
