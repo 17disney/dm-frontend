@@ -73,16 +73,16 @@ export const constantRouterMap = [
         meta: { title: '开放时间表', icon: '' }
       },
       {
+        path: 'firetime',
+        name: 'firetime',
+        component: () => import('@/pages/explorer/firetime.vue'),
+        meta: { title: '烟花时刻表', icon: '' }
+      },
+      {
         path: 'tickets',
         name: 'tickets',
         component: () => import('@/pages/explorer/tickets'),
         meta: { title: '售票量', icon: '' }
-      },
-      {
-        path: 'firetime',
-        name: 'firetime',
-        component: () => import('@/pages/explorer/firetime.vue'),
-        meta: { title: '烟花时间表', icon: '' }
       }
     ]
   },
