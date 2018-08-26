@@ -86,7 +86,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
   {
     path: '/wait',
     component: Layout,
