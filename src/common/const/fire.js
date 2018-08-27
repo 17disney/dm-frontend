@@ -9,23 +9,23 @@ const FIRE_TYPE_VAR = {
 const FIRE_TYPE = [
   {
     label: '线性',
-    value: FIRE_TYPE_VAR.LINE
+    value: FIRE_TYPE_VAR.LINE,
+    icon: 'fire-line'
   },
   {
     label: '喷射',
-    value: FIRE_TYPE_VAR.SPRAY
-  },
-  {
-    label: '线性',
-    value: FIRE_TYPE_VAR.LINE
+    value: FIRE_TYPE_VAR.SPRAY,
+    icon: 'fire-spray'
   },
   {
     label: '集束',
-    value: FIRE_TYPE_VAR.CLUSTER
+    value: FIRE_TYPE_VAR.CLUSTER,
+    icon: 'fire-cluster'
   },
   {
     label: '菊花',
-    value: FIRE_TYPE_VAR.FLOWER
+    value: FIRE_TYPE_VAR.FLOWER,
+    icon: 'fire-flower'
   }
 ]
 

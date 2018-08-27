@@ -85,7 +85,6 @@ $layout-header-height = 64px;
   <div class="layout-header">
     <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
       <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
-
       <div class="layout-header__menu">
         <el-submenu index="local">
           <template slot="title">{{$t('ds.disneyLand.' + local)}}</template>
