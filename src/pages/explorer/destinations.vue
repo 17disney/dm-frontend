@@ -11,9 +11,7 @@
       </el-radio-group>
       <el-checkbox v-model="filters.visible">隐藏不可见</el-checkbox>
       <el-button @click="clickUpdateAttRawList">更新全部</el-button>
-
     </dm-header>
-
     <dm-content>
       <dm-card>
         <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
@@ -67,7 +65,6 @@
         </el-table>
       </dm-card>
     </dm-content>
-
     <!-- Form -->
     <el-dialog :title="editForm.form.name" :visible.sync="editForm.visible">
       <el-form label-position="left" :model="editForm.form" label-width="200px">
