@@ -75,7 +75,7 @@ import base from '@/common/mixins/base'
 // import { mapState } from 'vuex'
 import moment from 'moment'
 import BaseLine from '@/components/Charts/BaseLine'
-import Forecast from 'pkg/17disney-common/api/forecast'
+import Forecast from 'packages/17disney-common/api/forecast'
 
 import ForecastItemRate from '@/components/Forecast/ForecastItemRate'
 

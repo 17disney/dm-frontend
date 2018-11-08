@@ -1,6 +1,6 @@
 import moment from 'moment'
 import Local from '@/common/const/local'
-import WaitTimes from 'pkg/17disney-common/api/wait-times'
+import WaitTimes from 'packages/17disney-common/api/wait-times'
 import { lineToObject } from '@/utils/tool'
 import attType from '@/common/data/att-type'
 import playType from '@/common/data/play-type'

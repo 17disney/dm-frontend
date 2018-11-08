@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import Timesguide from 'pkg/17disney-common/api/timesguide'
+import Timesguide from 'packages/17disney-common/api/timesguide'
 import { TIMESGUIDE_TYPE_LIST } from '@/common/const'
 // import moment from 'moment'
 

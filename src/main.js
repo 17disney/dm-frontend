@@ -13,8 +13,8 @@ import App from './App'
 
 // UI
 import ElementUI from 'element-ui'
-import DmUI from 'package/dm-ui'
-import AttUI from 'package/att-ui'
+import DmUI from 'packages/17disney-ui-dm'
+import AttUI from 'packages/17disney-ui-att'
 
 Vue.use(ElementUI)
 Vue.use(DmUI)
@@ -23,7 +23,7 @@ Vue.use(AttUI)
 // Tools
 import Color from './common/color'
 import initFilters from './common/filters/init'
-import * as Api from 'pkg/17disney-common/api'
+import * as Api from 'packages/17disney-common/api'
 import Message from './utils/message'
 
 initFilters(Vue)

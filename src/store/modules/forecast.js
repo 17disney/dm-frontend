@@ -1,6 +1,6 @@
 // import Cookies from 'js-cookie'
 // import moment from 'moment'
-import Forecast from 'pkg/17disney-common/api/forecast'
+import Forecast from 'packages/17disney-common/api/forecast'
 
 const app = {
   state: {
