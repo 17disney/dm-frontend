@@ -12,6 +12,10 @@ $layout-header-height = 64px;
   flex-shrink: 0;
   padding-right: 24px;
 
+  .el-submenu {
+    float: left;
+  }
+
   &__menu {
     float: right;
   }
@@ -83,9 +87,9 @@ $layout-header-height = 64px;
 
 <template>
   <div class="layout-header">
-    <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
-      <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
-      <div class="layout-header__menu">
+    <div class="layout-header__menu">
+      <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
+        <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
         <el-submenu index="local">
           <template slot="title">{{$t('ds.disneyLand.' + local)}}</template>
           <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{$t(item.label)}}</el-menu-item>
@@ -115,9 +119,9 @@ $layout-header-height = 64px;
             </el-dropdown>
           </div>
         </div>
-      </div>
 
-    </el-menu>
+      </el-menu>
+    </div>
   </div>
 </template>
 
