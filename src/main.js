@@ -13,17 +13,19 @@ import App from './App'
 
 // UI
 import ElementUI from 'element-ui'
-import DmUI from 'packages/17disney-ui-dm'
-import AttUI from 'packages/17disney-ui-att'
+import DmUI from '17disney-ui-dm'
+import AttUI from '17disney-ui-att'
+import VCharts from 'v-charts'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'small' })
 Vue.use(DmUI)
 Vue.use(AttUI)
+Vue.use(VCharts)
 
 // Tools
+import * as Api from '17disney-common/api'
 import Color from './common/color'
 import initFilters from './common/filters/init'
-import * as Api from 'packages/17disney-common/api'
 import Message from './utils/message'
 
 initFilters(Vue)
