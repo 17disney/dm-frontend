@@ -1,40 +1,39 @@
 <template>
   <el-container>
-    <el-dialog width="1000px" title="详情" :visible.sync="addDialog.visible">
-      <el-form :model="addDialog.form" ref="ruleForm" label-width="80px">
+    <el-dialog width="1000px" :visible.sync="addDialog.visible" title="详情">
+      <el-form ref="ruleForm" :model="addDialog.form" label-width="80px">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-upload :on-success="uploadSuccess" class="upload-demo" :data="{'token': token}" drag action="https://upload.qiniup.com" multiple>
-              <i class="el-icon-upload"></i>
+            <el-upload :on-success="uploadSuccess" :data="{'token': token}" class="upload-demo" drag action="https://upload.qiniup.com" multiple>
+              <i class="el-icon-upload"/>
               <div class="el-upload__text">将文件拖到此处，或
                 <em>点击上传</em>
               </div>
             </el-upload>
-            <timesguide-item :data="addDialog.form"></timesguide-item>
+            <timesguide-item :data="addDialog.form"/>
             <a :href="addDialog.form.picUrl" :download="addDialog.form.picUrl">下载</a>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Id" prop="name">
-              <el-input v-model="addDialog.form.id"></el-input>
+              <el-input v-model="addDialog.form.id"/>
             </el-form-item>
             <el-form-item label="时间" prop="region">
-              <el-date-picker @change="dateRangeChange" v-model="addDialog.form.daterange" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-              </el-date-picker>
+              <el-date-picker v-model="addDialog.form.daterange" @change="dateRangeChange" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
             </el-form-item>
             <el-form-item label="组名" prop="name">
-              <el-input v-model="addDialog.form.groupId"></el-input>
+              <el-input v-model="addDialog.form.groupId"/>
             </el-form-item>
             <el-form-item label="位置" prop="name">
-              <el-input v-model="addDialog.form.local"></el-input>
+              <el-input v-model="addDialog.form.local"/>
             </el-form-item>
             <el-form-item label="质量" prop="name">
-              <el-rate v-model="addDialog.form.rate"></el-rate>
+              <el-rate v-model="addDialog.form.rate"/>
             </el-form-item>
             <el-form-item label="图片" prop="name">
-              <el-input v-model="addDialog.form.picUrl"></el-input>
+              <el-input v-model="addDialog.form.picUrl"/>
             </el-form-item>
             <el-form-item label="贡献者" prop="name">
-              <el-input v-model="addDialog.form.author"></el-input>
+              <el-input v-model="addDialog.form.author"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -53,7 +52,7 @@
     </el-header>
     <el-main>
       <div class="timesguide__list">
-        <times-guide @click-item="handleClickTimesguide(item)" v-for="item in list" :key="item.id" :data="item"></times-guide>
+        <times-guide v-for="item in list" @click-item="handleClickTimesguide(item)" :key="item.id" :data="item"/>
       </div>
     </el-main>
   </el-container>
@@ -63,7 +62,7 @@
 import Timesguide from '17disney-common/api/timesguide'
 import base from '@/common/mixins/base'
 import moment from 'moment'
-import TimesGuide from '@/components/timesguide/timesguide'
+import TimesGuide from '@/components/Timesguide/timesguide'
 import TimesguideItem from '@/components/Timesguide/TimesguideItem'
 import { TIMESGUIDE_TYPE } from '@/common/const'
 

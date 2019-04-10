@@ -13,13 +13,13 @@ import App from './App'
 
 // UI
 import ElementUI from 'element-ui'
-import DmUI from '17disney-ui-dm'
-import AttUI from '17disney-ui-att'
+// import DmUI from '17disney-ui-dm'
+// import AttUI from '17disney-ui-att'
 import VCharts from 'v-charts'
 
 Vue.use(ElementUI, { size: 'small' })
-Vue.use(DmUI)
-Vue.use(AttUI)
+// Vue.use(DmUI)
+// Vue.use(AttUI)
 Vue.use(VCharts)
 
 // Tools
