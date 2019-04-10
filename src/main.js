@@ -48,9 +48,7 @@ initLocale(Vue)
 Vue.config.productionTip = false // 关闭生产提示
 
 new Vue({
-  el: '#app',
   router,
   store,
-  template: '<App/>',
-  components: { App }
-})
+  render: h => h(App)
+}).$mount('#app')
