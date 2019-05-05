@@ -1,6 +1,6 @@
 <template>
   <div class="chart chart--att-count chart--full">
-    <div class="inner" :id="id"></div>
+    <div :id="id" class="inner"/>
   </div>
 </template>
 
@@ -16,7 +16,9 @@ export default {
     },
     data: {
       type: Array,
-      default: []
+      default: function() {
+        return []
+      }
     }
   },
   data() {
@@ -25,13 +27,13 @@ export default {
       indexList: ['availableCount']
     }
   },
-  mounted() {
-    this.init()
-  },
   watch: {
     'data': function(val) {
       this.init()
     }
+  },
+  mounted() {
+    this.init()
   },
   methods: {
     initSeries(data, key) {

@@ -5,9 +5,7 @@
 }
 </style>
 <template>
-  <div :id="id" class="chart chart-base-line">
-
-  </div>
+  <div :id="id" class="chart chart-base-line"/>
 </template>
 
 <script>
@@ -17,7 +15,6 @@ export default {
 
   props: {
     data: Array,
-    default: [],
     id: {
       type: String,
       default: 'chart'
@@ -29,6 +26,7 @@ export default {
       chart: null
     }
   },
+  computed: {},
   watch: {
     'data': function(val) {
       if (val.length > 0) {
@@ -36,7 +34,6 @@ export default {
       }
     }
   },
-  computed: {},
 
   mounted() {
     this.init()

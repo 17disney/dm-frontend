@@ -18,7 +18,7 @@
 </style>
 <template>
   <div class="sub-aside">
-    <slot></slot>
+    <slot/>
   </div>
 </template>
 

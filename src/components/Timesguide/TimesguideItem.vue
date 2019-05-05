@@ -34,8 +34,8 @@
 }
 </style>
 <template>
-  <div @click="handleClick(data)" class="timesguide-item" :class="typeClass">
-    <img class="timesguide-item__pic" :src="data.picUrl" :alt="typeName">
+  <div :class="typeClass" class="timesguide-item" @click="handleClick(data)">
+    <img :src="data.picUrl" :alt="typeName" class="timesguide-item__pic">
   </div>
 </template>
 

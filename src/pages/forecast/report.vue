@@ -2,14 +2,14 @@
   <div class="page bg--gray">
     <div class="page-content">
       <el-card>
-        <el-date-picker v-model="dateRange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="dateRange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
       </el-card>
       <el-card>
-        <el-table height="900" class="att-list-table" :data="data">
+        <el-table :data="data" height="900" class="att-list-table">
           <el-table-column label="日期" width="120">
             <template slot-scope="scope">
               <span>
-                {{scope.row.date}}
+                {{ scope.row.date }}
               </span>
             </template>
           </el-table-column>
@@ -37,7 +37,7 @@
           <el-table-column label="当前售票量" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.ticketNum}}
+                {{ scope.row.ticketNum }}
               </span>
             </template>
           </el-table-column>
@@ -45,7 +45,7 @@
           <el-table-column label="预测售票量" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.ticketNumFT}}
+                {{ scope.row.ticketNumFT }}
               </span>
             </template>
           </el-table-column>
@@ -53,7 +53,7 @@
           <el-table-column label="售票趋势" width="200">
             <template slot-scope="scope">
               <span>
-                <base-line v-if="scope.row.dayList" :data="scope.row.dayList" :id="scope.row.date"></base-line>
+                <base-line v-if="scope.row.dayList" :data="scope.row.dayList" :id="scope.row.date"/>
               </span>
             </template>
           </el-table-column>
@@ -61,7 +61,7 @@
           <el-table-column label="预测客流量" width="100">
             <template slot-scope="scope">
               <span>
-                {{scope.row.flowMaxFT}}
+                {{ scope.row.flowMaxFT }}
               </span>
             </template>
           </el-table-column>
@@ -69,12 +69,12 @@
           <el-table-column label="等候时间预测">
             <template slot-scope="scope">
               <span>
-              <div class="forecast-num">
-                <div class="forecast-num__item" v-for="(item, index) in activeAttList">
-                  <div class="forecast-num__day">{{item.name}}</div>
-                  <div class="forecast-num__num">{{scope.row.atts[item.aid]['waitAvg']}}分钟</div>
+                <div class="forecast-num">
+                  <div v-for="(item, index) in activeAttList" :key="index" class="forecast-num__item">
+                    <div class="forecast-num__day">{{ item.name }}</div>
+                    <div class="forecast-num__num">{{ scope.row.atts[item.aid]['waitAvg'] }}分钟</div>
+                  </div>
                 </div>
-              </div>
               </span>
             </template>
           </el-table-column>
@@ -97,10 +97,10 @@ import ForecastItemRate from '@/components/Forecast/ForecastItemRate'
 // const DATE_FORMAT = 'YYYY-MM-DD'
 
 export default {
-  mixins: [base],
   components: {
     BaseLine, ForecastItemRate
   },
+  mixins: [base],
 
   data() {
     return {

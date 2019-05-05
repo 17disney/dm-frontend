@@ -1,5 +1,4 @@
-<style lang='stylus' scoped>
-</style>
+<style lang='stylus' scoped></style>
 <template>
   <div>
     <el-radio-group v-model="dateMode">
@@ -8,8 +7,21 @@
       <el-radio-button label="7d">最近7天</el-radio-button>
       <el-radio-button label="30d">最近30天</el-radio-button>
     </el-radio-group>
-    <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-    <att-date-select v-if="dateType === 'date'" @select-date="clickDate" style="margin-top: 16px" v-model="dateRang"></att-date-select>
+    <el-date-picker
+      v-model="dateRang"
+      :type="dateType"
+      format="yyyy-MM-dd"
+      value-format="yyyy-MM-dd"
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+    />
+    <att-date-select
+      v-if="dateType === 'date'"
+      v-model="dateRang"
+      style="margin-top: 16px"
+      @select-date="clickDate"
+    />
   </div>
 </template>
 
@@ -37,6 +49,16 @@ export default {
       dateRang: this.value
     }
   },
+  computed: {
+    dateType() {
+      const { dateRang } = this
+      if (typeof dateRang === 'string') {
+        return 'date'
+      } else {
+        return 'daterange'
+      }
+    }
+  },
   watch: {
     'dateMode'(val) {
       if (val === 'today') {
@@ -55,16 +77,6 @@ export default {
     },
     'dateRang'(val) {
       this.$emit('click-date', val)
-    }
-  },
-  computed: {
-    dateType() {
-      const { dateRang } = this
-      if (typeof dateRang === 'string') {
-        return 'date'
-      } else {
-        return 'daterange'
-      }
     }
   },
 

@@ -1,15 +1,15 @@
 <template>
   <div class="page bg-gray">
     <dm-header>
-      <att-count-date-select @click-date="clickDate"></att-count-date-select>
+      <att-count-date-select @click-date="clickDate"/>
     </dm-header>
     <dm-main>
       <dm-content>
         <el-card v-if="dateType==='date'">
-          <charts-ticket-date v-if="ticketDate" :data="ticketDate"></charts-ticket-date>
+          <charts-ticket-date v-if="ticketDate" :data="ticketDate"/>
         </el-card>
         <el-card v-else>
-          <charts-ticket-count :data="ticketCount"></charts-ticket-count>
+          <charts-ticket-count :data="ticketCount"/>
         </el-card>
       </dm-content>
     </dm-main>
@@ -25,8 +25,8 @@ import AttCountDateSelect from '@/components/Att/AttCountDateSelect'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
-  mixins: [base],
   components: { ChartsTicketDate, ChartsTicketCount, AttCountDateSelect },
+  mixins: [base],
 
   props: {
   },

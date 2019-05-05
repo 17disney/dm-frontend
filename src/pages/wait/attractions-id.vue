@@ -2,32 +2,32 @@
   <dm-container>
     <sub-aside>
       <dm-scroll :settings="settings">
-        <att-list-select @click-item="selectAtt" v-model="aid" :data="activeAttList"></att-list-select>
+        <att-list-select v-model="aid" :data="activeAttList" @click-item="selectAtt"/>
       </dm-scroll>
     </sub-aside>
     <dm-container>
       <el-main>
         <el-card v-if="att" class="card-bottom">
           <div slot="header" class="clearfix">
-            <span class="card__title">{{att.name}}</span>
+            <span class="card__title">{{ att.name }}</span>
           </div>
           <el-row>
             <div class="att-desc-list">
               <ul class="att-desc-list__list">
                 <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runDefault}}人/分钟</div>
+                  <div class="att-desc-list__num">{{ att.runDefault }}人/分钟</div>
                   <div class="att-desc-list__desc">承载量</div>
                 </li>
                 <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.groupNum}}人</div>
+                  <div class="att-desc-list__num">{{ att.groupNum }}人</div>
                   <div class="att-desc-list__desc">每组人数</div>
                 </li>
                 <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runInterval}}秒</div>
+                  <div class="att-desc-list__num">{{ att.runInterval }}秒</div>
                   <div class="att-desc-list__desc">运行间隔</div>
                 </li>
                 <li class="att-desc-list__item">
-                  <div class="att-desc-list__num">{{att.runTimer}}秒</div>
+                  <div class="att-desc-list__num">{{ att.runTimer }}秒</div>
                   <div class="att-desc-list__desc">游玩时长</div>
                 </li>
               </ul>
@@ -42,28 +42,28 @@
             <el-radio-button label="7d">最近7天</el-radio-button>
             <el-radio-button label="30d">最近30天</el-radio-button>
           </el-radio-group>
-          <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-          <dm-select-date @click="clickDate" style="margin-top: 16px" v-model="dateRang"></dm-select-date>
+          <el-date-picker v-model="dateRang" :type="dateType" format="yyyy-MM-dd" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
+          <dm-select-date v-model="dateRang" style="margin-top: 16px" @click="clickDate"/>
         </el-card>
 
         <el-card v-if="dateType==='daterange'">
           <div slot="header" class="clearfix">
             <span>日平均等候时间</span>
           </div>
-          <charts-att-count :data="attCount" xAxisKey="date" :indexList="['waitAvg']"></charts-att-count>
+          <charts-att-count :data="attCount" :index-list="['waitAvg']" x-axis-key="date"/>
         </el-card>
 
-        <el-card class="card-bottom" v-if="dateType==='date'">
+        <el-card v-if="dateType==='date'" class="card-bottom">
           <div slot="header" class="clearfix">
             <span>每日等候时间</span>
           </div>
-          <charts-att-wait :data="attWait"></charts-att-wait>
+          <charts-att-wait :data="attWait"/>
         </el-card>
         <el-card v-if="dateType==='date' && att && attWait.fpList && attWait.fpList.length > 0">
           <div slot="header" class="clearfix">
             <span>快速通行证</span>
           </div>
-          <charts-att-fp :att="att" :data="attWait"></charts-att-fp>
+          <charts-att-fp :att="att" :data="attWait"/>
         </el-card>
       </el-main>
     </dm-container>
@@ -84,9 +84,8 @@ import base from '@/common/mixins/base'
 const DATE_FORMAT = 'YYYY-MM-DD'
 
 export default {
-  mixins: [base],
-
   components: { ChartsAttCount, ChartsAttWait, ChartsAttFp, SubAside, AttListSelect },
+  mixins: [base],
 
   props: {
   },

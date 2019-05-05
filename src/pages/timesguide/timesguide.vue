@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-dialog width="1000px" :visible.sync="addDialog.visible" title="详情">
+    <el-dialog :visible.sync="addDialog.visible" width="1000px" title="详情">
       <el-form ref="ruleForm" :model="addDialog.form" label-width="80px">
         <el-row :gutter="20">
           <el-col :span="12">
@@ -18,7 +18,7 @@
               <el-input v-model="addDialog.form.id"/>
             </el-form-item>
             <el-form-item label="时间" prop="region">
-              <el-date-picker v-model="addDialog.form.daterange" @change="dateRangeChange" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
+              <el-date-picker v-model="addDialog.form.daterange" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="dateRangeChange"/>
             </el-form-item>
             <el-form-item label="组名" prop="name">
               <el-input v-model="addDialog.form.groupId"/>
@@ -52,7 +52,7 @@
     </el-header>
     <el-main>
       <div class="timesguide__list">
-        <times-guide v-for="item in list" @click-item="handleClickTimesguide(item)" :key="item.id" :data="item"/>
+        <times-guide v-for="item in list" :key="item.id" :data="item" @click-item="handleClickTimesguide(item)"/>
       </div>
     </el-main>
   </el-container>

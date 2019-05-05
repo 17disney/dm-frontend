@@ -4,19 +4,21 @@
   <div class="page bg--gray">
     <div class="card">
       <div class="card__body">
-        <att-list @click-att-item="clickAttItem" :data="activeAttList"></att-list>
+        <att-list :data="activeAttList" @click-att-item="clickAttItem"/>
 
         <el-form ref="form" :model="planForm" label-width="80px">
           <el-form-item label="入园时间">
-            <el-time-select v-model="planForm.enterTime" :picker-options="{
-              start: '08:00',
-              step: '00:05',
-              end: '18:30'
-            }" placeholder="入园时间">
-            </el-time-select>
+            <el-time-select
+              v-model="planForm.enterTime"
+              :picker-options="{
+                start: '08:00',
+                step: '00:05',
+                end: '18:30'
+              }"
+              placeholder="入园时间"/>
           </el-form-item>
           <el-form-item label="入园日期">
-            <el-date-picker v-model="planForm.date" type="date" placeholder="选择日期"></el-date-picker>
+            <el-date-picker v-model="planForm.date" type="date" placeholder="选择日期"/>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="clickStartSimulation">开始模拟</el-button>

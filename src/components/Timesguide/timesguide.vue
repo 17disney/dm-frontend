@@ -62,14 +62,14 @@
 }
 </style>
 <template>
-  <div @click="clickItem" class="timesguide__item">
-    <img class="timesguide__pic" onerror="this.style.display='none'" :src="data.picUrl">
+  <div class="timesguide__item" @click="clickItem">
+    <img :src="data.picUrl" class="timesguide__pic" onerror="this.style.display='none'">
     <div class="timesguide__default">
       <h3 class="timesguide__title">乐园时间表</h3>
       <h3 class="timesguide__entitle">TIMES GUIDE</h3>
-      <span class="timesguide__daterange" v-if="data.startDate === data.endDate">{{startDate}}</span>
-      <span class="timesguide__daterange" v-else>{{startDate}}-{{endDate}}</span>
-      <att-icon class="timesguide__icon" name="shanghai-disney-resort"></att-icon>
+      <span v-if="data.startDate === data.endDate" class="timesguide__daterange">{{ startDate }}</span>
+      <span v-else class="timesguide__daterange">{{ startDate }}-{{ endDate }}</span>
+      <att-icon class="timesguide__icon" name="shanghai-disney-resort"/>
     </div>
   </div>
 </template>

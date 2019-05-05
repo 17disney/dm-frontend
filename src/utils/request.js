@@ -53,7 +53,8 @@ service.interceptors.response.use(
   },
 
   error => {
-    let { response, message } = error
+    const { response } = error
+    let { message } = error
     if (response && response.data && response.data.error) {
       message = response.data.error
     }

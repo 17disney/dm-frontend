@@ -7,8 +7,8 @@
 }
 </style>
 <template>
-  <div class="forecast-item-rate" :class="rateClass">
-    {{rate}}%
+  <div :class="rateClass" class="forecast-item-rate">
+    {{ rate }}%
   </div>
 </template>
 

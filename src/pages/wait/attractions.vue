@@ -1,33 +1,33 @@
- <template>
+<template>
   <div>
     <dm-header>
-      <dm-select-date @click="handleDateSelect" v-model="date"></dm-select-date>
+      <dm-select-date v-model="date" @click="handleDateSelect"/>
     </dm-header>
     <dm-content>
-      <el-table class="att-list-table" :data="activeAttList" v-loading.body="attLoading.attsWait">
+      <el-table v-loading.body="attLoading.attsWait" :data="activeAttList" class="att-list-table">
         <el-table-column :label="$t('ds.label.name')">
           <template slot-scope="scope">
             <div class="att-list-item__meta">
-              <att-media size="small" :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
+              <att-media :medias="scope.row.medias" size="small" type="finderListMobileSquare"/>
               <span class="title">
-                {{scope.row.name}}
+                {{ scope.row.name }}
               </span>
             </div>
           </template>
         </el-table-column>
         <el-table-column :label="$t('ds.label.status')" width="150">
           <template slot-scope="scope">
-            <att-status v-if="attsWait[scope.row.aid]" :status="attsWait[scope.row.aid]['status']"></att-status>
+            <att-status v-if="attsWait[scope.row.aid]" :status="attsWait[scope.row.aid]['status']"/>
           </template>
         </el-table-column>
         <el-table-column :label="$t('ds.label.waitsAvg')" width="150">
           <template slot-scope="scope">
-            <att-wait-time v-if="attsWait[scope.row.aid]" :wait="attsWait[scope.row.aid]" :time="attsWait[scope.row.aid]['waitAvg']"></att-wait-time>
+            <att-wait-time v-if="attsWait[scope.row.aid]" :wait="attsWait[scope.row.aid]" :time="attsWait[scope.row.aid]['waitAvg']"/>
           </template>
         </el-table-column>
         <el-table-column :label="$t('ds.label.trend')" width="250">
           <template slot-scope="scope">
-            <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"></base-line>
+            <base-line v-if="attsWait[scope.row.aid]" :data="attsWait[scope.row.aid]['waitHour']" :id="scope.row.aid"/>
           </template>
         </el-table-column>
       </el-table>
@@ -42,8 +42,8 @@ import moment from 'moment'
 import BaseLine from '@/components/Charts/BaseLine'
 
 export default {
-  mixins: [base],
   components: { BaseLine },
+  mixins: [base],
 
   data() {
     return {
@@ -71,14 +71,14 @@ export default {
     }
   },
 
-  mounted() {
-    this.init()
-  },
-
   watch: {
     local: function(val, oVal) {
       this.init()
     }
+  },
+
+  mounted() {
+    this.init()
   },
 
   methods: {

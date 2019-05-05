@@ -4,15 +4,15 @@
   <div class="page bg--gray">
     <div class="page-content">
       <el-card>
-        <el-date-picker v-model="dateRange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        <el-date-picker v-model="dateRange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
       </el-card>
 
       <el-card>
-        <el-table class="att-list-table" :data="data">
+        <el-table :data="data" class="att-list-table">
           <el-table-column label="日期">
             <template slot-scope="scope">
               <span>
-                {{scope.row.date}}
+                {{ scope.row.date }}
               </span>
             </template>
           </el-table-column>
@@ -34,14 +34,14 @@
           <el-table-column label="售票量">
             <template slot-scope="scope">
               <span>
-                {{scope.row.ticketNum}}
+                {{ scope.row.ticketNum }}
               </span>
             </template>
           </el-table-column>
           <el-table-column label="欢乐度">
             <template slot-scope="scope">
               <span>
-                {{scope.row.markMax}}
+                {{ scope.row.markMax }}
               </span>
             </template>
           </el-table-column>
@@ -49,7 +49,7 @@
           <el-table-column label="客流量">
             <template slot-scope="scope">
               <span>
-                {{scope.row.flowMax}}
+                {{ scope.row.flowMax }}
               </span>
             </template>
           </el-table-column>
@@ -57,7 +57,7 @@
           <el-table-column label="预测客流">
             <template slot-scope="scope">
               <span>
-                {{scope.row.flowMaxFT}}
+                {{ scope.row.flowMaxFT }}
               </span>
             </template>
           </el-table-column>
@@ -66,7 +66,7 @@
             <template slot-scope="scope">
               <span>
                 <!-- <forecast-item-rate :rate="scope.row.flowMaxFTRate"></forecast-item-rate> -->
-                <el-progress :text-inside="true" :stroke-width="18" :percentage="scope.row.flowMaxFTRate"></el-progress>
+                <el-progress :text-inside="true" :stroke-width="18" :percentage="scope.row.flowMaxFTRate"/>
               </span>
             </template>
           </el-table-column>
@@ -87,10 +87,10 @@ import ForecastItemRate from '@/components/Forecast/ForecastItemRate'
 const DATE_FORMAT = 'YYYY-MM-DD'
 
 export default {
-  mixins: [base],
   components: {
     ForecastItemRate
   },
+  mixins: [base],
 
   data() {
     return {

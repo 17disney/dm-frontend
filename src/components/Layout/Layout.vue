@@ -1,10 +1,10 @@
 <template>
-  <div class="layout" :class="{hideSidebar:!sidebar.opened}">
+  <div :class="{hideSidebar:!sidebar.opened}" class="layout">
     <!-- <dm-alert></dm-alert> -->
-    <layout-sidebar></layout-sidebar>
+    <layout-sidebar/>
     <div class="layout-main">
-      <layout-header></layout-header>
-      <layout-content></layout-content>
+      <layout-header/>
+      <layout-content/>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import { LayoutHeader, LayoutSidebar, LayoutContent } from './components'
 
 export default {
-  name: 'layout',
+  name: 'Layout',
   components: {
     LayoutHeader,
     LayoutSidebar,

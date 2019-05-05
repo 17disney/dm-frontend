@@ -1,6 +1,6 @@
 <template>
   <div class="chart chart--att-count chart--full">
-    <div class="inner" :id="id"></div>
+    <div :id="id" class="inner"/>
   </div>
 </template>
 
@@ -17,20 +17,21 @@ export default {
     },
     data: {
       type: Array,
-      default: []
+      default: function() {
+        return []
+      }
     },
     indexList: {
       type: Array,
-      default: ['flowMax']
+      default: function() {
+        return ['flowMax']
+      }
     }
   },
   data() {
     return {
       chart: null
     }
-  },
-  mounted() {
-    this.init()
   },
   watch: {
     'data': function(val) {
@@ -39,6 +40,9 @@ export default {
     'indexList': function(val) {
       this.init()
     }
+  },
+  mounted() {
+    this.init()
   },
   methods: {
     initSeries(data, key) {

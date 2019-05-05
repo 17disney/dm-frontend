@@ -163,11 +163,11 @@ $layout-sidebar-width = 256px;
 <template>
   <div class="layout-sidebar">
     <div class="logo">
-      <att-icon class="icon" name="shanghai-disney-resort"></att-icon>
+      <att-icon class="icon" name="shanghai-disney-resort"/>
     </div>
     <div class="layout-sidebar-list">
-      <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse">
-        <sidebar-item :routes="routes"></sidebar-item>
+      <el-menu :default-active="$route.path" :collapse="isCollapse" mode="vertical" unique-opened>
+        <sidebar-item :routes="routes"/>
       </el-menu>
       <!-- <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse"> -->
 
@@ -178,7 +178,7 @@ $layout-sidebar-width = 256px;
     </div>
     <div class="sidebar-collapser">
       <a @click="toggleSideBar">
-        <i class="el-icon-d-arrow-left icon"></i>
+        <i class="el-icon-d-arrow-left icon"/>
         <span class="label">收缩侧边栏</span>
       </a>
     </div>

@@ -88,16 +88,16 @@ $layout-header-height = 64px;
 <template>
   <div class="layout-header">
     <div class="layout-header__menu">
-      <el-menu menu-trigger="click" @select="handleSelect" mode="horizontal">
+      <el-menu menu-trigger="click" mode="horizontal" @select="handleSelect">
         <!-- <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger> -->
         <el-submenu index="local">
-          <template slot="title">{{$t('ds.disneyLand.' + local)}}</template>
-          <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{$t(item.label)}}</el-menu-item>
+          <template slot="title">{{ $t('ds.disneyLand.' + local) }}</template>
+          <el-menu-item v-for="item in LOCAL" :key="item.value" :index="'local--' + item.value">{{ $t(item.label) }}</el-menu-item>
         </el-submenu>
 
         <el-submenu index="locale">
-          <template slot="title">{{locale | locale}}</template>
-          <el-menu-item v-for="item in LOCALE" :key="item.value" :index="'locale--' + item.value">{{item.label}}</el-menu-item>
+          <template slot="title">{{ locale | locale }}</template>
+          <el-menu-item v-for="item in LOCALE" :key="item.value" :index="'locale--' + item.value">{{ item.label }}</el-menu-item>
         </el-submenu>
         <div class="layout-header__user">
           <div class="layout-header__action">
@@ -106,14 +106,14 @@ $layout-header-height = 64px;
                 <img :src="avatar">
               </div>
               <div class="user-name">Disney</div>
-              <el-dropdown-menu class="user-dropdown" slot="dropdown">
+              <el-dropdown-menu slot="dropdown" class="user-dropdown">
                 <router-link class="inlineBlock" to="/">
                   <el-dropdown-item>
                     Home
                   </el-dropdown-item>
                 </router-link>
                 <el-dropdown-item divided>
-                  <div @click="logout" style="display:block;">LogOut</div>
+                  <div style="display:block;" @click="logout">LogOut</div>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -135,6 +135,11 @@ import Hamburger from '@/components/Hamburger'
 import base from '@/common/mixins/base'
 
 export default {
+
+  components: {
+    Breadcrumb,
+    Hamburger
+  },
   mixins: [base],
   data() {
     return {
@@ -142,11 +147,6 @@ export default {
       LOCAL,
       LOCALE
     }
-  },
-
-  components: {
-    Breadcrumb,
-    Hamburger
   },
 
   computed: {
@@ -185,5 +185,3 @@ export default {
   }
 }
 </script>
-
-

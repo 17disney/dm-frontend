@@ -47,10 +47,10 @@
 <template>
   <div class="att-list-select">
     <ul class="att-list-select__list">
-      <el-tooltip v-for="item in data" :key="item.id" class="item" effect="dark" :content="item.name" placement="right">
-        <li class="att-list-select__item" :class="{'is-active': item.aid === value}" @click="clickAttItem(item.aid)">
-          <att-media size="small" :medias="item.medias"></att-media>
-          <span class="att-list-select__title">{{item.name}}</span>
+      <el-tooltip v-for="item in data" :key="item.id" :content="item.name" class="item" effect="dark" placement="right">
+        <li :class="{'is-active': item.aid === value}" class="att-list-select__item" @click="clickAttItem(item.aid)">
+          <att-media :medias="item.medias" size="small"/>
+          <span class="att-list-select__title">{{ item.name }}</span>
         </li>
       </el-tooltip>
     </ul>

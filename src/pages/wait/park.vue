@@ -10,9 +10,8 @@
           <el-radio-button label="7d">最近7天</el-radio-button>
           <el-radio-button label="30d">最近30天</el-radio-button>
         </el-radio-group>
-        <el-date-picker v-model="dateRang" format="yyyy-MM-dd" value-format="yyyy-MM-dd" :type="dateType" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-        </el-date-picker>
-        <att-date-select @select-date="clickDate" style="margin-top:16px;" v-model="dateRang"></att-date-select>
+        <el-date-picker v-model="dateRang" :type="dateType" format="yyyy-MM-dd" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
+        <att-date-select v-model="dateRang" style="margin-top:16px;" @select-date="clickDate"/>
       </el-card>
       <!-- <el-card class="card-bottom" v-if="dateType==='date'">
         <div class="att-count-num">
@@ -23,13 +22,13 @@
           </ul>
         </div>
       </el-card> -->
-      <el-row :gutter="16" v-if="dateType==='date'">
+      <el-row v-if="dateType==='date'" :gutter="16">
         <el-col :span="12">
           <el-card class="card-bottom">
             <div slot="header" class="clearfix">
               <span>客流量</span>
             </div>
-            <charts-park-wait id="chart-park-flow" type="flow" :data="parkWait"></charts-park-wait>
+            <charts-park-wait id="chart-park-flow" :data="parkWait" type="flow"/>
           </el-card>
         </el-col>
         <el-col :span="12">
@@ -37,23 +36,23 @@
             <div slot="header" class="clearfix">
               <span>乐园指数</span>
             </div>
-            <charts-park-wait id="chart-park-mark" type="mark" :data="parkWait"></charts-park-wait>
+            <charts-park-wait id="chart-park-mark" :data="parkWait" type="mark"/>
           </el-card>
         </el-col>
       </el-row>
 
-      <el-card class="card-bottom" v-if="dateType==='daterange'">
+      <el-card v-if="dateType==='daterange'" class="card-bottom">
         <div slot="header" class="clearfix">
           <span>乐园客流量</span>
         </div>
-        <charts-park-count id="charts-park-count-flow" :indexList="['flowMax']" :data="parkCount"></charts-park-count>
+        <charts-park-count id="charts-park-count-flow" :index-list="['flowMax']" :data="parkCount"/>
       </el-card>
 
       <el-card v-if="dateType==='daterange'">
         <div slot="header" class="clearfix">
           <span>乐园指数</span>
         </div>
-        <charts-park-count id="charts-park-count-mark" :indexList="['markMax']" :data="parkCount"></charts-park-count>
+        <charts-park-count id="charts-park-count-mark" :index-list="['markMax']" :data="parkCount"/>
       </el-card>
     </div>
   </div>
@@ -68,8 +67,8 @@ import ChartsParkCount from '@/components/Charts/ChartsParkCount'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 export default {
-  mixins: [base],
   components: { ChartsParkWait, ChartsParkCount },
+  mixins: [base],
 
   data() {
     return {

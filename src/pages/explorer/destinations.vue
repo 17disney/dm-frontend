@@ -2,10 +2,9 @@
   <div class="page bg--gray">
     <dm-header>
       <el-select v-model="filters.type" placeholder="请选择">
-        <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id">
-        </el-option>
+        <el-option v-for="item in attType" :key="item.id" :label="item.name" :value="item.id"/>
       </el-select>
-      <el-radio-group @change="handleFilterChange" v-model="filters.isRaw">
+      <el-radio-group v-model="filters.isRaw" @change="handleFilterChange">
         <el-radio-button :label="false">存档值</el-radio-button>
         <el-radio-button :label="true">原始值</el-radio-button>
       </el-radio-group>
@@ -14,7 +13,7 @@
     </dm-header>
     <dm-content>
       <dm-card>
-        <el-table class="attlist-table" stripe :data="activeAttList" v-loading.body="listLoading" element-loading-text="Loading" fit highlight-current-row>
+        <el-table v-loading.body="listLoading" :data="activeAttList" class="attlist-table" stripe element-loading-text="Loading" fit highlight-current-row>
           <el-table-column type="expand">
             <template slot-scope="scope">
               <el-form label-position="left" inline class="demo-table-expand">
@@ -22,7 +21,7 @@
                   <span>{{ scope.row.webLink }}</span>
                 </el-form-item>
                 <el-form-item label="介绍">
-                  <span v-for="desc in scope.row.descriptions">{{ desc.text}}</span>
+                  <span v-for="(desc, index) in scope.row.descriptions" :key="index">{{ desc.text }}</span>
                 </el-form-item>
               </el-form>
             </template>
@@ -30,36 +29,36 @@
           <el-table-column label="名称">
             <template slot-scope="scope">
               <div class="att-list-item__meta">
-                <att-media :medias="scope.row.medias" type="finderListMobileSquare"></att-media>
+                <att-media :medias="scope.row.medias" type="finderListMobileSquare"/>
                 <span class="title">
-                  {{scope.row.name}}
+                  {{ scope.row.name }}
                 </span>
               </div>
             </template>
           </el-table-column>
           <el-table-column label="热门等级" width="150">
             <template slot-scope="scope">
-              <el-rate v-model="scope.row.hotLevel" disabled></el-rate>
+              <el-rate v-model="scope.row.hotLevel" disabled/>
             </template>
           </el-table-column>
           <el-table-column label="承载量" width="150">
             <template slot-scope="scope">
               <span>
-                {{scope.row.runDefault}} / 分
+                {{ scope.row.runDefault }} / 分
               </span>
             </template>
           </el-table-column>
           <el-table-column label="游览时长" width="150">
             <template slot-scope="scope">
               <span>
-                {{scope.row.runTimer}} 秒
+                {{ scope.row.runTimer }} 秒
               </span>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="200" align="type">
             <template slot-scope="scope">
-              <el-button size="small" type="primary" @click="clickEditAtt(scope.row)" icon="el-icon-edit">编辑</el-button>
-              <el-button size="small" type="default" @click="clickUpdateAtt(scope.row)" plain>更新</el-button>
+              <el-button size="small" type="primary" icon="el-icon-edit" @click="clickEditAtt(scope.row)">编辑</el-button>
+              <el-button size="small" type="default" plain @click="clickUpdateAtt(scope.row)">更新</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -67,33 +66,32 @@
     </dm-content>
     <!-- Form -->
     <el-dialog :title="editForm.form.name" :visible.sync="editForm.visible">
-      <el-form label-position="left" :model="editForm.form" label-width="200px">
+      <el-form :model="editForm.form" label-position="left" label-width="200px">
         <el-form-item label="项目等级">
-          <el-slider :min="1" :max="5" v-model="editForm.form.hotLevel" :step="1"></el-slider>
+          <el-slider :min="1" :max="5" v-model="editForm.form.hotLevel" :step="1"/>
         </el-form-item>
         <el-form-item label="游乐类型">
           <el-radio-group v-model="editForm.form.playType">
-            <el-radio border v-for="item in playType" :key="item.id" :label="item.id">{{item.name}}</el-radio>
+            <el-radio v-for="item in playType" :key="item.id" :label="item.id" border>{{ item.name }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="最大承载量（分钟）">
-          <el-input v-model="editForm.form.runMax" auto-complete="off"></el-input>
+          <el-input v-model="editForm.form.runMax" auto-complete="off"/>
         </el-form-item>
         <el-form-item label="标准承载量（分钟）">
-          <el-input v-model="editForm.form.runDefault" auto-complete="off"></el-input>
+          <el-input v-model="editForm.form.runDefault" auto-complete="off"/>
         </el-form-item>
         <el-form-item label="每组人数">
-          <el-input v-model="editForm.form.groupNum" auto-complete="off"></el-input>
+          <el-input v-model="editForm.form.groupNum" auto-complete="off"/>
         </el-form-item>
         <el-form-item label="运行间隔（秒）">
-          <el-input v-model="editForm.form.runInterval" auto-complete="off"></el-input>
+          <el-input v-model="editForm.form.runInterval" auto-complete="off"/>
         </el-form-item>
         <el-form-item label="运行时长（秒）">
-          <el-input v-model="editForm.form.runTimer" auto-complete="off"></el-input>
+          <el-input v-model="editForm.form.runTimer" auto-complete="off"/>
         </el-form-item>
         <el-form-item label="是否显示">
-          <el-switch v-model="editForm.form.visible">
-          </el-switch>
+          <el-switch v-model="editForm.form.visible"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -109,10 +107,10 @@ import base from '@/common/mixins/base'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  mixins: [base],
   components: {
 
   },
+  mixins: [base],
   data() {
     return {
       listLoading: false,

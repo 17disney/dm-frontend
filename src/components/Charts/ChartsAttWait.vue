@@ -1,6 +1,6 @@
 <template>
   <div class="chart chart--att-count chart--full">
-    <div class="inner" :id="id"></div>
+    <div :id="id" class="inner"/>
   </div>
 </template>
 
@@ -27,13 +27,13 @@ export default {
       chart: null
     }
   },
-  mounted() {
-    this.init()
-  },
   watch: {
     'data': function(val) {
       this.init()
     }
+  },
+  mounted() {
+    this.init()
   },
   methods: {
     initSeries(name, data) {
@@ -65,8 +65,8 @@ export default {
       const { startTime, endTime, date } = data
       let { waitList = [] } = data
 
-      let startX = moment(date + ' ' + startTime, 'YYYY-MM-DD HH:mm:ss').format('x')
-      let endX = moment(date + ' ' + endTime, 'YYYY-MM-DD HH:mm:ss').format('x')
+      const startX = moment(date + ' ' + startTime, 'YYYY-MM-DD HH:mm:ss').format('x')
+      const endX = moment(date + ' ' + endTime, 'YYYY-MM-DD HH:mm:ss').format('x')
 
       waitList = waitList.filter(_ => {
         _[0] = xToXUTC(_[0], utc)
@@ -75,7 +75,7 @@ export default {
 
       // 设置x轴数据
       const xAxisData = waitList.map(_ => {
-        let val = moment(_[0], 'x').format('H:mm')
+        const val = moment(_[0], 'x').format('H:mm')
         return val
       })
 
